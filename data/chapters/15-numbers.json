@@ -1,0 +1,163 @@
+{
+  "id": "15-numbers",
+  "title": "C++数字",
+  "order": 15,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-numbers.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "通常，当我们需要用到数字时，我们会使用原始的数据类型，如 int、short、long、float 和 double 等等。这些用于数字的数据类型，其可能的值和数值范围，我们已经在 C++ 数据类型一章中讨论过。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 定义数字"
+    },
+    {
+      "type": "text",
+      "content": "我们已经在之前章节的各种实例中定义过数字。下面是一个 C++ 中定义各种类型数字的综合实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \nint main ()\n{\n// 数字定义\nshort s;\n   int i;\n   long l;\n   float f;\n   double d;\n   \n   // 数字赋值\ns = 10;      \n   i = 1000;    \n   l = 1000000; \n   f = 230.47;  \n   d = 30949.374;\n   \n   // 数字输出\ncout << \"short  s :\" << s << endl;\n   cout << \"int    i :\" << i << endl;\n   cout << \"long   l :\" << l << endl;\n   cout << \"float  f :\" << f << endl;\n   cout << \"double d :\" << d << endl;\n \n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "short  s :10\r\nint    i :1000\r\nlong   l :1000000\r\nfloat  f :230.47\r\ndouble d :30949.4"
+    },
+    {
+      "type": "text",
+      "content": "C++ 数学运算"
+    },
+    {
+      "type": "text",
+      "content": "在 C++ 中，除了可以创建各种函数，还包含了各种有用的函数供您使用。这些函数写在标准 C 和 C++ 库中，叫做内置函数。您可以在程序中引用这些函数。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 内置了丰富的数学函数，可对各种数字进行运算。下表列出了 C++ 中一些有用的内置的数学函数。"
+    },
+    {
+      "type": "text",
+      "content": "为了利用这些函数，您需要引用数学头文件<cmath>。"
+    },
+    {
+      "type": "text",
+      "content": "序号 | 函数 & 描述\n1 | double cos(double);该函数返回弧度角（double 型）的余弦。\n2 | double sin(double);该函数返回弧度角（double 型）的正弦。\n3 | double tan(double);该函数返回弧度角（double 型）的正切。\n4 | double log(double);该函数返回参数的自然对数。\n5 | double pow(double, double);假设第一个参数为 x，第二个参数为 y，则该函数返回 x 的 y 次方。\n6 | double hypot(double, double);该函数返回两个参数的平方总和的平方根，也就是说，参数为一个直角三角形的两个直角边，函数会返回斜边的长度。\n7 | double sqrt(double);该函数返回参数的平方根。\n8 | int abs(int);该函数返回整数的绝对值。\n9 | double fabs(double);该函数返回任意一个浮点数的绝对值。\n10 | double floor(double);该函数返回一个小于或等于传入参数的最大整数。"
+    },
+    {
+      "type": "text",
+      "content": "下面是一个关于数学运算的简单实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <cmath>\nusing namespace std;\n \nint main ()\n{\n// 数字定义\nshort s = 10;\n   int i = -1000;\n   long l = 100000;\n   float f = 230.47;\n   double d = 200.374;\n \n   // 数学运算\ncout << \"sin(d) :\" << sin(d) << endl;\n   cout << \"abs(i)  :\" << abs(i) << endl;\n   cout << \"floor(d) :\" << floor(d) << endl;\n   cout << \"sqrt(f) :\" << sqrt(f) << endl;\n   cout << \"pow( d, 2) :\" << pow(d, 2) << endl;\n \n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "sin(d) :-0.634939\r\nabs(i)  :1000\r\nfloor(d) :200\r\nsqrt(f) :15.1812\r\npow( d, 2 ) :40149.7"
+    },
+    {
+      "type": "text",
+      "content": "C++ 随机数"
+    },
+    {
+      "type": "text",
+      "content": "在许多情况下，需要生成随机数。关于随机数生成器，有两个相关的函数。一个是rand()，该函数只返回一个伪随机数。生成随机数之前必须先调用srand()函数。"
+    },
+    {
+      "type": "text",
+      "content": "下面是一个关于生成随机数的简单实例。实例中使用了time()函数来获取系统时间的秒数，通过调用 rand() 函数来生成随机数："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <ctime>\n#include <cstdlib>\nusing namespace std;\n \nint main ()\n{\nint i,j;\n \n   // 设置种子\nsrand( (unsigned)time( NULL ) );\n \n   /* 生成 10 个随机数 */\nfor( i = 0; i < 10; i++ )\n{\n// 生成实际的随机数\nj= rand();\n      cout <<\"随机数： \" << j << endl;\n   }\nreturn 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "随机数： 1748144778\r\n随机数： 630873888\r\n随机数： 2134540646\r\n随机数： 219404170\r\n随机数： 902129458\r\n随机数： 920445370\r\n随机数： 1319072661\r\n随机数： 257938873\r\n随机数： 1256201101\r\n随机数： 580322989"
+    },
+    {
+      "type": "text",
+      "content": "C++ 数学常数"
+    },
+    {
+      "type": "text",
+      "content": "在 C++ 中，数学常数（如 π、e、黄金比例等）是许多算法和应用中不可或缺的部分，虽然早期版本的 C++ 中没有直接提供这些常数，但从 C++20 开始，标准库引入了几个常用的数学常数，并提供了更高效和统一的方式来访问它们。"
+    },
+    {
+      "type": "text",
+      "content": "更多内容参考：C++ 标准库<numbers>。"
+    },
+    {
+      "type": "text",
+      "content": "常量：std::numbers::pi\n类型：std::float32_t（32位浮动）、std::float64_t（64位浮动）"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <cmath>\n#include <iostream>\n\nint main() {\n    std::cout << \"pi: \" << std::numbers::pi << std::endl;\n}"
+    },
+    {
+      "type": "text",
+      "content": "自然对数的底数 e (Euler's Number)"
+    },
+    {
+      "type": "text",
+      "content": "常量：std::numbers::e\n类型：std::float32_t、std::float64_t"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::cout << \"e: \" << std::numbers::e << std::endl;"
+    },
+    {
+      "type": "text",
+      "content": "黄金比例 φ (Golden Ratio)"
+    },
+    {
+      "type": "text",
+      "content": "常量：std::numbers::phi\n类型：std::float32_t、std::float64_t"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::cout << \"phi: \" << std::numbers::phi << std::endl;"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <cmath>\n#include <numbers>\n\nint main() {\n    std::cout << \"pi: \" << std::numbers::pi << std::endl;\n    std::cout << \"e: \" << std::numbers::e << std::endl;\n    std::cout << \"phi: \" << std::numbers::phi << std::endl;\n\n    return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "pi: 3.14159\r\ne: 2.71828\r\nphi: 1.61803"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

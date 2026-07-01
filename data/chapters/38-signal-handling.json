@@ -1,0 +1,108 @@
+{
+  "id": "38-signal-handling",
+  "title": "C++信号处理",
+  "order": 38,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-signal-handling.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "信号是由操作系统传给进程的中断，会提早终止一个程序。在 UNIX、LINUX、Mac OS X 或 Windows 系统上，可以通过按 Ctrl+C 产生中断。"
+    },
+    {
+      "type": "text",
+      "content": "有些信号不能被程序捕获，但是下表所列信号可以在程序中捕获，并可以基于信号采取适当的动作。这些信号是定义在 C++ 头文件 <csignal> 中。"
+    },
+    {
+      "type": "text",
+      "content": "信号 | 描述\nSIGABRT | 程序的异常终止，如调用abort。\nSIGFPE | 错误的算术运算，比如除以零或导致溢出的操作。\nSIGILL | 检测非法指令。\nSIGINT | 程序终止(interrupt)信号。\nSIGSEGV | 非法访问内存。\nSIGTERM | 发送到程序的终止请求。"
+    },
+    {
+      "type": "text",
+      "content": "signal() 函数"
+    },
+    {
+      "type": "text",
+      "content": "C++ 信号处理库提供了signal函数，用来捕获突发事件。以下是 signal() 函数的语法："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "void (*signal (int sig, void (*func)(int)))(int);"
+    },
+    {
+      "type": "text",
+      "content": "这个看起来有点费劲，以下语法格式更容易理解："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "signal(registered signal, signal handler)"
+    },
+    {
+      "type": "text",
+      "content": "这个函数接收两个参数：第一个参数是要设置的信号的标识符，第二个参数是指向信号处理函数的指针。函数返回值是一个指向先前信号处理函数的指针。如果先前没有设置信号处理函数，则返回值为 SIG_DFL。如果先前设置的信号处理函数为 SIG_IGN，则返回值为 SIG_IGN。"
+    },
+    {
+      "type": "text",
+      "content": "让我们编写一个简单的 C++ 程序，使用 signal() 函数捕获 SIGINT 信号。不管您想在程序中捕获什么信号，您都必须使用signal函数来注册信号，并将其与信号处理程序相关联。看看下面的实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <csignal>\n#include <unistd.h>\nusing namespace std;\n \nvoid signalHandler( int signum )\n{\ncout << \"Interrupt signal (\" << signum << \") received.\\n\";\n \n    // 清理并关闭\n// 终止程序  \nexit(signum);  \n \n}\nint main ()\n{\n// 注册信号 SIGINT 和信号处理程序\nsignal(SIGINT, signalHandler);  \n \n    while(1){\ncout << \"Going to sleep....\" << endl;\n       sleep(1);\n    }\nreturn 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Going to sleep....\r\nGoing to sleep....\r\nGoing to sleep...."
+    },
+    {
+      "type": "text",
+      "content": "现在，按 Ctrl+C 来中断程序，您会看到程序捕获信号，程序打印如下内容并退出："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Going to sleep....\r\nGoing to sleep....\r\nGoing to sleep....\r\nInterrupt signal (2) received."
+    },
+    {
+      "type": "text",
+      "content": "raise() 函数"
+    },
+    {
+      "type": "text",
+      "content": "您可以使用函数raise()生成信号，该函数带有一个整数信号编号作为参数，语法如下："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "int raise (signal sig);"
+    },
+    {
+      "type": "text",
+      "content": "在这里，sig是要发送的信号的编号，这些信号包括：SIGINT、SIGABRT、SIGFPE、SIGILL、SIGSEGV、SIGTERM、SIGHUP。以下是我们使用 raise() 函数内部生成信号的实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <csignal>\n#include <unistd.h>\nusing namespace std;\n \nvoid signalHandler( int signum )\n{\ncout << \"Interrupt signal (\" << signum << \") received.\\n\";\n \n    // 清理并关闭\n// 终止程序 \nexit(signum);  \n \n}\nint main ()\n{\nint i = 0;\n    // 注册信号 SIGINT 和信号处理程序\nsignal(SIGINT, signalHandler);  \n \n    while(++i){\ncout << \"Going to sleep....\" << endl;\n       if( i == 3 ){\nraise( SIGINT);\n       }\nsleep(1);\n    }\nreturn 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果，并会自动退出："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Going to sleep....\r\nGoing to sleep....\r\nGoing to sleep....\r\nInterrupt signal (2) received."
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

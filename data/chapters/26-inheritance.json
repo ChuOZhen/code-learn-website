@@ -1,0 +1,139 @@
+{
+  "id": "26-inheritance",
+  "title": "C++继承",
+  "order": 26,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-inheritance.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "面向对象程序设计中最重要的一个概念是继承。继承允许我们依据另一个类来定义一个类，这使得创建和维护一个应用程序变得更容易。这样做，也达到了重用代码功能和提高执行效率的效果。"
+    },
+    {
+      "type": "text",
+      "content": "当创建一个类时，您不需要重新编写新的数据成员和成员函数，只需指定新建的类继承了一个已有的类的成员即可。这个已有的类称为基类，新建的类称为派生类。"
+    },
+    {
+      "type": "text",
+      "content": "继承代表了is a关系。例如，哺乳动物是动物，狗是哺乳动物，因此，狗是动物，等等。"
+    },
+    {
+      "type": "text",
+      "content": "代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "// 基类\nclass Animal {\n    // eat() 函数\n    // sleep() 函数\n};\n\n\n//派生类\nclass Dog : public Animal {\n    // bark() 函数\n};"
+    },
+    {
+      "type": "text",
+      "content": "基类 & 派生类"
+    },
+    {
+      "type": "text",
+      "content": "一个类可以派生自多个类，这意味着，它可以从多个基类继承数据和函数。定义一个派生类，我们使用一个类派生列表来指定基类。类派生列表以一个或多个基类命名，形式如下："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "class derived-class: access-specifier base-class"
+    },
+    {
+      "type": "text",
+      "content": "其中，访问修饰符 access-specifier 是public、protected或private其中的一个，base-class 是之前定义过的某个类的名称。如果未使用访问修饰符 access-specifier，则默认为 private。"
+    },
+    {
+      "type": "text",
+      "content": "假设有一个基类Shape，Rectangle是它的派生类，如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \n// 基类\nclass Shape\n{\npublic:\n      void setWidth(int w)\n{\nwidth = w;\n      }\nvoid setHeight(int h)\n{\nheight = h;\n      }\nprotected:\n      int width;\n      int height;\n};\n \n// 派生类\nclass Rectangle: public Shape\n{\npublic:\n      int getArea()\n{\nreturn (width * height); \n      }\n};\n \nint main(void)\n{\nRectangle Rect;\n \n   Rect.setWidth(5);\n   Rect.setHeight(7);\n \n   // 输出对象的面积\ncout << \"Total area: \" << Rect.getArea() << endl;\n \n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Total area: 35"
+    },
+    {
+      "type": "text",
+      "content": "访问控制和继承"
+    },
+    {
+      "type": "text",
+      "content": "派生类可以访问基类中所有的非私有成员。因此基类成员如果不想被派生类的成员函数访问，则应在基类中声明为 private。"
+    },
+    {
+      "type": "text",
+      "content": "我们可以根据访问权限总结出不同的访问类型，如下所示："
+    },
+    {
+      "type": "text",
+      "content": "访问 | public | protected | private\n同一个类 | yes | yes | yes\n派生类 | yes | yes | no\n外部的类 | yes | no | no"
+    },
+    {
+      "type": "text",
+      "content": "一个派生类继承了所有的基类方法，但下列情况除外："
+    },
+    {
+      "type": "text",
+      "content": "基类的构造函数、析构函数和拷贝构造函数。\n基类的重载运算符。\n基类的友元函数。"
+    },
+    {
+      "type": "text",
+      "content": "继承类型"
+    },
+    {
+      "type": "text",
+      "content": "当一个类派生自基类，该基类可以被继承为public、protected或private几种类型。继承类型是通过上面讲解的访问修饰符 access-specifier 来指定的。"
+    },
+    {
+      "type": "text",
+      "content": "我们几乎不使用protected或private继承，通常使用public继承。当使用不同类型的继承时，遵循以下几个规则："
+    },
+    {
+      "type": "text",
+      "content": "公有继承（public）：当一个类派生自公有基类时，基类的公有成员也是派生类的公有成员，基类的保护成员也是派生类的保护成员，基类的私有成员不能直接被派生类访问，但是可以通过调用基类的公有和保护成员来访问。\n保护继承（protected）：当一个类派生自保护基类时，基类的公有和保护成员将成为派生类的保护成员。\n私有继承（private）：当一个类派生自私有基类时，基类的公有和保护成员将成为派生类的私有成员。"
+    },
+    {
+      "type": "text",
+      "content": "多继承即一个子类可以有多个父类，它继承了多个父类的特性。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 类可以从多个类继承成员，语法如下："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "class <派生类名>:<继承方式1><基类名1>,<继承方式2><基类名2>,…\r\n{\r\n<派生类类体>\r\n};"
+    },
+    {
+      "type": "text",
+      "content": "其中，访问修饰符继承方式是public、protected或private其中的一个，用来修饰每个基类，各个基类之间用逗号分隔，如上所示。现在让我们一起看看下面的实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \n// 基类 Shape\nclass Shape\n{\npublic:\n      void setWidth(int w)\n{\nwidth = w;\n      }\nvoid setHeight(int h)\n{\nheight = h;\n      }\nprotected:\n      int width;\n      int height;\n};\n \n// 基类 PaintCost\nclass PaintCost\n{\npublic:\n      int getCost(int area)\n{\nreturn area * 70;\n      }\n};\n \n// 派生类\nclass Rectangle: public Shape, public PaintCost\n{\npublic:\n      int getArea()\n{\nreturn (width * height); \n      }\n};\n \nint main(void)\n{\nRectangle Rect;\n   int area;\n \n   Rect.setWidth(5);\n   Rect.setHeight(7);\n \n   area = Rect.getArea();\n   \n   // 输出对象的面积\ncout << \"Total area: \" << Rect.getArea() << endl;\n \n   // 输出总花费\ncout << \"Total paint cost: $\" << Rect.getCost(area) << endl;\n \n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Total area: 35\r\nTotal paint cost: $2450"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

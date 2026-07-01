@@ -1,0 +1,109 @@
+{
+  "id": "19-references",
+  "title": "C++引用",
+  "order": 19,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-references.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "引用变量是一个别名，也就是说，它是某个已存在变量的另一个名字。"
+    },
+    {
+      "type": "text",
+      "content": "一旦把引用初始化为某个变量，就可以使用该引用名称或变量名称来指向变量。"
+    },
+    {
+      "type": "text",
+      "content": "引用必须在定义时初始化，并且一旦绑定到一个变量后，就不能再绑定到其他变量。"
+    },
+    {
+      "type": "text",
+      "content": "引用的语法如下："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "int a = 10;\r\nint &ref = a;  // ref 是 a 的引用"
+    },
+    {
+      "type": "text",
+      "content": "int &ref表示ref是一个int类型的引用。\nref是a的别名，对ref的操作会直接作用于a。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 引用 vs 指针"
+    },
+    {
+      "type": "text",
+      "content": "引用很容易与指针混淆，它们之间有三个主要的不同："
+    },
+    {
+      "type": "text",
+      "content": "不存在空引用，引用必须连接到一块合法的内存。\n一旦引用被初始化为一个对象，就不能被指向到另一个对象。指针可以在任何时候指向到另一个对象。\n引用必须在创建时被初始化。指针可以在任何时间被初始化。\n引用的对象必须是一个变量，而指针必须是一个地址。"
+    },
+    {
+      "type": "text",
+      "content": "特性 | 引用 | 指针\n定义与初始化 | 必须初始化，且不能为null。 | 可以不初始化，可以在后续代码中指向其他对象，可以为null。\n语法 | 使用&声明，例如：int &ref = a; | 使用*声明，例如：int *ptr = &a;\n重新绑定 | 不能重新绑定，一旦初始化后始终引用同一个对象。 | 可以重新指向其他对象，例如：ptr = &b;\n空值（Nullability） | 不能为null，必须绑定到有效的对象。 | 可以为null，表示不指向任何对象。\n内存占用 | 不占用额外内存（编译器通常将其优化为直接操作所引用的对象）。 | 占用额外内存（存储地址，通常是一个机器字长，如4字节或8字节）。\n访问方式 | 直接使用，无需解引用操作符，例如：ref = 10; | 需要使用*解引用操作符访问或修改所指向的对象，例如：*ptr = 10;\n多级间接访问 | 不支持多级间接访问（不能有引用的引用）。 | 支持多级间接访问（如指针的指针：int **pptr;）。\n函数参数传递 | 常用于函数参数传递，语法简洁，例如：void func(int &x) { x = 10; } | 也可以用于函数参数传递，但需要使用解引用操作符，例如：void func(int *x) { *x = 10; }\n数组与引用 | 不能直接创建引用数组，但可以创建数组的引用，例如：int (&ref)[10] = arr; | 可以创建指针数组，也可以创建指向数组的指针，例如：int *ptrArr[10];\n安全性 | 更安全，不能为null，且语法更直观。 | 更灵活，但容易出错（如空指针、野指针等）。\n底层实现 | 通常通过指针实现，但编译器会优化为直接操作所引用的对象。 | 直接存储目标对象的内存地址。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 中创建引用"
+    },
+    {
+      "type": "text",
+      "content": "试想变量名称是变量附属在内存位置中的标签，您可以把引用当成是变量附属在内存位置中的第二个标签。因此，您可以通过原始变量名称或引用来访问变量的内容。例如："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "int i = 17;"
+    },
+    {
+      "type": "text",
+      "content": "我们可以为 i 声明引用变量，如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "int&  r = i;\r\ndouble& s = d;"
+    },
+    {
+      "type": "text",
+      "content": "在这些声明中，&读作引用。"
+    },
+    {
+      "type": "text",
+      "content": "因此，第一个声明可以读作\"r 是一个初始化为 i 的整型引用\"，第二个声明可以读作\"s 是一个初始化为 d 的 double 型引用\"。"
+    },
+    {
+      "type": "text",
+      "content": "下面的实例使用了 int 和 double 引用："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \nint main ()\n{\n// 声明简单的变量\nint i;\n   double d;\n \n   // 声明引用变量\nint&    r = i;\n   double& s = d;\n   \n   i = 5;\n   cout << \"Value of i : \" << i << endl;\n   cout << \"Value of i reference : \" << r  << endl;\n \n   d = 11.7;\n   cout << \"Value of d : \" << d << endl;\n   cout << \"Value of d reference : \" << s  << endl;\n   \n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Value of i : 5\r\nValue of i reference : 5\r\nValue of d : 11.7\r\nValue of d reference : 11.7"
+    },
+    {
+      "type": "text",
+      "content": "引用通常用于函数参数列表和函数返回值。下面列出了 C++ 程序员必须清楚的两个与 C++ 引用相关的重要概念："
+    },
+    {
+      "type": "text",
+      "content": "概念 | 描述\n把引用作为参数 | C++ 支持把引用作为参数传给函数，这比传一般的参数更安全。\n把引用作为返回值 | 可以从 C++ 函数中返回引用，就像返回其他数据类型一样。"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

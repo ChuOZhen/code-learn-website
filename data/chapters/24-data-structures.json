@@ -1,0 +1,279 @@
+{
+  "id": "24-data-structures",
+  "title": "C++ 数据结构",
+  "order": 24,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-data-structures.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "C++ 提供了多种数据结构，既有基础的如数组、结构体、类等，也有高级的 STL 容器如vector、map和unordered_map等。"
+    },
+    {
+      "type": "text",
+      "content": "下面详细介绍 C++ 中常用的数据结构及其特点和用法。"
+    },
+    {
+      "type": "text",
+      "content": "1.数组（Array）"
+    },
+    {
+      "type": "text",
+      "content": "数组是最基础的数据结构，用于存储一组相同类型的数据。"
+    },
+    {
+      "type": "text",
+      "content": "固定大小，一旦声明，大小不能改变。\n直接访问元素，时间复杂度为 O(1)。\n适合处理大小已知、元素类型相同的集合。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "int arr[5] = {1, 2, 3, 4, 5};\ncout << arr[0]; // 输出第一个元素"
+    },
+    {
+      "type": "text",
+      "content": "优缺点："
+    },
+    {
+      "type": "text",
+      "content": "优点：访问速度快，内存紧凑。\n缺点：大小固定，无法动态扩展，不适合处理大小不确定的数据集。"
+    },
+    {
+      "type": "text",
+      "content": "2.结构体（Struct）"
+    },
+    {
+      "type": "text",
+      "content": "结构体允许将不同类型的数据组合在一起，形成一种自定义的数据类型。"
+    },
+    {
+      "type": "text",
+      "content": "可以包含不同类型的成员变量。\n提供了对数据的基本封装，但功能有限。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "struct Person {\n    string name;\n    int age;\n};\nPerson p = {\"Alice\", 25};\ncout << p.name << endl; // 输出 Alice"
+    },
+    {
+      "type": "text",
+      "content": "3.类（Class）"
+    },
+    {
+      "type": "text",
+      "content": "类是 C++ 中用于面向对象编程的核心结构，允许定义成员变量和成员函数。与struct类似，但功能更强大，支持继承、封装、多态等特性。"
+    },
+    {
+      "type": "text",
+      "content": "可以包含成员变量、成员函数、构造函数、析构函数。\n支持面向对象特性，如封装、继承、多态。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "class Person {\nprivate:\n    string name;\n    int age;\npublic:\n    Person(string n, int a) : name(n), age(a) {}\n    void printInfo() {\n        cout << \"Name: \" << name << \", Age: \" << age << endl;\n    }\n};\nPerson p(\"Bob\", 30);\np.printInfo(); // 输出: Name: Bob, Age: 30"
+    },
+    {
+      "type": "text",
+      "content": "4.链表（Linked List）"
+    },
+    {
+      "type": "text",
+      "content": "链表是一种动态数据结构，由一系列节点组成，每个节点包含数据和指向下一个节点的指针。"
+    },
+    {
+      "type": "text",
+      "content": "动态调整大小，不需要提前定义容量。\n插入和删除操作效率高，时间复杂度为 O(1)（在链表头部或尾部操作）。\n线性查找，时间复杂度为 O(n)。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "struct Node {\n    int data;\n    Node* next;\n};\nNode* head = nullptr;\nNode* newNode = new Node{10, nullptr};\nhead = newNode; // 插入新节点"
+    },
+    {
+      "type": "text",
+      "content": "优缺点："
+    },
+    {
+      "type": "text",
+      "content": "优点：动态大小，适合频繁插入和删除的场景。\n缺点：随机访问效率低，不如数组直接访问快。"
+    },
+    {
+      "type": "text",
+      "content": "5.栈（Stack）"
+    },
+    {
+      "type": "text",
+      "content": "栈是一种后进先出（LIFO, Last In First Out）的数据结构，常用于递归、深度优先搜索等场景。"
+    },
+    {
+      "type": "text",
+      "content": "只允许在栈顶进行插入和删除操作。\n时间复杂度为 O(1)。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "stack<int> s;\ns.push(1);\ns.push(2);\ncout << s.top(); // 输出 2\ns.pop();"
+    },
+    {
+      "type": "text",
+      "content": "优缺点："
+    },
+    {
+      "type": "text",
+      "content": "优点：操作简单，效率高。\n缺点：只能在栈顶操作，访问其他元素需要弹出栈顶元素。"
+    },
+    {
+      "type": "text",
+      "content": "6.队列（Queue）"
+    },
+    {
+      "type": "text",
+      "content": "队列是一种先进先出（FIFO, First In First Out）的数据结构，常用于广度优先搜索、任务调度等场景。"
+    },
+    {
+      "type": "text",
+      "content": "插入操作在队尾进行，删除操作在队头进行。\n时间复杂度为 O(1)。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "queue<int> q;\nq.push(1);\nq.push(2);\ncout << q.front(); // 输出 1\nq.pop();"
+    },
+    {
+      "type": "text",
+      "content": "优缺点："
+    },
+    {
+      "type": "text",
+      "content": "优点：适合按顺序处理数据的场景，如任务调度。\n缺点：无法随机访问元素。"
+    },
+    {
+      "type": "text",
+      "content": "7.双端队列（Deque）"
+    },
+    {
+      "type": "text",
+      "content": "双端队列允许在两端进行插入和删除操作，是栈和队列的结合体。"
+    },
+    {
+      "type": "text",
+      "content": "允许在两端进行插入和删除。\n时间复杂度为 O(1)。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "deque<int> dq;\ndq.push_back(1);\ndq.push_front(2);\ncout << dq.front(); // 输出 2\ndq.pop_front();"
+    },
+    {
+      "type": "text",
+      "content": "优缺点："
+    },
+    {
+      "type": "text",
+      "content": "优点：灵活的双向操作。\n缺点：空间占用较大，适合需要在两端频繁操作的场景。"
+    },
+    {
+      "type": "text",
+      "content": "8.哈希表（Hash Table）"
+    },
+    {
+      "type": "text",
+      "content": "哈希表是一种通过键值对存储数据的数据结构，支持快速查找、插入和删除操作。C++ 中的unordered_map是哈希表的实现。"
+    },
+    {
+      "type": "text",
+      "content": "使用哈希函数快速定位元素，时间复杂度为 O(1)。\n不保证元素的顺序。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "unordered_map<string, int> hashTable;\nhashTable[\"apple\"] = 10;\ncout << hashTable[\"apple\"]; // 输出 10"
+    },
+    {
+      "type": "text",
+      "content": "优缺点："
+    },
+    {
+      "type": "text",
+      "content": "优点：查找、插入、删除操作效率高。\n缺点：无法保证元素顺序，哈希冲突时性能会下降。"
+    },
+    {
+      "type": "text",
+      "content": "9.映射（Map）"
+    },
+    {
+      "type": "text",
+      "content": "map是一种有序的键值对容器，底层实现是红黑树。与unordered_map不同，它保证键的顺序，查找、插入和删除的时间复杂度为 O(log n)。"
+    },
+    {
+      "type": "text",
+      "content": "保证元素按键的顺序排列。\n使用二叉搜索树实现。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "map<string, int> myMap;\nmyMap[\"apple\"] = 10;\ncout << myMap[\"apple\"]; // 输出 10"
+    },
+    {
+      "type": "text",
+      "content": "优缺点："
+    },
+    {
+      "type": "text",
+      "content": "优点：元素有序，适合需要按顺序处理数据的场景。\n缺点：操作效率比unordered_map略低。"
+    },
+    {
+      "type": "text",
+      "content": "10.集合（Set）"
+    },
+    {
+      "type": "text",
+      "content": "set是一种用于存储唯一元素的有序集合，底层同样使用红黑树实现。它保证元素不重复且有序。"
+    },
+    {
+      "type": "text",
+      "content": "保证元素的唯一性。\n元素自动按升序排列。\n时间复杂度为 O(log n)。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "set<int> s;\ns.insert(1);\ns.insert(2);\ncout << *s.begin(); // 输出 1"
+    },
+    {
+      "type": "text",
+      "content": "优缺点："
+    },
+    {
+      "type": "text",
+      "content": "优点：自动排序和唯一性保证。\n缺点：插入和删除的效率不如无序集合。"
+    },
+    {
+      "type": "text",
+      "content": "11.动态数组（Vector）"
+    },
+    {
+      "type": "text",
+      "content": "vector是 C++ 标准库提供的动态数组实现，可以动态扩展容量，支持随机访问。"
+    },
+    {
+      "type": "text",
+      "content": "动态调整大小。\n支持随机访问，时间复杂度为 O(1)。\n当容量不足时，动态扩展，时间复杂度为摊销 O(1)。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vector<int> v;\nv.push_back(1);\nv.push_back(2);\ncout << v[0]; // 输出 1"
+    },
+    {
+      "type": "text",
+      "content": "优缺点："
+    },
+    {
+      "type": "text",
+      "content": "优点：支持随机访问，动态扩展。\n缺点：插入和删除中间元素的效率较低。"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

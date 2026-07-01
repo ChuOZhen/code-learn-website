@@ -1,0 +1,225 @@
+{
+  "id": "08-constants-literals",
+  "title": "C++常量",
+  "order": 8,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-constants-literals.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "常量是固定值，在程序执行期间不会改变。这些固定的值，又叫做字面量。常量可以是任何的基本数据类型，可分为整型数字、浮点数字、字符、字符串和布尔值。常量就像是常规的变量，只不过常量的值在定义后不能进行修改。"
+    },
+    {
+      "type": "text",
+      "content": "整数常量"
+    },
+    {
+      "type": "text",
+      "content": "整数常量可以是十进制、八进制或十六进制的常量。前缀指定基数：0x 或 0X 表示十六进制，0 表示八进制，不带前缀则默认表示十进制。"
+    },
+    {
+      "type": "text",
+      "content": "整数常量也可以带一个后缀，后缀是 U 和 L 的组合，U 表示无符号整数（unsigned），L 表示长整数（long）。后缀可以是大写，也可以是小写，U 和 L 的顺序任意。"
+    },
+    {
+      "type": "text",
+      "content": "下面列举几个整数常量的实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "212 // 合法的\n215u // 合法的\n0xFeeL // 合法的\n078 // 非法的：8 不是八进制的数字\n032UU // 非法的：不能重复后缀"
+    },
+    {
+      "type": "text",
+      "content": "以下是各种类型的整数常量的实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "85 // 十进制\n0213 // 八进制 \n0x4b // 十六进制 \n30 // 整数 \n30u // 无符号整数 \n30l // 长整数 \n30ul // 无符号长整数"
+    },
+    {
+      "type": "text",
+      "content": "浮点常量"
+    },
+    {
+      "type": "text",
+      "content": "浮点常量由整数部分、小数点、小数部分和指数部分组成。您可以使用小数形式或者指数形式来表示浮点常量。"
+    },
+    {
+      "type": "text",
+      "content": "当使用小数形式表示时，必须包含整数部分、小数部分，或同时包含两者。当使用指数形式表示时， 必须包含小数点、指数，或同时包含两者。带符号的指数是用 e 或 E 引入的。"
+    },
+    {
+      "type": "text",
+      "content": "下面列举几个浮点常量的实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "3.14159 // 合法的 \n314159E-5L // 合法的 \n510E // 非法的：不完整的指数\n210f // 非法的：没有小数或指数\n.e55 // 非法的：缺少整数或分数"
+    },
+    {
+      "type": "text",
+      "content": "布尔常量"
+    },
+    {
+      "type": "text",
+      "content": "布尔常量共有两个，它们都是标准的 C++ 关键字："
+    },
+    {
+      "type": "text",
+      "content": "true值代表真。\nfalse值代表假。"
+    },
+    {
+      "type": "text",
+      "content": "我们不应把 true 的值看成 1，把 false 的值看成 0。"
+    },
+    {
+      "type": "text",
+      "content": "字符常量"
+    },
+    {
+      "type": "text",
+      "content": "字符常量是括在单引号中。如果常量以 L（仅当大写时）开头，则表示它是一个宽字符常量（例如 L'x'），此时它必须存储在wchar_t类型的变量中。否则，它就是一个窄字符常量（例如 'x'），此时它可以存储在char类型的简单变量中。"
+    },
+    {
+      "type": "text",
+      "content": "字符常量可以是一个普通的字符（例如 'x'）、一个转义序列（例如 '\\t'），或一个通用的字符（例如 '\\u02C0'）。"
+    },
+    {
+      "type": "text",
+      "content": "在 C++ 中，有一些特定的字符，当它们前面有反斜杠时，它们就具有特殊的含义，被用来表示如换行符（\\n）或制表符（\\t）等。下表列出了一些这样的转义序列码："
+    },
+    {
+      "type": "text",
+      "content": "转义序列 | 含义\n\\\\ | \\ 字符\n\\' | ' 字符\n\\\" | \" 字符\n\\? | ? 字符\n\\a | 警报铃声\n\\b | 退格键\n\\f | 换页符\n\\n | 换行符\n\\r | 回车\n\\t | 水平制表符\n\\v | 垂直制表符\n\\ooo | 一到三位的八进制数\n\\xhh . . . | 一个或多个数字的十六进制数"
+    },
+    {
+      "type": "text",
+      "content": "下面的实例显示了一些转义序列字符："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \nint main()\n{\ncout << \"Hello\\tWorld\\n\\n\";\n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Hello   World"
+    },
+    {
+      "type": "text",
+      "content": "字符串常量"
+    },
+    {
+      "type": "text",
+      "content": "字符串字面值或常量是括在双引号\"\"中的。一个字符串包含类似于字符常量的字符：普通的字符、转义序列和通用的字符。"
+    },
+    {
+      "type": "text",
+      "content": "您可以使用\\做分隔符，把一个很长的字符串常量进行分行。"
+    },
+    {
+      "type": "text",
+      "content": "下面的实例显示了一些字符串常量："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string greeting = \"hello, runoob\";\n    cout << greeting;\n    cout << \"\\n\";     // 换行符\n    string greeting2 = \"hello, \\\n                        runoob\";\n    cout << greeting2;\n    return 0;\n}"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "hello, runoob\r\nhello, runoob"
+    },
+    {
+      "type": "text",
+      "content": "定义常量"
+    },
+    {
+      "type": "text",
+      "content": "在 C++ 中，有两种简单的定义常量的方式："
+    },
+    {
+      "type": "text",
+      "content": "使用#define预处理器。\n使用const关键字。"
+    },
+    {
+      "type": "text",
+      "content": "#define 预处理器"
+    },
+    {
+      "type": "text",
+      "content": "下面是使用 #define 预处理器定义常量的形式："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#define identifier value"
+    },
+    {
+      "type": "text",
+      "content": "具体请看下面的实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \n#define LENGTH 10 \n#define WIDTH 5\n#define NEWLINE '\\n'\nint main()\n{\nint area;  \n   \n   area = LENGTH * WIDTH;\n   cout << area;\n   cout << NEWLINE;\n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "50"
+    },
+    {
+      "type": "text",
+      "content": "const 关键字"
+    },
+    {
+      "type": "text",
+      "content": "您可以使用const前缀声明指定类型的常量，如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "const type variable = value;"
+    },
+    {
+      "type": "text",
+      "content": "具体请看下面的实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \nint main()\n{\nconst int LENGTH = 10;\n   const int WIDTH  = 5;\n   const char NEWLINE = '\\n';\n   int area;  \n   \n   area = LENGTH * WIDTH;\n   cout << area;\n   cout << NEWLINE;\n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "50"
+    },
+    {
+      "type": "text",
+      "content": "请注意，把常量定义为大写字母形式，是一个很好的编程实践。"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

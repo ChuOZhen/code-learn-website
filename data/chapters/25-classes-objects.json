@@ -1,0 +1,100 @@
+{
+  "id": "25-classes-objects",
+  "title": "C++类 & 对象",
+  "order": 25,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-classes-objects.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "C++ 在 C 语言的基础上增加了面向对象编程，C++ 支持面向对象程序设计。类是 C++ 的核心特性，通常被称为用户定义的类型。类用于指定对象的形式，是一种用户自定义的数据类型，它是一种封装了数据和函数的组合。类中的数据称为成员变量，函数称为成员函数。类可以被看作是一种模板，可以用来创建具有相同属性和行为的多个对象。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 类定义"
+    },
+    {
+      "type": "text",
+      "content": "定义一个类需要使用关键字class，然后指定类的名称，并类的主体是包含在一对花括号中，主体包含类的成员变量和成员函数。"
+    },
+    {
+      "type": "text",
+      "content": "定义一个类，本质上是定义一个数据类型的蓝图，它定义了类的对象包括了什么，以及可以在这个对象上执行哪些操作。"
+    },
+    {
+      "type": "text",
+      "content": "以下实例我们使用关键字class定义 Box 数据类型，包含了三个成员变量 length、breadth 和 height："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "class Box\n{\npublic:\n      double length;   // 盒子的长度\ndouble breadth;  // 盒子的宽度\ndouble height;   // 盒子的高度\n};"
+    },
+    {
+      "type": "text",
+      "content": "关键字public确定了类成员的访问属性。在类对象作用域内，公共成员在类的外部是可访问的。您也可以指定类的成员为private或protected，这个我们稍后会进行讲解。"
+    },
+    {
+      "type": "text",
+      "content": "定义 C++ 对象"
+    },
+    {
+      "type": "text",
+      "content": "类提供了对象的蓝图，所以基本上，对象是根据类来创建的。声明类的对象，就像声明基本类型的变量一样。下面的语句声明了类 Box 的两个对象："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Box Box1;          // 声明 Box1，类型为 Box\nBox Box2;          // 声明 Box2，类型为 Box"
+    },
+    {
+      "type": "text",
+      "content": "对象 Box1 和 Box2 都有它们各自的数据成员。"
+    },
+    {
+      "type": "text",
+      "content": "访问数据成员"
+    },
+    {
+      "type": "text",
+      "content": "类的对象的公共数据成员可以使用直接成员访问运算符.来访问。"
+    },
+    {
+      "type": "text",
+      "content": "为了更好地理解这些概念，让我们尝试一下下面的实例："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \nclass Box\n{\npublic:\n      double length;   // 长度\ndouble breadth;  // 宽度\ndouble height;   // 高度\n// 成员函数声明\ndouble get(void);\n      void set( double len, double bre, double hei );\n};\n// 成员函数定义\ndouble Box::get(void)\n{\nreturn length * breadth * height;\n}\nvoid Box::set( double len, double bre, double hei)\n{\nlength = len;\n    breadth = bre;\n    height = hei;\n}\nint main( )\n{\nBox Box1;        // 声明 Box1，类型为 Box\nBox Box2;        // 声明 Box2，类型为 Box\nBox Box3;        // 声明 Box3，类型为 Box\ndouble volume = 0.0;     // 用于存储体积\n// box 1 详述\nBox1.height = 5.0; \n   Box1.length = 6.0; \n   Box1.breadth = 7.0;\n \n   // box 2 详述\nBox2.height = 10.0;\n   Box2.length = 12.0;\n   Box2.breadth = 13.0;\n \n   // box 1 的体积\nvolume = Box1.height * Box1.length * Box1.breadth;\n   cout << \"Box1 的体积：\" << volume <<endl;\n \n   // box 2 的体积\nvolume = Box2.height * Box2.length * Box2.breadth;\n   cout << \"Box2 的体积：\" << volume <<endl;\n \n \n   // box 3 详述\nBox3.set(16.0, 8.0, 12.0); \n   volume = Box3.get(); \n   cout << \"Box3 的体积：\" << volume <<endl;\n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Box1 的体积：210\r\nBox2 的体积：1560\r\nBox3 的体积：1536"
+    },
+    {
+      "type": "text",
+      "content": "需要注意的是，私有的成员和受保护的成员不能使用直接成员访问运算符 (.) 来直接访问。我们将在后续的教程中学习如何访问私有成员和受保护的成员。"
+    },
+    {
+      "type": "text",
+      "content": "类 & 对象详解"
+    },
+    {
+      "type": "text",
+      "content": "到目前为止，我们已经对 C++ 的类和对象有了基本的了解。下面的列表中还列出了其他一些 C++ 类和对象相关的概念，可以点击相应的链接进行学习。"
+    },
+    {
+      "type": "text",
+      "content": "概念 | 描述\n类成员函数 | 类的成员函数是指那些把定义和原型写在类定义内部的函数，就像类定义中的其他变量一样。\n类访问修饰符 | 类成员可以被定义为 public、private 或 protected。默认情况下是定义为 private。\n构造函数 & 析构函数 | 类的构造函数是一种特殊的函数，在创建一个新的对象时调用。类的析构函数也是一种特殊的函数，在删除所创建的对象时调用。\nC++ 拷贝构造函数 | 拷贝构造函数，是一种特殊的构造函数，它在创建对象时，是使用同一类中之前创建的对象来初始化新创建的对象。\nC++ 友元函数 | 友元函数可以访问类的 private 和 protected 成员。\nC++ 内联函数 | 通过内联函数，编译器试图在调用函数的地方扩展函数体中的代码。\nC++ 中的 this 指针 | 每个对象都有一个特殊的指针this，它指向对象本身。\nC++ 中指向类的指针 | 指向类的指针方式如同指向结构的指针。实际上，类可以看成是一个带有函数的结构。\nC++ 类的静态成员 | 类的数据成员和函数成员都可以被声明为静态的。"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

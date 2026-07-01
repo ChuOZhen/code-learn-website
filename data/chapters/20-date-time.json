@@ -1,0 +1,85 @@
+{
+  "id": "20-date-time",
+  "title": "C++日期 & 时间",
+  "order": 20,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-date-time.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "C++ 标准库没有提供所谓的日期类型。C++ 继承了 C 语言用于日期和时间操作的结构和函数。为了使用日期和时间相关的函数和结构，需要在 C++ 程序中引用 <ctime> 头文件。"
+    },
+    {
+      "type": "text",
+      "content": "有四个与时间相关的类型：clock_t、time_t、size_t和tm。类型 clock_t、size_t 和 time_t 能够把系统时间和日期表示为某种整数。"
+    },
+    {
+      "type": "text",
+      "content": "结构类型tm把日期和时间以 C 结构的形式保存，tm 结构的定义如下："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "struct tm {\nint tm_sec;   // 秒，正常范围从 0 到 59，但允许至 61\nint tm_min;   // 分，范围从 0 到 59\nint tm_hour;  // 小时，范围从 0 到 23\nint tm_mday;  // 一月中的第几天，范围从 1 到 31\nint tm_mon;   // 月，范围从 0 到 11\nint tm_year;  // 自 1900 年起的年数\nint tm_wday;  // 一周中的第几天，范围从 0 到 6，从星期日算起\nint tm_yday;  // 一年中的第几天，范围从 0 到 365，从 1 月 1 日算起\nint tm_isdst; // 夏令时\n};"
+    },
+    {
+      "type": "text",
+      "content": "下面是 C/C++ 中关于日期和时间的重要函数。所有这些函数都是 C/C++ 标准库的组成部分，您可以在 C++ 标准库中查看一下各个函数的细节。"
+    },
+    {
+      "type": "text",
+      "content": "序号 | 函数 & 描述\n1 | time_t time(time_t *time);该函数返回系统的当前日历时间，自 1970 年 1 月 1 日以来经过的秒数。如果系统没有时间，则返回 -1。\n2 | char *ctime(const time_t *time);返回一个指向字符串的指针，字符串内容表示本地时间，格式为：Www Mmm dd hh:mm:ss yyyy\\n\\0其中：Www：星期（如 Tue）Mmm：月份（如 Jul）dd：日（如 29）hh:mm:ss：时间（24 小时制）yyyy：年份（如 2025）最后包含换行符\\n和结束符\\0示例返回值：\"Tue Jul 29 19:12:15 2025\\n\\0\"\n3 | struct tm *localtime(const time_t *time);该函数返回一个指向表示本地时间的tm结构的指针。\n4 | clock_t clock(void);该函数返回程序执行起（一般为程序的开头），处理器时钟所使用的时间。如果时间不可用，则返回 -1。\n5 | char * asctime ( const struct tm * time );该函数返回一个指向字符串的指针，字符串包含了 time 所指向结构中存储的信息，返回形式为：day month date hours:minutes:seconds year\\n\\0。\n6 | struct tm *gmtime(const time_t *time);该函数返回一个指向 time 的指针，time 为 tm 结构，用协调世界时（UTC）也被称为格林尼治标准时间（GMT）表示。\n7 | time_t mktime(struct tm *time);该函数返回日历时间，相当于 time 所指向结构中存储的时间。\n8 | double difftime ( time_t time2, time_t time1 );该函数返回 time1 和 time2 之间相差的秒数。\n9 | size_t strftime();该函数可用于格式化日期和时间为指定的格式。"
+    },
+    {
+      "type": "text",
+      "content": "当前日期和时间"
+    },
+    {
+      "type": "text",
+      "content": "下面的实例获取当前系统的日期和时间，包括本地时间和协调世界时（UTC）。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <ctime>\nusing namespace std;\n \nint main( )\n{\n// 基于当前系统的当前日期/时间\ntime_t now = time(0);\n   \n   // 把 now 转换为字符串形式\nchar* dt = ctime(&now);\n \n   cout << \"本地日期和时间：\" << dt << endl;\n \n   // 把 now 转换为 tm 结构\ntm *gmtm = gmtime(&now);\n   dt = asctime(gmtm);\n   cout << \"UTC 日期和时间：\"<< dt << endl;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "本地日期和时间：Sat Jan  8 20:07:41 2011\r\n\r\nUTC 日期和时间：Sun Jan  9 03:07:41 2011"
+    },
+    {
+      "type": "text",
+      "content": "使用结构 tm 格式化时间"
+    },
+    {
+      "type": "text",
+      "content": "tm结构在 C/C++ 中处理日期和时间相关的操作时，显得尤为重要。tm 结构以 C 结构的形式保存日期和时间。大多数与时间相关的函数都使用了 tm 结构。下面的实例使用了 tm 结构和各种与日期和时间相关的函数。"
+    },
+    {
+      "type": "text",
+      "content": "在练习使用结构之前，需要对 C 结构有基本的了解，并懂得如何使用箭头 -> 运算符来访问结构成员。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <ctime>\nusing namespace std;\n \nint main( )\n{\n// 基于当前系统的当前日期/时间\ntime_t now = time(0);\n \n   cout << \"1970 到目前经过秒数:\" << now << endl;\n \n   tm *ltm = localtime(&now);\n \n   // 输出 tm 结构的各个组成部分\ncout << \"年: \"<< 1900 + ltm->tm_year << endl;\n   cout << \"月: \"<< 1 + ltm->tm_mon<< endl;\n   cout << \"日: \"<<  ltm->tm_mday << endl;\n   cout << \"时间: \"<< ltm->tm_hour << \":\";\n   cout << ltm->tm_min << \":\";\n   cout << ltm->tm_sec << endl;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "1970 到目前时间:1503564157\r\n年: 2017\r\n月: 8\r\n日: 24\r\n时间: 16:42:37"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

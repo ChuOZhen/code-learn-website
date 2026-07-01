@@ -1,0 +1,132 @@
+{
+  "id": "09-modifier-types",
+  "title": "C++修饰符类型",
+  "order": 9,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-modifier-types.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "C++ 允许在char、int 和 double数据类型前放置修饰符。"
+    },
+    {
+      "type": "text",
+      "content": "修饰符是用于改变变量类型的行为的关键字，它更能满足各种情境的需求。"
+    },
+    {
+      "type": "text",
+      "content": "下面列出了数据类型修饰符："
+    },
+    {
+      "type": "text",
+      "content": "signed：表示变量可以存储负数。对于整型变量来说，signed 可以省略，因为整型变量默认为有符号类型。\nunsigned：表示变量不能存储负数。对于整型变量来说，unsigned 可以将变量范围扩大一倍。\nshort：表示变量的范围比 int 更小。short int 可以缩写为 short。\nlong：表示变量的范围比 int 更大。long int 可以缩写为 long。\nlong long：表示变量的范围比 long 更大。C++11 中新增的数据类型修饰符。\nfloat：表示单精度浮点数。\ndouble：表示双精度浮点数。\nbool：表示布尔类型，只有 true 和 false 两个值。\nchar：表示字符类型。\nwchar_t：表示宽字符类型，可以存储 Unicode 字符。"
+    },
+    {
+      "type": "text",
+      "content": "修饰符signed、unsigned、long 和 short可应用于整型，signed和unsigned可应用于字符型，long可应用于双精度型。"
+    },
+    {
+      "type": "text",
+      "content": "这些修饰符也可以组合使用，修饰符signed和unsigned也可以作为long或short修饰符的前缀。例如：unsigned long int。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 允许使用速记符号来声明无符号短整数或无符号长整数。您可以不写 int，只写单词unsigned、short或long，int是隐含的。例如，下面的两个语句都声明了无符号整型变量。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "signed int num1 = -10; // 定义有符号整型变量 num1，初始值为 -10\r\nunsigned int num2 = 20; // 定义无符号整型变量 num2，初始值为 20\r\n\r\nshort int num1 = 10; // 定义短整型变量 num1，初始值为 10\r\nlong int num2 = 100000; // 定义长整型变量 num2，初始值为 100000\r\n\r\nlong long int num1 = 10000000000; // 定义长长整型变量 num1，初始值为 10000000000\r\n\r\nfloat num1 = 3.14f; // 定义单精度浮点数变量 num1，初始值为 3.14\r\ndouble num2 = 2.71828; // 定义双精度浮点数变量 num2，初始值为 2.71828\r\n\r\nbool flag = true; // 定义布尔类型变量 flag，初始值为 true\r\n\r\nchar ch1 = 'a'; // 定义字符类型变量 ch1，初始值为 'a'\r\nwchar_t ch2 = L'你'; // 定义宽字符类型变量 ch2，初始值为 '你'"
+    },
+    {
+      "type": "text",
+      "content": "为了理解 C++ 解释有符号整数和无符号整数修饰符之间的差别，我们来运行一下下面这个短程序："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \n/* \n * 这个程序演示了有符号整数和无符号整数之间的差别\n*/\nint main()\n{\nshort int i;           // 有符号短整数\nshort unsigned int j;  // 无符号短整数\nj = 50000;\n \n   i = j;\n   cout << i << \" \" << j;\n \n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的程序运行时，会输出下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "-15536 50000"
+    },
+    {
+      "type": "text",
+      "content": "上述结果中，无符号短整数 50,000 的位模式被解释为有符号短整数 -15,536。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 中的类型限定符"
+    },
+    {
+      "type": "text",
+      "content": "类型限定符提供了变量的额外信息，用于在定义变量或函数时改变它们的默认行为的关键字。"
+    },
+    {
+      "type": "text",
+      "content": "限定符 | 含义\nconst | const定义常量，表示该变量的值不能被修改。\nvolatile | 修饰符volatile告诉该变量的值可能会被程序以外的因素改变，如硬件或其他线程。。\nrestrict | 由restrict修饰的指针是唯一一种访问它所指向的对象的方式。只有 C99 增加了新的类型限定符 restrict。\nmutable | mutable 用于修饰类的成员变量。被 mutable 修饰的成员变量可以被修改，即使它们所在的对象是 const 的。\nstatic | 用于定义静态变量，表示该变量的作用域仅限于当前文件或当前函数内，不会被其他文件或函数访问。\nregister | 用于定义寄存器变量，表示该变量被频繁使用，可以存储在CPU的寄存器中，以提高程序的运行效率。在 C++11 中被标记为弃用(deprecated)\r\n在 C++17 中被正式移除。"
+    },
+    {
+      "type": "text",
+      "content": "const 实例"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "const int NUM = 10; // 定义常量 NUM，其值不可修改\r\nconst int* ptr = &NUM; // 定义指向常量的指针，指针所指的值不可修改\r\nint const* ptr2 = &NUM; // 和上面一行等价"
+    },
+    {
+      "type": "text",
+      "content": "volatile 实例"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "volatile int num = 20; // 定义变量 num，其值可能会在未知的时间被改变"
+    },
+    {
+      "type": "text",
+      "content": "mutable 实例"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "class Example {\r\npublic:\r\n    int get_value() const {\r\n        return value_; // const 关键字表示该成员函数不会修改对象中的数据成员\r\n    }\r\n    void set_value(int value) const {\r\n        value_ = value; // mutable 关键字允许在 const 成员函数中修改成员变量\r\n    }\r\nprivate:\r\n    mutable int value_;\r\n};"
+    },
+    {
+      "type": "text",
+      "content": "static 实例"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "void example_function() {\r\n    static int count = 0; // static 关键字使变量 count 存储在程序生命周期内都存在\r\n    count++;\r\n}"
+    },
+    {
+      "type": "text",
+      "content": "register 实例"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "void example_function(register int num) {\r\n    // register 关键字建议编译器将变量 num 存储在寄存器中\r\n    // 以提高程序执行速度\r\n    // 但是实际上是否会存储在寄存器中由编译器决定\r\n}"
+    },
+    {
+      "type": "text",
+      "content": "C++11 后 register 的变化："
+    },
+    {
+      "type": "text",
+      "content": "在 C++11 中被标记为弃用(deprecated)\n在 C++17 中被正式移除\n保留为关键字（可能用于兼容或未来用途）"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

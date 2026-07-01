@@ -1,0 +1,49 @@
+{
+  "id": "13-decision",
+  "title": "C++判断",
+  "order": 13,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-decision.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "判断结构要求程序员指定一个或多个要评估或测试的条件，以及条件为真时要执行的语句（必需的）和条件为假时要执行的语句（可选的）。下面是大多数编程语言中典型的判断结构的一般形式："
+    },
+    {
+      "type": "text",
+      "content": "判断语句"
+    },
+    {
+      "type": "text",
+      "content": "C++ 编程语言提供了以下类型的判断语句。点击链接查看每个语句的细节。"
+    },
+    {
+      "type": "text",
+      "content": "语句 | 描述\nif 语句 | 一个if 语句由一个布尔表达式后跟一个或多个语句组成。\nif...else 语句 | 一个if 语句后可跟一个可选的else 语句，else 语句在布尔表达式为假时执行。\n嵌套 if 语句 | 您可以在一个if或else if语句内使用另一个if或else if语句。\nswitch 语句 | 一个switch语句允许测试一个变量等于多个值时的情况。\n嵌套 switch 语句 | 您可以在一个switch语句内使用另一个switch语句。"
+    },
+    {
+      "type": "text",
+      "content": "? : 运算符"
+    },
+    {
+      "type": "text",
+      "content": "我们已经在前面的章节中讲解了条件运算符 ? :，可以用来替代if...else语句。它的一般形式如下："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Exp1 ? Exp2 : Exp3;"
+    },
+    {
+      "type": "text",
+      "content": "其中，Exp1、Exp2 和 Exp3 是表达式。请注意，冒号的使用和位置。"
+    },
+    {
+      "type": "text",
+      "content": "? 表达式的值是由 Exp1 决定的。如果 Exp1 为真，则计算 Exp2 的值，结果即为整个 ? 表达式的值。如果 Exp1 为假，则计算 Exp3 的值，结果即为整个 ? 表达式的值。"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

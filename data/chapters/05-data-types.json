@@ -1,0 +1,325 @@
+{
+  "id": "05-data-types",
+  "title": "C++数据类型",
+  "order": 5,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-data-types.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "使用编程语言进行编程时，需要用到各种变量来存储各种信息。变量保留的是它所存储的值的内存位置。这意味着，当您创建一个变量时，就会在内存中保留一些空间。您可能需要存储各种数据类型（比如字符型、宽字符型、整型、浮点型、双浮点型、布尔型等）的信息，操作系统会根据变量的数据类型，来分配内存和决定在保留内存中存储什么。"
+    },
+    {
+      "type": "text",
+      "content": "基本的内置类型"
+    },
+    {
+      "type": "text",
+      "content": "C++ 为程序员提供了种类丰富的内置数据类型和用户自定义的数据类型。下表列出了七种基本的 C++ 数据类型："
+    },
+    {
+      "type": "text",
+      "content": "类型 | 关键字\n布尔型 | bool\n字符型 | char\n整型 | int\n浮点型 | float\n双浮点型 | double\n无类型 | void\n宽字符型 | wchar_t"
+    },
+    {
+      "type": "text",
+      "content": "其实 wchar_t 是这样来的："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "typedef short int wchar_t;"
+    },
+    {
+      "type": "text",
+      "content": "所以 wchar_t 实际上的空间是和 short int 一样。"
+    },
+    {
+      "type": "text",
+      "content": "一些基本类型可以使用一个或多个类型修饰符进行修饰："
+    },
+    {
+      "type": "text",
+      "content": "修饰符 | 描述 | 示例\nsigned | 表示有符号类型（默认） | signed int x = -10;\nunsigned | 表示无符号类型 | unsigned int y = 10;\nshort | 表示短整型 | short int z = 100;\nlong | 表示长整型 | long int a = 100000;\nconst | 表示常量，值不可修改 | const int b = 5;\nvolatile | 表示变量可能被意外修改，禁止编译器优化 | volatile int c = 10;\nmutable | 表示类成员可以在const对象中修改 | mutable int counter;"
+    },
+    {
+      "type": "text",
+      "content": "下表显示了各种变量类型在内存中存储值时需要占用的内存，以及该类型的变量所能存储的最大值和最小值。"
+    },
+    {
+      "type": "text",
+      "content": "注意：不同系统会有所差异，一字节为 8 位。"
+    },
+    {
+      "type": "text",
+      "content": "注意：默认情况下，int、short、long都是带符号的，即 signed。"
+    },
+    {
+      "type": "text",
+      "content": "注意：long int 8 个字节，int 都是 4 个字节，早期的 C 编译器定义了 long int 占用 4 个字节，int 占用 2 个字节，新版的 C/C++ 标准兼容了早期的这一设定。"
+    },
+    {
+      "type": "text",
+      "content": "数据类型 | 描述 | 大小（字节） | 范围/取值示例\nbool | 布尔类型，表示真或假 | 1 | true或false\nchar | 字符类型，通常用于存储 ASCII 字符 | 1 | -128 到 127 或 0 到 255\nsigned char | 有符号字符类型 | 1 | -128 到 127\nunsigned char | 无符号字符类型 | 1 | 0 到 255\nwchar_t | 宽字符类型，用于存储 Unicode 字符 | 2 或 4 | 取决于平台\nchar16_t | 16 位 Unicode 字符类型（C++11 引入） | 2 | 0 到 65,535\nchar32_t | 32 位 Unicode 字符类型（C++11 引入） | 4 | 0 到 4,294,967,295\nshort | 短整型 | 2 | -32,768 到 32,767\nunsigned short | 无符号短整型 | 2 | 0 到 65,535\nint | 整型 | 4 | -2,147,483,648 到 2,147,483,647\nunsigned int | 无符号整型 | 4 | 0 到 4,294,967,295\nlong | 长整型 | 4 或 8 | 取决于平台\nunsigned long | 无符号长整型 | 4 或 8 | 取决于平台\nlong long | 长长整型（C++11 引入） | 8 | -9,223,372,036,854,775,808 到 9,223,372,036,854,775,807\nunsigned long long | 无符号长长整型（C++11 引入） | 8 | 0 到 18,446,744,073,709,551,615\nfloat | 单精度浮点数 | 4 | 约 ±3.4e±38（6-7 位有效数字）\ndouble | 双精度浮点数 | 8 | 约 ±1.7e±308（15 位有效数字）\nlong double | 扩展精度浮点数 | 8、12 或 16 | 取决于平台"
+    },
+    {
+      "type": "text",
+      "content": "C++11 新增类型"
+    },
+    {
+      "type": "text",
+      "content": "数据类型 | 描述 | 示例\nauto | 自动类型推断 | auto x = 10;\ndecltype | 获取表达式的类型 | decltype(x) y = 20;\nnullptr | 空指针常量 | int* ptr = nullptr;\nstd::initializer_list | 初始化列表类型 | std::initializer_list<int> list = {1, 2, 3};\nstd::tuple | 元组类型，可以存储多个不同类型的值 | std::tuple<int, float, char> t(1, 2.0, 'a');"
+    },
+    {
+      "type": "text",
+      "content": "注意，各种类型的存储大小与系统位数有关，但目前通用的以64位系统为主。以下列出了32位系统与64位系统的存储大小的差别（windows 相同）："
+    },
+    {
+      "type": "text",
+      "content": "从上表可得知，变量的大小会根据编译器和所使用的电脑而有所不同。"
+    },
+    {
+      "type": "text",
+      "content": "下面实例会输出您电脑上各种数据类型的大小。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include<iostream> \n#include <limits>\nusing namespace std;  \n  \nint main()\n{\ncout << \"type: \\t\\t\" << \"************size**************\"<< endl;  \n    cout << \"bool: \\t\\t\" << \"所占字节数：\" << sizeof(bool);  \n    cout << \"\\t最大值：\" << (numeric_limits<bool>::max)();  \n    cout << \"\\t\\t最小值：\" << (numeric_limits<bool>::min)() << endl;  \n    cout << \"char: \\t\\t\" << \"所占字节数：\" << sizeof(char);  \n    cout << \"\\t最大值：\" << (numeric_limits<char>::max)();  \n    cout << \"\\t\\t最小值：\" << (numeric_limits<char>::min)() << endl;  \n    cout << \"signed char: \\t\" << \"所占字节数：\" << sizeof(signed char);  \n    cout << \"\\t最大值：\" << (numeric_limits<signed char>::max)();  \n    cout << \"\\t\\t最小值：\" << (numeric_limits<signed char>::min)() << endl;  \n    cout << \"unsigned char: \\t\" << \"所占字节数：\" << sizeof(unsigned char);  \n    cout << \"\\t最大值：\" << (numeric_limits<unsigned char>::max)();  \n    cout << \"\\t\\t最小值：\" << (numeric_limits<unsigned char>::min)() << endl;  \n    cout << \"wchar_t: \\t\" << \"所占字节数：\" << sizeof(wchar_t);  \n    cout << \"\\t最大值：\" << (numeric_limits<wchar_t>::max)();  \n    cout << \"\\t\\t最小值：\" << (numeric_limits<wchar_t>::min)() << endl;  \n    cout << \"short: \\t\\t\" << \"所占字节数：\" << sizeof(short);  \n    cout << \"\\t最大值：\" << (numeric_limits<short>::max)();  \n    cout << \"\\t\\t最小值：\" << (numeric_limits<short>::min)() << endl;  \n    cout << \"int: \\t\\t\" << \"所占字节数：\" << sizeof(int);  \n    cout << \"\\t最大值：\" << (numeric_limits<int>::max)();  \n    cout << \"\\t最小值：\" << (numeric_limits<int>::min)() << endl;  \n    cout << \"unsigned: \\t\" << \"所占字节数：\" << sizeof(unsigned);  \n    cout << \"\\t最大值：\" << (numeric_limits<unsigned>::max)();  \n    cout << \"\\t最小值：\" << (numeric_limits<unsigned>::min)() << endl;  \n    cout << \"long: \\t\\t\" << \"所占字节数：\" << sizeof(long);  \n    cout << \"\\t最大值：\" << (numeric_limits<long>::max)();  \n    cout << \"\\t最小值：\" << (numeric_limits<long>::min)() << endl;  \n    cout << \"unsigned long: \\t\" << \"所占字节数：\" << sizeof(unsigned long);  \n    cout << \"\\t最大值：\" << (numeric_limits<unsigned long>::max)();  \n    cout << \"\\t最小值：\" << (numeric_limits<unsigned long>::min)() << endl;  \n    cout << \"double: \\t\" << \"所占字节数：\" << sizeof(double);  \n    cout << \"\\t最大值：\" << (numeric_limits<double>::max)();  \n    cout << \"\\t最小值：\" << (numeric_limits<double>::min)() << endl;  \n    cout << \"long double: \\t\" << \"所占字节数：\" << sizeof(long double);  \n    cout << \"\\t最大值：\" << (numeric_limits<long double>::max)();  \n    cout << \"\\t最小值：\" << (numeric_limits<long double>::min)() << endl;  \n    cout << \"float: \\t\\t\" << \"所占字节数：\" << sizeof(float);  \n    cout << \"\\t最大值：\" << (numeric_limits<float>::max)();  \n    cout << \"\\t最小值：\" << (numeric_limits<float>::min)() << endl;  \n    cout << \"size_t: \\t\" << \"所占字节数：\" << sizeof(size_t);  \n    cout << \"\\t最大值：\" << (numeric_limits<size_t>::max)();  \n    cout << \"\\t最小值：\" << (numeric_limits<size_t>::min)() << endl;  \n    cout << \"string: \\t\" << \"所占字节数：\" << sizeof(string) << endl;  \n    // << \"\\t最大值：\" << (numeric_limits<string>::max)() << \"\\t最小值：\" << (numeric_limits<string>::min)() << endl;  \ncout << \"type: \\t\\t\" << \"************size**************\"<< endl;  \n    return 0;  \n}"
+    },
+    {
+      "type": "text",
+      "content": "本实例使用了endl，这将在每一行后插入一个换行符，<<运算符用于向屏幕传多个值，sizeof()运算符用来获取各种数据类型的大小。"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生以下的结果，结果会根据所使用的计算机而有所不同："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "type:         ************size**************\r\nbool:         所占字节数：1    最大值：1        最小值：0\r\nchar:         所占字节数：1    最大值：        最小值：?\r\nsigned char:     所占字节数：1    最大值：        最小值：?\r\nunsigned char:     所占字节数：1    最大值：?        最小值：\r\nwchar_t:     所占字节数：4    最大值：2147483647        最小值：-2147483648\r\nshort:         所占字节数：2    最大值：32767        最小值：-32768\r\nint:         所占字节数：4    最大值：2147483647    最小值：-2147483648\r\nunsigned:     所占字节数：4    最大值：4294967295    最小值：0\r\nlong:         所占字节数：8    最大值：9223372036854775807    最小值：-9223372036854775808\r\nunsigned long:     所占字节数：8    最大值：18446744073709551615    最小值：0\r\ndouble:     所占字节数：8    最大值：1.79769e+308    最小值：2.22507e-308\r\nlong double:     所占字节数：16    最大值：1.18973e+4932    最小值：3.3621e-4932\r\nfloat:         所占字节数：4    最大值：3.40282e+38    最小值：1.17549e-38\r\nsize_t:     所占字节数：8    最大值：18446744073709551615    最小值：0\r\nstring:     所占字节数：24\r\ntype:         ************size**************"
+    },
+    {
+      "type": "text",
+      "content": "派生数据类型"
+    },
+    {
+      "type": "text",
+      "content": "数据类型 | 描述 | 示例\n数组 | 相同类型元素的集合 | int arr[5] = {1, 2, 3, 4, 5};\n指针 | 存储变量内存地址的类型 | int* ptr = &x;\n引用 | 变量的别名 | int& ref = x;\n函数 | 函数类型，表示函数的签名 | int func(int a, int b);\n结构体 | 用户定义的数据类型，可以包含多个不同类型的成员 | struct Point { int x; int y; };\n类 | 用户定义的数据类型，支持封装、继承和多态 | class MyClass { ... };\n联合体 | 多个成员共享同一块内存 | union Data { int i; float f; };\n枚举 | 用户定义的整数常量集合 | enum Color { RED, GREEN, BLUE };"
+    },
+    {
+      "type": "text",
+      "content": "类型别名"
+    },
+    {
+      "type": "text",
+      "content": "别名 | 描述 | 示例\ntypedef | 为现有类型定义别名 | typedef int MyInt;\nusing | 为现有类型定义别名（C++11 引入） | using MyInt = int;"
+    },
+    {
+      "type": "text",
+      "content": "标准库类型"
+    },
+    {
+      "type": "text",
+      "content": "数据类型 | 描述 | 示例\nstd::string | 字符串类型 | std::string s = \"Hello\";\nstd::vector | 动态数组 | std::vector<int> v = {1, 2, 3};\nstd::array | 固定大小数组（C++11 引入） | std::array<int, 3> a = {1, 2, 3};\nstd::pair | 存储两个值的容器 | std::pair<int, float> p(1, 2.0);\nstd::map | 键值对容器 | std::map<int, std::string> m;\nstd::set | 唯一值集合 | std::set<int> s = {1, 2, 3};"
+    },
+    {
+      "type": "text",
+      "content": "typedef 声明"
+    },
+    {
+      "type": "text",
+      "content": "您可以使用typedef为一个已有的类型取一个新的名字。下面是使用 typedef 定义一个新类型的语法："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "typedef type newname;"
+    },
+    {
+      "type": "text",
+      "content": "例如，下面的语句会告诉编译器，feet 是 int 的另一个名称："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "typedef int feet;"
+    },
+    {
+      "type": "text",
+      "content": "现在，下面的声明是完全合法的，它创建了一个整型变量 distance："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "feet distance;"
+    },
+    {
+      "type": "text",
+      "content": "枚举类型"
+    },
+    {
+      "type": "text",
+      "content": "枚举类型(enumeration)是C++中的一种派生数据类型，它是由用户定义的若干枚举常量的集合。"
+    },
+    {
+      "type": "text",
+      "content": "如果一个变量只有几种可能的值，可以定义为枚举(enumeration)类型。所谓\"枚举\"是指将变量的值一一列举出来，变量的值只能在列举出来的值的范围内。"
+    },
+    {
+      "type": "text",
+      "content": "创建枚举，需要使用关键字enum。枚举类型的一般形式为："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "enum 枚举名{ \r\n     标识符[=整型常数], \r\n     标识符[=整型常数], \r\n... \r\n    标识符[=整型常数]\r\n} 枚举变量;"
+    },
+    {
+      "type": "text",
+      "content": "如果枚举没有初始化, 即省掉\"=整型常数\"时, 则从第一个标识符开始。"
+    },
+    {
+      "type": "text",
+      "content": "例如，下面的代码定义了一个颜色枚举，变量 c 的类型为 color。最后，c 被赋值为 \"blue\"。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "enum color { red, green, blue } c;\r\nc = blue;"
+    },
+    {
+      "type": "text",
+      "content": "默认情况下，第一个名称的值为 0，第二个名称的值为 1，第三个名称的值为 2，以此类推。但是，您也可以给名称赋予一个特殊的值，只需要添加一个初始值即可。例如，在下面的枚举中，green的值为 5。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "enum color { red, green=5, blue };"
+    },
+    {
+      "type": "text",
+      "content": "在这里，blue的值为 6，因为默认情况下，每个名称都会比它前面一个名称大 1，但 red 的值依然为 0。"
+    },
+    {
+      "type": "text",
+      "content": "类型转换"
+    },
+    {
+      "type": "text",
+      "content": "类型转换是将一个数据类型的值转换为另一种数据类型的值。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 中有四种类型转换：静态转换、动态转换、常量转换和重新解释转换。"
+    },
+    {
+      "type": "text",
+      "content": "静态转换（Static Cast）"
+    },
+    {
+      "type": "text",
+      "content": "静态转换是将一种数据类型的值强制转换为另一种数据类型的值。"
+    },
+    {
+      "type": "text",
+      "content": "静态转换通常用于比较类型相似的对象之间的转换，例如将 int 类型转换为 float 类型。"
+    },
+    {
+      "type": "text",
+      "content": "静态转换不进行任何运行时类型检查，因此可能会导致运行时错误。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "int i = 10;\nfloat f = static_cast<float>(i); // 静态将int类型转换为float类型"
+    },
+    {
+      "type": "text",
+      "content": "动态转换（Dynamic Cast）"
+    },
+    {
+      "type": "text",
+      "content": "动态转换（dynamic_cast）是 C++ 中用于在继承层次结构中进行向下转换（downcasting）的一种机制。"
+    },
+    {
+      "type": "text",
+      "content": "动态转换通常用于将一个基类指针或引用转换为派生类指针或引用。"
+    },
+    {
+      "type": "text",
+      "content": "动态转换在运行时进行类型检查。如果转换失败，对于指针类型会返回 nullptr，对于引用类型则会抛出 std::bad_cast 异常。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "dynamic_cast<目标类型>(表达式)"
+    },
+    {
+      "type": "text",
+      "content": "目标类型：必须是指针或引用类型。\n表达式：需要转换的基类指针或引用。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nclass Base {\npublic:\n    virtual ~Base() = default; // 基类必须具有虚函数\n};\n \nclass Derived : public Base {\npublic:\n    void show() {\nstd::cout << \"Derived class method\" << std::endl;\n    }\n};\n \nint main() {\nBase* ptr_base = new Derived; // 基类指针指向派生类对象\n// 将基类指针转换为派生类指针\nDerived* ptr_derived = dynamic_cast<Derived*>(ptr_base);\n \n    if (ptr_derived) {\nptr_derived->show(); // 成功转换，调用派生类方法\n} else {\nstd::cout << \"Dynamic cast failed!\" << std::endl;\n    }\ndelete ptr_base;\n    return 0;\n}"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Derived class method"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <typeinfo>\n\nclass Base {\npublic:\n    virtual ~Base() = default; // 基类必须具有虚函数\n};\n\nclass Derived : public Base {\npublic:\n    void show() {\n        std::cout << \"Derived class method\" << std::endl;\n    }\n};\n\nint main() {\n    Derived derived_obj;\n    Base& ref_base = derived_obj; // 基类引用绑定到派生类对象\n\n    try {\n        // 将基类引用转换为派生类引用\n        Derived& ref_derived = dynamic_cast<Derived&>(ref_base);\n        ref_derived.show(); // 成功转换，调用派生类方法\n    } catch (const std::bad_cast& e) {\n        std::cout << \"Dynamic cast failed: \" << e.what() << std::endl;\n    }\n\n    return 0;\n}"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Derived class method"
+    },
+    {
+      "type": "text",
+      "content": "特性 | 指针类型 | 引用类型\n转换失败返回值 | 返回nullptr | 抛出std::bad_cast异常\n适用场景 | 向下转换、运行时类型检查 | 向下转换、运行时类型检查\n性能开销 | 较高 | 较高\n基类要求 | 必须具有虚函数 | 必须具有虚函数"
+    },
+    {
+      "type": "text",
+      "content": "常量转换（Const Cast）"
+    },
+    {
+      "type": "text",
+      "content": "常量转换用于将 const 类型的对象转换为非 const 类型的对象。"
+    },
+    {
+      "type": "text",
+      "content": "常量转换只能用于转换掉 const 属性，不能改变对象的类型。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "const int i = 10;\nint& r = const_cast<int&>(i); // 常量转换，将const int转换为int"
+    },
+    {
+      "type": "text",
+      "content": "重新解释转换（Reinterpret Cast）"
+    },
+    {
+      "type": "text",
+      "content": "重新解释转换将一个数据类型的值重新解释为另一个数据类型的值，通常用于在不同的数据类型之间进行转换。"
+    },
+    {
+      "type": "text",
+      "content": "重新解释转换不进行任何类型检查，因此可能会导致未定义的行为。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "int i = 10;\nfloat f = reinterpret_cast<float&>(i); // 重新解释将int类型转换为float类型"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

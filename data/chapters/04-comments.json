@@ -1,0 +1,73 @@
+{
+  "id": "04-comments",
+  "title": "C++注释",
+  "order": 4,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-comments.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "程序的注释是解释性语句，您可以在 C++ 代码中包含注释，这将提高源代码的可读性。所有的编程语言都允许某种形式的注释。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 支持单行注释和多行注释。注释中的所有字符会被 C++ 编译器忽略。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 注释一般有两种："
+    },
+    {
+      "type": "text",
+      "content": "//- 一般用于单行注释。\n/* ... */- 一般用于多行注释。"
+    },
+    {
+      "type": "text",
+      "content": "注释以//开始，直到行末为止。例如："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \nint main() {\n// 这是一个注释\ncout << \"Hello World!\";\n  return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "也可以放在语句后面："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \nint main()\n{\ncout << \"Hello World!\"; // 输出 Hello World!\nreturn 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译时，编译器会忽略// 这是一个注释和// 输出 Hello World!，最后会产生以下结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Hello World!"
+    },
+    {
+      "type": "text",
+      "content": "C++ 注释以/*开始，以*/终止。例如："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \nint main() {\n/* 这是注释 */\n/* C++ 注释也可以\n     * 跨行\n     */\ncout << \"Hello World!\";\n    return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "在/*和*/注释内部，//字符没有特殊的含义。在//注释内，/*和*/字符也没有特殊的含义。因此，您可以在一种注释内嵌套另一种注释。例如："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "/* 用于输出 Hello World 的注释\n \ncout << \"Hello World\"; // 输出 Hello World\n \n*/"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

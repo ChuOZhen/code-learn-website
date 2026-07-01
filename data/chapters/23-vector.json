@@ -1,0 +1,532 @@
+{
+  "id": "23-vector",
+  "title": "C++ vector 容器",
+  "order": 23,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-vector.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "在 C++ 中，vector是最常用的 STL 容器之一。"
+    },
+    {
+      "type": "text",
+      "content": "vector本质上是一个可自动扩容的动态数组，与传统数组相比，vector 不需要手动管理内存，可以根据元素数量自动扩容。"
+    },
+    {
+      "type": "text",
+      "content": "由于 vector 具有："
+    },
+    {
+      "type": "text",
+      "content": "连续内存存储\n随机访问速度快\nSTL 生态完整\n缓存友好（Cache Friendly）"
+    },
+    {
+      "type": "text",
+      "content": "因此，在现代 C++ 开发中，大部分顺序数据存储场景都会优先考虑 vector。"
+    },
+    {
+      "type": "text",
+      "content": "vector 的核心特点"
+    },
+    {
+      "type": "text",
+      "content": "动态大小：vector 可以自动扩容和缩容。\n连续内存：元素在内存中连续存储，访问效率非常高。\n随机访问：支持通过下标快速访问元素，时间复杂度为 O(1)。\n自动内存管理：不需要手动 malloc/free。\n支持迭代器：可以方便地与 STL 算法配合使用。"
+    },
+    {
+      "type": "text",
+      "content": "为什么 vector 很快？"
+    },
+    {
+      "type": "text",
+      "content": "vector 的元素在内存中是连续排列的："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "[1][2][3][4][5]"
+    },
+    {
+      "type": "text",
+      "content": "这种布局对 CPU Cache 非常友好。"
+    },
+    {
+      "type": "text",
+      "content": "CPU 在读取第一个元素时，通常会提前把后面的数据一起加载到缓存中，因此遍历 vector 的速度通常非常快。"
+    },
+    {
+      "type": "text",
+      "content": "这也是为什么很多情况下："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vector 比 list 更快"
+    },
+    {
+      "type": "text",
+      "content": "即使 list 在理论上的删除复杂度更低。"
+    },
+    {
+      "type": "text",
+      "content": "使用 vector"
+    },
+    {
+      "type": "text",
+      "content": "使用 vector 前，需要包含头文件："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <vector>"
+    },
+    {
+      "type": "text",
+      "content": "创建 vector"
+    },
+    {
+      "type": "text",
+      "content": "创建一个空 vector："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::vector<int>vec;"
+    },
+    {
+      "type": "text",
+      "content": "指定初始大小："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::vector<int>vec(5);"
+    },
+    {
+      "type": "text",
+      "content": "以上代码会创建 5 个元素，默认值为 0。"
+    },
+    {
+      "type": "text",
+      "content": "指定初始值："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::vector<int>vec(5, 10);"
+    },
+    {
+      "type": "text",
+      "content": "创建结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "[10, 10, 10, 10, 10]"
+    },
+    {
+      "type": "text",
+      "content": "使用初始化列表："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::vector<int>vec = {1, 2, 3, 4};"
+    },
+    {
+      "type": "text",
+      "content": "添加元素"
+    },
+    {
+      "type": "text",
+      "content": "使用push_back()向尾部添加元素："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vec.push_back(100);"
+    },
+    {
+      "type": "text",
+      "content": "vector 尾部追加元素的平均时间复杂度为："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "O(1)"
+    },
+    {
+      "type": "text",
+      "content": "访问元素"
+    },
+    {
+      "type": "text",
+      "content": "使用下标访问："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "int x = vec[0];"
+    },
+    {
+      "type": "text",
+      "content": "使用at()："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "int y = vec.at(1);"
+    },
+    {
+      "type": "text",
+      "content": "[]不检查越界，速度更快。\nat()会检查越界，更安全。"
+    },
+    {
+      "type": "text",
+      "content": "获取大小"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vec.size();"
+    },
+    {
+      "type": "text",
+      "content": "返回当前元素数量。"
+    },
+    {
+      "type": "text",
+      "content": "size 和 capacity 的区别"
+    },
+    {
+      "type": "text",
+      "content": "这是 vector 最重要的概念之一。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::vector<int>vec;\r\n\r\nvec.push_back(1);\r\nvec.push_back(2);\r\n\r\nstd::cout << vec.size() << std::endl;\r\nstd::cout << vec.capacity() << std::endl;"
+    },
+    {
+      "type": "text",
+      "content": "输出可能为："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "2\r\n4"
+    },
+    {
+      "type": "text",
+      "content": "size：当前元素数量。\ncapacity：当前已分配的内存容量。"
+    },
+    {
+      "type": "text",
+      "content": "capacity 通常大于等于 size。"
+    },
+    {
+      "type": "text",
+      "content": "这是因为 vector 会提前申请更多空间，以减少频繁扩容。"
+    },
+    {
+      "type": "text",
+      "content": "vector 扩容机制"
+    },
+    {
+      "type": "text",
+      "content": "当 vector 空间不足时，会发生扩容："
+    },
+    {
+      "type": "text",
+      "content": "申请更大的内存\n复制旧元素\n释放旧内存"
+    },
+    {
+      "type": "text",
+      "content": "这个过程代价较高。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::vector<int>vec;\r\n\r\nfor (int i = 0; i < 1000000; i++) {\r\n    vec.push_back(i);\r\n}"
+    },
+    {
+      "type": "text",
+      "content": "可能发生多次内存重新分配。"
+    },
+    {
+      "type": "text",
+      "content": "reserve() 预分配空间"
+    },
+    {
+      "type": "text",
+      "content": "为了避免频繁扩容，可以提前分配内存："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::vector<int>vec;\r\n\r\nvec.reserve(1000000);"
+    },
+    {
+      "type": "text",
+      "content": "这样可以减少："
+    },
+    {
+      "type": "text",
+      "content": "内存重新分配\n元素复制\n性能损耗"
+    },
+    {
+      "type": "text",
+      "content": "这是工程开发中非常重要的优化技巧。"
+    },
+    {
+      "type": "text",
+      "content": "遍历 vector"
+    },
+    {
+      "type": "text",
+      "content": "使用下标"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "for (size_t i = 0; i < vec.size(); i++) {\r\n    std::cout << vec[i] << \" \";\r\n}"
+    },
+    {
+      "type": "text",
+      "content": "使用迭代器"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "for (auto it = vec.begin(); it != vec.end(); ++it) {\r\n    std::cout << *it << \" \";\r\n}"
+    },
+    {
+      "type": "text",
+      "content": "范围 for 循环"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "for (int element : vec) {\r\n    std::cout << element << \" \";\r\n}"
+    },
+    {
+      "type": "text",
+      "content": "删除元素"
+    },
+    {
+      "type": "text",
+      "content": "删除第三个元素："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vec.erase(vec.begin() + 2);"
+    },
+    {
+      "type": "text",
+      "content": "vector 删除中间元素时，后面的元素会整体前移。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "1 2 3 4 5\r\n\r\n删除 2 后：\r\n\r\n1 3 4 5"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "3 4 5"
+    },
+    {
+      "type": "text",
+      "content": "都需要移动位置。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "erase() 的时间复杂度为 O(n)"
+    },
+    {
+      "type": "text",
+      "content": "vector 不适合的场景"
+    },
+    {
+      "type": "text",
+      "content": "频繁头部插入\n频繁中间删除\n超大对象频繁扩容"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vec.insert(vec.begin(), 100);"
+    },
+    {
+      "type": "text",
+      "content": "这是一个较慢的操作。"
+    },
+    {
+      "type": "text",
+      "content": "迭代器失效"
+    },
+    {
+      "type": "text",
+      "content": "vector 扩容后，原来的内存地址可能失效。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::vector<int>vec = {1, 2, 3};\r\n\r\nauto it = vec.begin();\r\n\r\nvec.push_back(4);\r\n\r\nstd::cout << *it;"
+    },
+    {
+      "type": "text",
+      "content": "这里的it可能已经失效。"
+    },
+    {
+      "type": "text",
+      "content": "因为 push_back() 可能导致重新分配内存。"
+    },
+    {
+      "type": "text",
+      "content": "这是 vector 最常见的坑之一。"
+    },
+    {
+      "type": "text",
+      "content": "clear() 的注意事项"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vec.clear();"
+    },
+    {
+      "type": "text",
+      "content": "clear() 只会清空元素："
+    },
+    {
+      "type": "text",
+      "content": "size 变为 0\ncapacity 可能仍然保留"
+    },
+    {
+      "type": "text",
+      "content": "也就是说："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "clear() 不一定释放内存"
+    },
+    {
+      "type": "text",
+      "content": "如果希望释放内存："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "std::vector<int>().swap(vec);"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vec.shrink_to_fit();"
+    },
+    {
+      "type": "text",
+      "content": "push_back 和 emplace_back"
+    },
+    {
+      "type": "text",
+      "content": "现代 C++ 更推荐使用："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "emplace_back()"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vec.push_back(Person(\"Tom\", 20));"
+    },
+    {
+      "type": "text",
+      "content": "可能产生临时对象。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vec.emplace_back(\"Tom\", 20);"
+    },
+    {
+      "type": "text",
+      "content": "会直接在 vector 内部原地构造对象。"
+    },
+    {
+      "type": "text",
+      "content": "通常效率更高。"
+    },
+    {
+      "type": "text",
+      "content": "vector 与数组的区别"
+    },
+    {
+      "type": "text",
+      "content": "特性 | 数组 | vector\n大小固定 | 是 | 否\n自动扩容 | 否 | 是\n连续内存 | 是 | 是\n随机访问 | 快 | 快\nSTL 支持 | 较少 | 完整\n安全访问 | 无 | at()"
+    },
+    {
+      "type": "text",
+      "content": "vector 常见操作复杂度"
+    },
+    {
+      "type": "text",
+      "content": "操作 | 时间复杂度\n随机访问 | O(1)\npush_back | 平均 O(1)\n尾部删除 | O(1)\n头部插入 | O(n)\n中间删除 | O(n)\nclear | O(n)"
+    },
+    {
+      "type": "text",
+      "content": "实例：学生成绩管理"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <vector>\n#include <numeric>\n\nint main() {\n    std::vector<int>scores = {85, 90, 78, 92};\n    scores.push_back(88);\n    std::cout << \"所有成绩: \";\n    for (int score : scores) {\n        std::cout << score << \" \";\n    }\n\n    std::cout << std::endl;\n    int total = std::accumulate(scores.begin(), scores.end(), 0);\n    double average = total * 1.0 / scores.size();\n    std::cout << \"平均成绩: \" << average << std::endl;\n    scores.erase(scores.begin() + 2);\n    std::cout << \"删除后成绩: \";\n    for (int score : scores) {\n        std::cout << score << \" \";\n    }\n\n    std::cout << std::endl;\n\n    return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "所有成绩: 85 90 78 92 88 \r\n平均成绩: 86.6\r\n删除后成绩: 85 90 92 88"
+    },
+    {
+      "type": "text",
+      "content": "vector 是现代 C++ 中最重要、最常用的数据结构之一。"
+    },
+    {
+      "type": "text",
+      "content": "它的核心优势："
+    },
+    {
+      "type": "text",
+      "content": "动态扩容\n连续内存\n随机访问快\n缓存友好\nSTL 生态完整"
+    },
+    {
+      "type": "text",
+      "content": "但同时也需要注意："
+    },
+    {
+      "type": "text",
+      "content": "扩容的性能代价\n中间删除效率低\n迭代器失效问题"
+    },
+    {
+      "type": "text",
+      "content": "对于绝大多数顺序存储场景："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "vector 通常都是默认首选容器"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+[
+  {
+    "chapter_id": "01-intro",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:37:10.712Z"
+  },
+  {
+    "chapter_id": "02-setup",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:37:16.734Z"
+  },
+  {
+    "chapter_id": "03-basic-syntax",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:44:15.967Z"
+  },
+  {
+    "chapter_id": "04-comments",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:37:43.933Z"
+  },
+  {
+    "chapter_id": "05-data-types",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:30:13.949Z"
+  },
+  {
+    "chapter_id": "07-variable-scope",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:30:24.213Z"
+  },
+  {
+    "chapter_id": "09-modifier-types",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:30:36.762Z"
+  },
+  {
+    "chapter_id": "08-constants-literals",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:30:37.846Z"
+  },
+  {
+    "chapter_id": "06-variable-types",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:37:48.549Z"
+  },
+  {
+    "chapter_id": "26-inheritance",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:37:53.549Z"
+  },
+  {
+    "chapter_id": "23-vector",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:32:44.602Z"
+  },
+  {
+    "chapter_id": "24-data-structures",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:35:01.377Z"
+  },
+  {
+    "chapter_id": "25-classes-objects",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:35:03.716Z"
+  },
+  {
+    "chapter_id": "31-interfaces",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:35:04.741Z"
+  },
+  {
+    "chapter_id": "32-files-streams",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:35:06.221Z"
+  },
+  {
+    "chapter_id": "34-dynamic-memory",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:35:07.252Z"
+  },
+  {
+    "chapter_id": "33-exceptions",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:35:07.905Z"
+  },
+  {
+    "chapter_id": "21-io",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T08:58:22.240Z"
+  },
+  {
+    "chapter_id": "22-struct",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:05:25.602Z"
+  },
+  {
+    "chapter_id": "29-data-abstraction",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:05:29.390Z"
+  },
+  {
+    "chapter_id": "30-data-encapsulation",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:05:32.999Z"
+  },
+  {
+    "chapter_id": "10-storage-classes",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:05:35.265Z"
+  },
+  {
+    "chapter_id": "11-operators",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:05:35.806Z"
+  },
+  {
+    "chapter_id": "12-loops",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:05:36.219Z"
+  },
+  {
+    "chapter_id": "13-decision",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:20:42.706Z"
+  },
+  {
+    "chapter_id": "14-functions",
+    "status": "in_progress",
+    "scroll_percent": 0,
+    "updated_at": "2026-07-01T09:20:43.478Z"
+  }
+]

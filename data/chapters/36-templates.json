@@ -1,0 +1,94 @@
+{
+  "id": "36-templates",
+  "title": "C++模板",
+  "order": 36,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-templates.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "模板是泛型编程的基础，泛型编程即以一种独立于任何特定类型的方式编写代码。"
+    },
+    {
+      "type": "text",
+      "content": "模板是创建泛型类或函数的蓝图或公式。库容器，比如迭代器和算法，都是泛型编程的例子，它们都使用了模板的概念。"
+    },
+    {
+      "type": "text",
+      "content": "每个容器都有一个单一的定义，比如向量，我们可以定义许多不同类型的向量，比如vector <int>或vector <string>。"
+    },
+    {
+      "type": "text",
+      "content": "您可以使用模板来定义函数和类，接下来让我们一起来看看如何使用。"
+    },
+    {
+      "type": "text",
+      "content": "函数模板"
+    },
+    {
+      "type": "text",
+      "content": "模板函数定义的一般形式如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "template <typename type> ret-type func-name(parameter list)\n{\n// 函数的主体\n}"
+    },
+    {
+      "type": "text",
+      "content": "在这里，type 是函数所使用的数据类型的占位符名称。这个名称可以在函数定义中使用。"
+    },
+    {
+      "type": "text",
+      "content": "下面是函数模板的实例，返回两个数中的最大值："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <string>\nusing namespace std;\n \ntemplate <typename T>\ninline T const& Max (T const& a, T const& b)\n{\nreturn a < b ? b:a; \n}\nint main ()\n{\nint i = 39;\n    int j = 20;\n    cout << \"Max(i, j): \" << Max(i, j) << endl; \n \n    double f1 = 13.5; \n    double f2 = 20.7; \n    cout << \"Max(f1, f2): \" << Max(f1, f2) << endl; \n \n    string s1 = \"Hello\"; \n    string s2 = \"World\"; \n    cout << \"Max(s1, s2): \" << Max(s1, s2) << endl; \n \n    return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Max(i, j): 39\r\nMax(f1, f2): 20.7\r\nMax(s1, s2): World"
+    },
+    {
+      "type": "text",
+      "content": "正如我们定义函数模板一样，我们也可以定义类模板。泛型类声明的一般形式如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "template <class type> class class-name {\r\n.\r\n.\r\n.\r\n}"
+    },
+    {
+      "type": "text",
+      "content": "在这里，type是占位符类型名称，可以在类被实例化的时候进行指定。您可以使用一个逗号分隔的列表来定义多个泛型数据类型。"
+    },
+    {
+      "type": "text",
+      "content": "下面的实例定义了类 Stack<>，并实现了泛型方法来对元素进行入栈出栈操作："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\n#include <vector>\n#include <cstdlib>\n#include <string>\n#include <stdexcept>\nusing namespace std;\n \ntemplate <class T>\nclass Stack {\nprivate: \n    vector<T> elems;     // 元素 \npublic: \n    void push(T const&);  // 入栈\nvoid pop();               // 出栈\nT top() const;            // 返回栈顶元素\nbool empty() const{ // 如果为空则返回真。\nreturn elems.empty(); \n    }\n}; \n \ntemplate <class T>\nvoid Stack<T>::push (T const& elem)\n{\n// 追加传入元素的副本\nelems.push_back(elem);    \n}\ntemplate <class T>\nvoid Stack<T>::pop ()\n{\nif (elems.empty()) {\nthrow out_of_range(\"Stack<>::pop(): empty stack\"); \n    }\n// 删除最后一个元素\nelems.pop_back();         \n}\ntemplate <class T>\nT Stack<T>::top () const\n{\nif (elems.empty()) {\nthrow out_of_range(\"Stack<>::top(): empty stack\"); \n    }\n// 返回最后一个元素的副本 \nreturn elems.back();      \n}\nint main()\n{\ntry {\nStack<int>         intStack;  // int 类型的栈 \nStack<string> stringStack;    // string 类型的栈 \n// 操作 int 类型的栈 \nintStack.push(7); \n        cout << intStack.top() <<endl; \n \n        // 操作 string 类型的栈 \nstringStack.push(\"hello\"); \n        cout << stringStack.top() << std::endl; \n        stringStack.pop(); \n        stringStack.pop(); \n    }\ncatch (exception const& ex) {\ncerr << \"Exception: \" << ex.what() <<endl; \n        return -1;\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "7\r\nhello\r\nException: Stack<>::pop(): empty stack"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}

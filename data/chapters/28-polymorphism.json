@@ -1,0 +1,228 @@
+{
+  "id": "28-polymorphism",
+  "title": "C++多态",
+  "order": 28,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-polymorphism.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "多态按字面的意思就是多种形态。"
+    },
+    {
+      "type": "text",
+      "content": "当类之间存在层次结构，并且类之间是通过继承关联时，就会用到多态。"
+    },
+    {
+      "type": "text",
+      "content": "在 C++ 中，多态（Polymorphism）是面向对象编程的重要特性之一。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 多态允许使用基类指针或引用来调用子类的重写方法，从而使得同一接口可以表现不同的行为。"
+    },
+    {
+      "type": "text",
+      "content": "多态使得代码更加灵活和通用，程序可以通过基类指针或引用来操作不同类型的对象，而不需要显式区分对象类型。这样可以使代码更具扩展性，在增加新的形状类时不需要修改主程序。"
+    },
+    {
+      "type": "text",
+      "content": "以下是多态的几个关键点："
+    },
+    {
+      "type": "text",
+      "content": "虚函数（Virtual Functions）："
+    },
+    {
+      "type": "text",
+      "content": "在基类中声明一个函数为虚函数，使用关键字virtual。\n派生类可以重写（override）这个虚函数。\n调用虚函数时，会根据对象的实际类型来决定调用哪个版本的函数。"
+    },
+    {
+      "type": "text",
+      "content": "动态绑定（Dynamic Binding）："
+    },
+    {
+      "type": "text",
+      "content": "也称为晚期绑定（Late Binding），在运行时确定函数调用的具体实现。\n需要使用指向基类的指针或引用来调用虚函数，编译器在运行时根据对象的实际类型来决定调用哪个函数。"
+    },
+    {
+      "type": "text",
+      "content": "纯虚函数（Pure Virtual Functions）："
+    },
+    {
+      "type": "text",
+      "content": "一个包含纯虚函数的类被称为抽象类（Abstract Class），它不能被直接实例化。\n纯虚函数没有函数体，声明时使用= 0。\n它强制派生类提供具体的实现。"
+    },
+    {
+      "type": "text",
+      "content": "多态的实现机制："
+    },
+    {
+      "type": "text",
+      "content": "虚函数表（V-Table）：C++运行时使用虚函数表来实现多态。每个包含虚函数的类都有一个虚函数表，表中存储了指向类中所有虚函数的指针。\n虚函数指针（V-Ptr）：对象中包含一个指向该类虚函数表的指针。"
+    },
+    {
+      "type": "text",
+      "content": "使用多态的优势："
+    },
+    {
+      "type": "text",
+      "content": "代码复用：通过基类指针或引用，可以操作不同类型的派生类对象，实现代码的复用。\n扩展性：新增派生类时，不需要修改依赖于基类的代码，只需要确保新类正确重写了虚函数。\n解耦：多态允许程序设计更加模块化，降低类之间的耦合度。"
+    },
+    {
+      "type": "text",
+      "content": "注意事项："
+    },
+    {
+      "type": "text",
+      "content": "只有通过基类的指针或引用调用虚函数时，才会发生多态。\n如果直接使用派生类的对象调用函数，那么调用的是派生类中的版本，而不是基类中的版本。\n多态性需要运行时类型信息（RTTI），这可能会增加程序的开销。"
+    },
+    {
+      "type": "text",
+      "content": "实例 1"
+    },
+    {
+      "type": "text",
+      "content": "我们通过一个简单的实例来了解多态的应用："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n\n// 基类 Animal\nclass Animal {\npublic:\n    // 虚函数 sound，为不同的动物发声提供接口\n    virtual void sound() const {\n        cout << \"Animal makes a sound\" << endl;\n    }\n    \n    // 虚析构函数确保子类对象被正确析构\n    virtual ~Animal() { \n        cout << \"Animal destroyed\" << endl; \n    }\n};\n\n// 派生类 Dog，继承自 Animal\nclass Dog : public Animal {\npublic:\n    // 重写 sound 方法\n    void sound() const override {\n        cout << \"Dog barks\" << endl;\n    }\n    \n    ~Dog() {\n        cout << \"Dog destroyed\" << endl;\n    }\n};\n\n// 派生类 Cat，继承自 Animal\nclass Cat : public Animal {\npublic:\n    // 重写 sound 方法\n    void sound() const override {\n        cout << \"Cat meows\" << endl;\n    }\n    \n    ~Cat() {\n        cout << \"Cat destroyed\" << endl;\n    }\n};\n\n// 测试多态\nint main() {\n    Animal* animalPtr;  // 基类指针\n\n    // 创建 Dog 对象，并指向 Animal 指针\n    animalPtr = new Dog();\n    animalPtr->sound();  // 调用 Dog 的 sound 方法\n    delete animalPtr;    // 释放内存，调用 Dog 和 Animal 的析构函数\n\n    // 创建 Cat 对象，并指向 Animal 指针\n    animalPtr = new Cat();\n    animalPtr->sound();  // 调用 Cat 的 sound 方法\n    delete animalPtr;    // 释放内存，调用 Cat 和 Animal 的析构函数\n\n    return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "程序执行输出为："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Dog barks\r\nDog destroyed\r\nAnimal destroyed\r\nCat meows\r\nCat destroyed\r\nAnimal destroyed"
+    },
+    {
+      "type": "text",
+      "content": "代码解释"
+    },
+    {
+      "type": "text",
+      "content": "基类Animal："
+    },
+    {
+      "type": "text",
+      "content": "Animal类定义了一个虚函数sound()，这是一个虚函数（virtual），用于表示动物发声的行为。\n~Animal()为虚析构函数，确保在释放基类指针指向的派生类对象时能够正确调用派生类的析构函数，防止内存泄漏。"
+    },
+    {
+      "type": "text",
+      "content": "派生类Dog和Cat："
+    },
+    {
+      "type": "text",
+      "content": "Dog和Cat类都从Animal类派生，并各自实现了sound()方法。\nDog的sound()输出\"Dog barks\"；Cat的sound()输出\"Cat meows\"。这使得同一个方法（sound()）在不同的类中表现不同的行为。"
+    },
+    {
+      "type": "text",
+      "content": "主函数main()："
+    },
+    {
+      "type": "text",
+      "content": "创建一个基类指针animalPtr。\n使用new Dog()创建Dog对象，将其地址赋给animalPtr。此时，调用animalPtr->sound()会输出\"Dog barks\"，因为animalPtr实际指向的是Dog对象。\n释放Dog对象时，先调用Dog的析构函数，再调用Animal的析构函数。\n使用new Cat()创建Cat对象并赋给animalPtr，再调用animalPtr->sound()，输出\"Cat meows\"，显示多态行为。"
+    },
+    {
+      "type": "text",
+      "content": "关键概念"
+    },
+    {
+      "type": "text",
+      "content": "虚函数：通过在基类中使用virtual关键字声明虚函数，派生类可以重写这个函数，从而使得在运行时根据对象类型调用正确的函数。\n动态绑定：C++ 的多态通过动态绑定实现。在运行时，基类指针animalPtr会根据它实际指向的对象类型（Dog或Cat）调用对应的sound()方法。\n虚析构函数：在具有多态行为的基类中，析构函数应该声明为virtual，以确保在删除派生类对象时调用派生类的析构函数，防止资源泄漏。"
+    },
+    {
+      "type": "text",
+      "content": "实例 2"
+    },
+    {
+      "type": "text",
+      "content": "下面的实例中，我们通过多态实现了一个通用的 Shape 基类和两个派生类 Rectangle 和 Triangle。"
+    },
+    {
+      "type": "text",
+      "content": "通过基类指针调用不同的派生类方法，展示了多态的动态绑定特性。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \n// 基类 Shape，表示形状\nclass Shape {\nprotected:\n      int width, height; // 宽度和高度\npublic:\n      // 构造函数，带有默认参数\nShape(int a = 0, int b = 0) : width(a), height(b) { }\n// 虚函数 area，用于计算面积\n// 使用 virtual 关键字，实现多态\nvirtual int area() {\ncout << \"Shape class area: \" << endl;\n         return 0;\n      }\n};\n \n// 派生类 Rectangle，表示矩形\nclass Rectangle : public Shape {\npublic:\n      // 构造函数，使用基类构造函数初始化 width 和 height\nRectangle(int a = 0, int b = 0) : Shape(a, b) { }\n// 重写 area 函数，计算矩形面积\nint area() override {\ncout << \"Rectangle class area: \" << endl;\n         return width * height;\n      }\n};\n \n// 派生类 Triangle，表示三角形\nclass Triangle : public Shape {\npublic:\n      // 构造函数，使用基类构造函数初始化 width 和 height\nTriangle(int a = 0, int b = 0) : Shape(a, b) { }\n// 重写 area 函数，计算三角形面积\nint area() override {\ncout << \"Triangle class area: \" << endl;\n         return (width * height / 2); \n      }\n};\n \n// 主函数\nint main() {\nShape *shape;           // 基类指针\nRectangle rec(10, 7);   // 矩形对象\nTriangle tri(10, 5);    // 三角形对象\n// 将基类指针指向矩形对象，并调用 area 函数\nshape = &rec;\n   cout << \"Rectangle Area: \" << shape->area() << endl;\n \n   // 将基类指针指向三角形对象，并调用 area 函数\nshape = &tri;\n   cout << \"Triangle Area: \" << shape->area() << endl;\n \n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Rectangle Area: Rectangle class area: \r\n70\r\nTriangle Area: Triangle class area: \r\n25"
+    },
+    {
+      "type": "text",
+      "content": "代码分析"
+    },
+    {
+      "type": "text",
+      "content": "Shape 类的定义："
+    },
+    {
+      "type": "text",
+      "content": "Shape是一个抽象基类，定义了一个虚函数area()。area()是用来计算面积的虚函数，并使用了virtual关键字，这样在派生类中可以重写该函数，进而实现多态。\nwidth和height是protected属性，只能在Shape类及其派生类中访问。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "// 基类 Shape，表示形状\r\nclass Shape {\r\n   protected:\r\n      int width, height; // 宽度和高度\r\n\r\n   public:\r\n      // 构造函数，带有默认参数\r\n      Shape(int a = 0, int b = 0) : width(a), height(b) { }\r\n\r\n      // 虚函数 area，用于计算面积\r\n      virtual int area() {\r\n         cout << \"Shape class area: \" << endl;\r\n         return 0;\r\n      }\r\n};"
+    },
+    {
+      "type": "text",
+      "content": "Rectangle 类的定义："
+    },
+    {
+      "type": "text",
+      "content": "Rectangle继承了Shape类，并重写了area()方法，计算矩形的面积。\narea()方法使用了override关键字，表示这是对基类Shape的area()方法的重写。\nRectangle::area()返回width * height，即矩形的面积。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "// 派生类 Rectangle，表示矩形\r\nclass Rectangle : public Shape {\r\n   public:\r\n      // 构造函数，使用基类构造函数初始化 width 和 height\r\n      Rectangle(int a = 0, int b = 0) : Shape(a, b) { }\r\n\r\n      // 重写 area 函数，计算矩形面积\r\n      int area() override { \r\n         cout << \"Rectangle class area: \" << endl;\r\n         return width * height;\r\n      }\r\n};"
+    },
+    {
+      "type": "text",
+      "content": "Triangle 类的定义："
+    },
+    {
+      "type": "text",
+      "content": "Triangle类也继承自Shape，并重写了area()方法，用于计算三角形的面积。\nTriangle::area()返回width * height / 2，这是三角形面积的公式。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "// 派生类 Triangle，表示三角形\r\nclass Triangle : public Shape {\r\n   public:\r\n      // 构造函数，使用基类构造函数初始化 width 和 height\r\n      Triangle(int a = 0, int b = 0) : Shape(a, b) { }\r\n\r\n      // 重写 area 函数，计算三角形面积\r\n      int area() override { \r\n         cout << \"Triangle class area: \" << endl;\r\n         return (width * height / 2); \r\n      }\r\n};"
+    },
+    {
+      "type": "text",
+      "content": "主函数中的多态行为："
+    },
+    {
+      "type": "text",
+      "content": "定义了一个基类指针shape，这个指针可以指向任何Shape类的对象或其派生类的对象。\n首先将shape指针指向Rectangle对象rec，然后调用shape->area()。由于area()是虚函数，此时会动态绑定到Rectangle::area()，输出矩形的面积。\n接着，将shape指针指向Triangle对象tri，调用shape->area()时会动态绑定到Triangle::area()，输出三角形的面积。"
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "// 主函数\r\nint main() {\r\n   Shape *shape;           // 基类指针\r\n   Rectangle rec(10, 7);   // 矩形对象\r\n   Triangle tri(10, 5);    // 三角形对象\r\n\r\n   // 将基类指针指向矩形对象，并调用 area 函数\r\n   shape = &rec;\r\n   cout << \"Rectangle Area: \" << shape->area() << endl;\r\n\r\n   // 将基类指针指向三角形对象，并调用 area 函数\r\n   shape = &tri;\r\n   cout << \"Triangle Area: \" << shape->area() << endl;\r\n\r\n   return 0;\r\n}"
+    },
+    {
+      "type": "text",
+      "content": "关键概念"
+    },
+    {
+      "type": "text",
+      "content": "虚函数：在基类Shape中定义了虚函数area()。虚函数的作用是让派生类可以重写此函数，并在运行时根据指针的实际对象类型调用适当的函数实现。\n动态绑定：因为area()是虚函数，shape->area()调用时会在运行时根据shape实际指向的对象类型（Rectangle或Triangle）来调用相应的area()实现。这种在运行时决定调用哪个函数的机制称为动态绑定，是多态的核心。\n基类指针的多态性：基类指针shape可以指向任何派生自Shape的对象。当shape指向不同的派生类对象时，调用shape->area()会产生不同的行为，这体现了多态的特性。\n在基类中可以有实现。通常虚函数在基类中提供默认实现，但子类可以选择重写。\n动态绑定：在运行时根据对象的实际类型调用相应的函数版本。\n可选重写：派生类可以选择性地重写虚函数，但不是必须。\n必须在基类中声明为= 0，表示没有实现，子类必须重写。\n抽象类：包含纯虚函数的类不能直接实例化，必须通过派生类实现所有纯虚函数才能创建对象。\n接口定义：纯虚函数通常用于定义接口，让派生类实现具体行为。"
+    }
+  ]
+}

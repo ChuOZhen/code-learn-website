@@ -1,0 +1,98 @@
+{
+  "id": "18-pointers",
+  "title": "C++指针",
+  "order": 18,
+  "source_url": "https://www.runoob.com/cplusplus/cpp-pointers.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "学习 C++ 的指针既简单又有趣。通过指针，可以简化一些 C++ 编程任务的执行，还有一些任务，如动态内存分配，没有指针是无法执行的。所以，想要成为一名优秀的 C++ 程序员，学习指针是很有必要的。"
+    },
+    {
+      "type": "text",
+      "content": "正如您所知道的，每一个变量都有一个内存位置，每一个内存位置都定义了可使用连字号（&）运算符访问的地址，它表示了在内存中的一个地址。请看下面的实例，它将输出定义的变量地址："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \nint main ()\n{\nint var1;\n   char var2[10];\n \n   cout << \"var1 变量的地址： \";\n   cout << &var1 << endl;\n \n   cout << \"var2 变量的地址： \";\n   cout << &var2 << endl;\n \n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "var1 变量的地址： 0xbfebd5c0\r\nvar2 变量的地址： 0xbfebd5b6"
+    },
+    {
+      "type": "text",
+      "content": "通过上面的实例，我们了解了什么是内存地址以及如何访问它。接下来让我们看看什么是指针。"
+    },
+    {
+      "type": "text",
+      "content": "什么是指针？"
+    },
+    {
+      "type": "text",
+      "content": "指针是一个变量，其值为另一个变量的地址，即，内存位置的直接地址。就像其他变量或常量一样，您必须在使用指针存储其他变量地址之前，对其进行声明。指针变量声明的一般形式为："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "type *var-name;"
+    },
+    {
+      "type": "text",
+      "content": "在这里，type是指针的基类型，它必须是一个有效的 C++ 数据类型，var-name是指针变量的名称。用来声明指针的星号 * 与乘法中使用的星号是相同的。但是，在这个语句中，星号是用来指定一个变量是指针。以下是有效的指针声明："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "int    *ip;    /* 一个整型的指针 */\r\ndouble *dp;    /* 一个 double 型的指针 */\r\nfloat  *fp;    /* 一个浮点型的指针 */\r\nchar   *ch;    /* 一个字符型的指针 */"
+    },
+    {
+      "type": "text",
+      "content": "所有指针的值的实际数据类型，不管是整型、浮点型、字符型，还是其他的数据类型，都是一样的，都是一个代表内存地址的长的十六进制数。不同数据类型的指针之间唯一的不同是，指针所指向的变量或常量的数据类型不同。"
+    },
+    {
+      "type": "text",
+      "content": "C++ 中使用指针"
+    },
+    {
+      "type": "text",
+      "content": "使用指针时会频繁进行以下几个操作：定义一个指针变量、把变量地址赋值给指针、访问指针变量中可用地址的值。这些是通过使用一元运算符*来返回位于操作数所指定地址的变量的值。下面的实例涉及到了这些操作："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "#include <iostream>\nusing namespace std;\n \nint main ()\n{\nint var = 20;   // 实际变量的声明\nint  *ip;        // 指针变量的声明\nip = &var;       // 在指针变量中存储 var 的地址\ncout << \"Value of var variable: \";\n   cout << var << endl;\n \n   // 输出在指针变量中存储的地址\ncout << \"Address stored in ip variable: \";\n   cout << ip << endl;\n \n   // 访问指针中地址的值\ncout << \"Value of *ip variable: \";\n   cout << *ip << endl;\n \n   return 0;\n}"
+    },
+    {
+      "type": "text",
+      "content": "当上面的代码被编译和执行时，它会产生下列结果："
+    },
+    {
+      "type": "code",
+      "lang": "cpp",
+      "content": "Value of var variable: 20\r\nAddress stored in ip variable: 0xbfc601ac\r\nValue of *ip variable: 20"
+    },
+    {
+      "type": "text",
+      "content": "C++ 指针详解"
+    },
+    {
+      "type": "text",
+      "content": "在 C++ 中，有很多指针相关的概念，这些概念都很简单，但是都很重要。下面列出了 C++ 程序员必须清楚的一些与指针相关的重要概念："
+    },
+    {
+      "type": "text",
+      "content": "概念 | 描述\nC++ Null 指针 | C++ 支持空指针。NULL 指针是一个定义在标准库中的值为零的常量。\nC++ 指针的算术运算 | 可以对指针进行四种算术运算：++、--、+、-\nC++ 指针 vs 数组 | 指针和数组之间有着密切的关系。\nC++ 指针数组 | 可以定义用来存储指针的数组。\nC++ 指向指针的指针 | C++ 允许指向指针的指针。\nC++ 传递指针给函数 | 通过引用或地址传递参数，使传递的参数在调用函数中被改变。\nC++ 从函数返回指针 | C++ 允许函数返回指针到局部变量、静态变量和动态内存分配。"
+    },
+    {
+      "type": "text",
+      "content": "其他扩展"
+    }
+  ]
+}
