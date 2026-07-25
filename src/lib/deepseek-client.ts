@@ -32,7 +32,7 @@ export async function* streamDeepChat(
     method: 'POST',
     headers: buildAuthHeaders(apiKey),
     body: JSON.stringify({
-      model: 'deepseek-chat',
+      model: 'deepseek-v4-flash',
       messages,
       stream: true,
     }),
@@ -80,7 +80,7 @@ async function chatComplete(apiKey: string, messages: ChatMessage[]): Promise<st
     method: 'POST',
     headers: buildAuthHeaders(apiKey),
     body: JSON.stringify({
-      model: 'deepseek-chat',
+      model: 'deepseek-v4-flash',
       messages,
       stream: false,
     }),
