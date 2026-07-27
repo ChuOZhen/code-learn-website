@@ -89,16 +89,16 @@ ${chapterContext}
   };
 
   return (
-    <div className="fixed inset-y-0 right-0 w-96 bg-sidebar border-l border-border flex flex-col z-40 shadow-2xl">
+    <div className="fixed inset-y-0 right-0 w-96 bg-background-soft border-l border-border flex flex-col z-40 shadow-2xl">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-border">
         <div>
           <h3 className="text-sm font-semibold text-foreground">AI 助教</h3>
-          <p className="text-xs text-muted">正在学习：{chapterTitle}</p>
+          <p className="text-xs text-foreground-muted">正在学习：{chapterTitle}</p>
         </div>
         <button
           onClick={onClose}
-          className="text-muted hover:text-foreground transition-colors p-1 rounded hover:bg-white/10"
+          className="text-foreground-muted hover:text-foreground transition-colors p-1.5 rounded-lg hover:bg-background-elevated"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -109,10 +109,10 @@ ${chapterContext}
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && (
-          <div className="text-center text-muted text-sm py-10">
+          <div className="text-center text-foreground-muted text-sm py-10">
             <p className="mb-2">👋 你好！我是你的 C++ 助教。</p>
             <p>关于「{chapterTitle}」有什么不懂的，尽管问我！</p>
-            <p className="mt-2 text-xs text-muted/60">我会尽量引导你自己思考，而不是直接给答案哦。</p>
+            <p className="mt-2 text-xs text-foreground-subtle">我会尽量引导你自己思考，而不是直接给答案哦。</p>
           </div>
         )}
 
@@ -124,8 +124,8 @@ ${chapterContext}
             <div
               className={`max-w-[85%] rounded-xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
                 msg.role === 'user'
-                  ? 'bg-primary text-white'
-                  : 'bg-background text-foreground'
+                  ? 'bg-gradient-to-r from-primary to-primary-hover text-white shadow-md'
+                  : 'bg-background border border-border text-foreground shadow-sm'
               }`}
             >
               {msg.content || (loading && i === messages.length - 1 ? '思考中...' : '')}
@@ -144,12 +144,12 @@ ${chapterContext}
             onKeyDown={handleKeyDown}
             placeholder="输入你的问题..."
             rows={1}
-            className="flex-1 px-3 py-2 bg-background border border-border rounded-lg text-sm text-foreground placeholder:text-muted/50 focus:outline-none focus:border-primary resize-none transition-colors"
+            className="flex-1 px-3 py-2 bg-background border border-border rounded-lg text-sm text-foreground placeholder:text-foreground-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none transition-all duration-200"
           />
           <button
             onClick={sendMessage}
             disabled={loading || !input.trim()}
-            className="px-3 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+            className="px-3 py-2 bg-gradient-to-r from-primary to-primary-hover hover:from-primary-hover hover:to-primary text-white rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shrink-0 active:scale-95"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

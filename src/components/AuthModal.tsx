@@ -54,7 +54,7 @@ export default function AuthModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="w-full max-w-md bg-card border border-border rounded-2xl shadow-2xl p-6 md:p-8">
+      <div className="w-full max-w-md bg-background-soft border border-border rounded-2xl shadow-2xl p-6 md:p-8">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">C++ 自学平台</h1>
           <p className="text-sm text-muted">数据完全存储在本地，保护你的隐私</p>
@@ -67,7 +67,7 @@ export default function AuthModal() {
               {users.map(u => (
                 <div
                   key={u.username}
-                  className="flex items-center justify-between p-3 rounded-lg bg-background border border-border hover:border-primary/50 transition-colors"
+                  className="flex items-center justify-between p-3 rounded-lg bg-background border border-border hover:border-primary/50 transition-all duration-200"
                 >
                   <div>
                     <p className="font-medium text-foreground">{u.username}</p>
@@ -78,13 +78,13 @@ export default function AuthModal() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => { setUsername(u.username); setMode('login'); }}
-                      className="px-3 py-1.5 bg-primary hover:bg-primary-hover text-white text-sm rounded-lg transition-colors"
+                      className="px-3 py-1.5 bg-gradient-to-r from-primary to-primary-hover hover:from-primary-hover hover:to-primary text-white text-sm rounded-lg transition-all duration-200 active:scale-95"
                     >
                       登录
                     </button>
                     <button
                       onClick={() => handleDelete(u.username)}
-                      className="px-3 py-1.5 text-red-400 hover:text-red-300 text-sm transition-colors"
+                      className="px-3 py-1.5 text-danger hover:text-red-300 text-sm transition-colors"
                     >
                       删除
                     </button>
@@ -94,7 +94,7 @@ export default function AuthModal() {
             </div>
             <button
               onClick={() => { setUsername(''); setPassword(''); setMode('register'); }}
-              className="w-full py-2.5 border border-border hover:border-primary/50 text-foreground rounded-lg transition-colors text-sm"
+              className="w-full py-2.5 border border-border hover:border-primary/50 text-foreground rounded-lg transition-all duration-200 text-sm hover:shadow-md"
             >
               创建新账号
             </button>
@@ -110,7 +110,7 @@ export default function AuthModal() {
                 type="text"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
-                className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground placeholder:text-foreground-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                 required
               />
             </div>
@@ -120,21 +120,21 @@ export default function AuthModal() {
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
-                className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground placeholder:text-foreground-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                 required
               />
             </div>
             {error && <p className="text-sm text-red-400">{error}</p>}
             <button
               type="submit"
-              className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg transition-colors"
+              className="w-full py-2.5 bg-gradient-to-r from-primary to-primary-hover hover:from-primary-hover hover:to-primary text-white rounded-lg transition-all duration-200 active:scale-95"
             >
               登录
             </button>
             <button
               type="button"
               onClick={() => setMode('select')}
-              className="w-full py-2.5 text-sm text-muted hover:text-foreground transition-colors"
+              className="w-full py-2.5 text-sm text-foreground-muted hover:text-foreground transition-colors"
             >
               返回选择账号
             </button>
@@ -150,7 +150,7 @@ export default function AuthModal() {
                 type="text"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
-                className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground placeholder:text-foreground-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                 required
               />
             </div>
@@ -160,7 +160,7 @@ export default function AuthModal() {
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
-                className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground placeholder:text-foreground-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                 required
               />
             </div>
@@ -170,7 +170,7 @@ export default function AuthModal() {
             {error && <p className="text-sm text-red-400">{error}</p>}
             <button
               type="submit"
-              className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg transition-colors"
+              className="w-full py-2.5 bg-gradient-to-r from-primary to-primary-hover hover:from-primary-hover hover:to-primary text-white rounded-lg transition-all duration-200 active:scale-95"
             >
               创建账号
             </button>
@@ -178,7 +178,7 @@ export default function AuthModal() {
               <button
                 type="button"
                 onClick={() => setMode('select')}
-                className="w-full py-2.5 text-sm text-muted hover:text-foreground transition-colors"
+                className="w-full py-2.5 text-sm text-foreground-muted hover:text-foreground transition-colors"
               >
                 返回选择账号
               </button>

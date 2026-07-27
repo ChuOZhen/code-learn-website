@@ -50,7 +50,7 @@ export default function ChapterActions({
       <div className="mt-10 pt-6 border-t border-border">
         {/* Action buttons row */}
         <div className="flex items-center justify-between mb-4">
-          <div className="text-sm text-muted">
+          <div className="text-sm text-foreground-muted">
             {status === 'completed' && (
               <span className="text-success flex items-center gap-1.5">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -71,7 +71,7 @@ export default function ChapterActions({
               <button
                 onClick={markIncomplete}
                 disabled={loading}
-                className="px-4 py-2 bg-background border border-border hover:bg-white/5 text-foreground text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-background border border-border hover:bg-background-elevated text-foreground text-sm font-medium rounded-lg transition-all duration-200 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? '保存中...' : '标记未完成'}
               </button>
@@ -79,7 +79,7 @@ export default function ChapterActions({
               <button
                 onClick={markComplete}
                 disabled={loading}
-                className="px-4 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-gradient-to-r from-primary to-primary-hover hover:from-primary-hover hover:to-primary text-white text-sm font-medium rounded-lg transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? '保存中...' : '标记完成'}
               </button>
@@ -92,7 +92,7 @@ export default function ChapterActions({
       <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-30">
         <button
           onClick={() => setShowSettings(true)}
-          className="w-12 h-12 bg-sidebar border border-border rounded-full flex items-center justify-center text-muted hover:text-foreground hover:border-primary/50 transition-all shadow-lg"
+          className="w-12 h-12 bg-background-soft border border-border rounded-full flex items-center justify-center text-foreground-muted hover:text-foreground hover:border-primary/50 transition-all duration-200 shadow-lg hover:shadow-xl"
           title="API 设置"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -102,7 +102,7 @@ export default function ChapterActions({
         </button>
         <button
           onClick={() => setShowChat(true)}
-          className="w-14 h-14 bg-primary hover:bg-primary-hover rounded-full flex items-center justify-center text-white transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40"
+          className="w-14 h-14 bg-gradient-to-r from-primary to-primary-hover hover:from-primary-hover hover:to-primary rounded-full flex items-center justify-center text-white transition-all duration-200 shadow-lg shadow-primary/25 hover:shadow-glow active:scale-95"
           title="AI 助教"
         >
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

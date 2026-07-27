@@ -36,7 +36,7 @@ export default function Sidebar() {
       {/* Mobile hamburger button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 md:hidden p-2 rounded-md bg-sidebar border border-border text-foreground shadow-lg"
+        className="fixed top-4 left-4 z-50 md:hidden p-2 rounded-md bg-background-soft border border-border text-foreground shadow-lg hover:bg-background-elevated transition-all duration-200"
         aria-label={isOpen ? '关闭菜单' : '打开菜单'}
         aria-expanded={isOpen}
       >
@@ -68,7 +68,7 @@ export default function Sidebar() {
       <aside
         className={`
           fixed md:relative z-40 h-full
-          bg-sidebar border-r border-border flex flex-col shrink-0
+          bg-background-soft border-r border-border flex flex-col shrink-0
           transition-all duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
           ${isCollapsed ? 'w-0 md:w-16 overflow-hidden' : 'w-72'}
@@ -82,13 +82,13 @@ export default function Sidebar() {
                 C++ 自学平台
               </h1>
             </Link>
-            <p className="text-xs text-muted mt-1.5">
+            <p className="text-xs text-foreground-muted mt-1.5">
               学习进度 {completedCount}/{chapters.length}
             </p>
             {/* Progress bar */}
-            <div className="mt-2.5 h-1.5 bg-background rounded-full overflow-hidden">
+            <div className="mt-2.5 h-2 bg-background rounded-full overflow-hidden">
               <div
-                className="h-full bg-primary rounded-full transition-all duration-500"
+                className="h-full bg-gradient-to-r from-primary to-primary-hover rounded-full transition-all duration-500"
                 style={{
                   width: `${chapters.length > 0 ? (completedCount / chapters.length) * 100 : 0}%`,
                 }}
@@ -99,7 +99,7 @@ export default function Sidebar() {
           {/* Collapse / expand button (desktop only) */}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden md:flex items-center justify-center w-7 h-7 rounded-md text-muted hover:text-foreground hover:bg-white/10 transition-colors shrink-0"
+            className="hidden md:flex items-center justify-center w-7 h-7 rounded-md text-foreground-muted hover:text-foreground hover:bg-background-elevated transition-colors shrink-0"
             title={isCollapsed ? '展开目录' : '收起目录'}
             aria-label={isCollapsed ? '展开目录' : '收起目录'}
           >
@@ -120,13 +120,12 @@ export default function Sidebar() {
           <div className="px-5 py-3 border-b border-border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-muted">当前用户</p>
+                <p className="text-xs text-foreground-muted">当前用户</p>
                 <p className="text-sm font-medium text-foreground">{currentUser}</p>
               </div>
               <button
                 onClick={() => logout()}
-                className="text-xs text-red-400 hover:text-red-300 transition-colors"
-              >
+                className="text-xs text-danger hover:text-red-300 transition-colors">
                 退出
               </button>
             </div>
@@ -145,10 +144,10 @@ export default function Sidebar() {
                 key={chapter.order}
                 href={`/chapters/${id}`}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-5 py-2.5 text-sm transition-colors border-l-2 ${
+                className={`flex items-center gap-3 px-5 py-2.5 text-sm transition-all duration-200 border-l-2 ${
                   isActive
-                    ? 'bg-primary/10 text-primary border-primary font-medium'
-                    : 'text-muted hover:text-foreground hover:bg-white/5 border-transparent'
+                    ? 'bg-primary-soft text-primary border-primary font-medium'
+                    : 'text-foreground-muted hover:text-foreground hover:bg-white/5 border-transparent'
                 }`}
               >
                 <span className="text-xs font-mono w-6 text-right opacity-60 shrink-0">

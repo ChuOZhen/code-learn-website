@@ -198,11 +198,11 @@ export default function ExercisePanel({
           {/* Controls */}
           <div className="flex flex-wrap items-center gap-3 mb-6">
         <div className="flex items-center gap-2">
-          <label className="text-sm text-muted">难度：</label>
+          <label className="text-sm text-foreground-muted">难度：</label>
           <select
             value={difficulty}
             onChange={e => setDifficulty(e.target.value as 'easy' | 'medium')}
-            className="px-3 py-1.5 bg-background border border-border rounded-lg text-sm text-foreground focus:outline-none focus:border-primary"
+            className="px-3 py-1.5 bg-background border border-border rounded-lg text-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
           >
             <option value="easy">简单</option>
             <option value="medium">中等</option>
@@ -210,11 +210,11 @@ export default function ExercisePanel({
         </div>
 
         <div className="flex items-center gap-2">
-          <label className="text-sm text-muted">数量：</label>
+          <label className="text-sm text-foreground-muted">数量：</label>
           <select
             value={count}
             onChange={e => setCount(Number(e.target.value))}
-            className="px-3 py-1.5 bg-background border border-border rounded-lg text-sm text-foreground focus:outline-none focus:border-primary"
+            className="px-3 py-1.5 bg-background border border-border rounded-lg text-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
           >
             <option value={2}>2 题</option>
             <option value={3}>3 题</option>
@@ -225,7 +225,7 @@ export default function ExercisePanel({
         <button
           onClick={generate}
           disabled={loading}
-          className="px-5 py-1.5 bg-primary hover:bg-primary-hover text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-5 py-1.5 bg-gradient-to-r from-primary to-primary-hover hover:from-primary-hover hover:to-primary text-white text-sm font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
         >
           {loading ? '生成中...' : exercises.length > 0 ? '重新生成' : '生成练习题'}
         </button>
@@ -233,14 +233,14 @@ export default function ExercisePanel({
 
       {/* Error */}
       {error && (
-        <div className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-lg px-4 py-3 mb-4">
+        <div className="text-sm text-danger bg-danger-soft border border-danger/20 rounded-lg px-4 py-3 mb-4">
           {error}
         </div>
       )}
 
       {/* Loading */}
       {loading && (
-        <div className="text-center py-10 text-muted">
+        <div className="text-center py-10 text-foreground-muted">
           <div className="inline-block w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin mb-3" />
           <p className="text-sm">AI 正在出题，请稍候...</p>
         </div>
@@ -253,10 +253,10 @@ export default function ExercisePanel({
             const { description, code } = parseQuestion(ex.question);
 
             return (
-              <div key={i} className="bg-card border border-border rounded-xl p-5">
+              <div key={i} className="bg-background-soft border border-border rounded-xl p-5 shadow-md hover:shadow-lg transition-all duration-200">
                 {/* Question */}
                 <div className="flex items-start gap-3 mb-4">
-                  <span className="shrink-0 w-7 h-7 bg-primary/20 text-primary rounded-full flex items-center justify-center text-sm font-bold">
+                  <span className="shrink-0 w-7 h-7 bg-primary-soft text-primary rounded-full flex items-center justify-center text-sm font-bold">
                     {i + 1}
                   </span>
                   <div className="flex-1">
@@ -276,7 +276,7 @@ export default function ExercisePanel({
                     {revealedHints.has(i) ? '收起提示' : '💡 查看提示'}
                   </button>
                   {revealedHints.has(i) && (
-                    <p className="text-sm text-muted bg-background rounded-lg px-3 py-2">
+                    <p className="text-sm text-foreground-muted bg-background rounded-lg px-3 py-2 border border-border">
                       {ex.hint}
                     </p>
                   )}
@@ -291,17 +291,17 @@ export default function ExercisePanel({
                       onChange={e => handleUserAnswerChange(i, e.target.value)}
                       placeholder="在这里输入你的答案或代码..."
                       rows={4}
-                      className="w-full px-3 py-2 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted/50 focus:outline-none focus:border-primary resize-y font-mono"
+                      className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm text-foreground placeholder:text-foreground-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 resize-y font-mono transition-all duration-200"
                     />
                     <div className="flex items-center justify-between mt-2">
                       <button
                         onClick={() => submitCheck(i)}
                         disabled={checking[i] || !userAnswers[i]?.trim()}
-                        className="px-4 py-1.5 bg-success hover:bg-green-500 text-white text-xs font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-1.5 bg-gradient-to-r from-success to-green-500 hover:from-green-500 hover:to-green-600 text-white text-xs font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
                       >
                         {checking[i] ? '检查中...' : '提交检查'}
                       </button>
-                      <span className="text-xs text-muted">
+                      <span className="text-xs text-foreground-muted">
                         AI 会根据参考答案评价你的答案
                       </span>
                     </div>
@@ -309,7 +309,7 @@ export default function ExercisePanel({
 
                   {/* Check result */}
                   {checkResults[i] && (
-                    <div className="bg-primary/10 border border-primary/20 rounded-lg p-3">
+                    <div className="bg-primary-soft border border-primary/20 rounded-lg p-3">
                       <p className="text-sm font-medium text-foreground mb-1">AI 评价</p>
                       <p className="text-sm text-foreground/90 whitespace-pre-wrap">
                         {checkResults[i].feedback}
@@ -327,7 +327,7 @@ export default function ExercisePanel({
                   {revealedAnswers.has(i) && (
                     <div className="space-y-3">
                       <CodeBlock code={ex.answer} language="cpp" />
-                      <p className="text-sm text-muted bg-background rounded-lg px-3 py-2">
+                      <p className="text-sm text-foreground-muted bg-background rounded-lg px-3 py-2 border border-border">
                         <span className="font-medium text-foreground">思路解析：</span>
                         {ex.explanation}
                       </p>

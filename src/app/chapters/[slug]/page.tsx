@@ -58,7 +58,7 @@ export default async function ChapterPage({
   return (
     <div className="max-w-4xl mx-auto px-8 py-8">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-muted mb-6">
+      <div className="flex items-center gap-2 text-sm text-foreground-muted mb-6">
         <Link href="/" className="hover:text-foreground transition-colors">
           首页
         </Link>
@@ -69,7 +69,7 @@ export default async function ChapterPage({
       {/* Title */}
       <h1 className="text-3xl font-bold text-foreground mb-2">{chapter.title}</h1>
       <div className="flex items-center gap-4 mb-8">
-        <span className="text-xs text-muted font-mono">
+        <span className="text-xs text-foreground-muted font-mono">
           第 {chapter.order}/{index.length} 章
         </span>
         <a
@@ -104,7 +104,7 @@ export default async function ChapterPage({
         {prevChapter ? (
           <Link
             href={`/chapters/${getIdFromUrl(prevChapter.url)}`}
-            className="text-sm text-muted hover:text-primary transition-colors"
+            className="text-sm text-foreground-muted hover:text-primary transition-colors"
           >
             &larr; {prevChapter.title}
           </Link>
@@ -114,7 +114,7 @@ export default async function ChapterPage({
         {nextChapter ? (
           <Link
             href={`/chapters/${getIdFromUrl(nextChapter.url)}`}
-            className="text-sm text-muted hover:text-primary transition-colors"
+            className="text-sm text-foreground-muted hover:text-primary transition-colors"
           >
             {nextChapter.title} &rarr;
           </Link>

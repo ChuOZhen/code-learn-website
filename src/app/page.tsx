@@ -19,13 +19,13 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href={`/chapters/${chapters[0]?.id || '01-intro'}`}
-              className="px-8 py-3 bg-primary hover:bg-primary-hover text-white font-medium rounded-xl transition-colors shadow-lg shadow-primary/20"
+              className="px-8 py-3 bg-gradient-to-r from-primary to-primary-hover text-white font-medium rounded-xl shadow-lg shadow-primary/20 hover:shadow-glow transition-all duration-200 active:scale-95"
             >
               开始学习
             </Link>
             <Link
               href={`/chapters/${chapters[1]?.id || '02-setup'}`}
-              className="px-8 py-3 bg-card border border-border hover:border-primary/50 text-foreground font-medium rounded-xl transition-colors"
+              className="px-8 py-3 bg-background-soft border border-border hover:border-primary/50 text-foreground font-medium rounded-xl transition-all duration-200 hover:shadow-md active:scale-95"
             >
               环境配置
             </Link>
@@ -42,8 +42,8 @@ export default function HomePage() {
           为什么学习 C++？
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-xl border border-border bg-card/50 hover:border-primary/30 transition-colors">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 text-xl">
+          <div className="bg-gradient-to-b from-background-soft/60 to-background/40 border border-border rounded-xl p-6 shadow-md hover:shadow-lg hover:border-primary/30 transition-all duration-200">
+            <div className="w-10 h-10 rounded-lg bg-primary-soft flex items-center justify-center text-primary mb-4 text-xl">
               🚀
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-2">高性能开发</h3>
@@ -52,8 +52,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="p-6 rounded-xl border border-border bg-card/50 hover:border-primary/30 transition-colors">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 text-xl">
+          <div className="bg-gradient-to-b from-background-soft/60 to-background/40 border border-border rounded-xl p-6 shadow-md hover:shadow-lg hover:border-primary/30 transition-all duration-200">
+            <div className="w-10 h-10 rounded-lg bg-primary-soft flex items-center justify-center text-primary mb-4 text-xl">
               🧠
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-2">深入计算机原理</h3>
@@ -62,8 +62,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="p-6 rounded-xl border border-border bg-card/50 hover:border-primary/30 transition-colors">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 text-xl">
+          <div className="bg-gradient-to-b from-background-soft/60 to-background/40 border border-border rounded-xl p-6 shadow-md hover:shadow-lg hover:border-primary/30 transition-all duration-200">
+            <div className="w-10 h-10 rounded-lg bg-primary-soft flex items-center justify-center text-primary mb-4 text-xl">
               🌐
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-2">广阔的职业前景</h3>
@@ -82,7 +82,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="flex gap-4">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+              <span className="shrink-0 w-8 h-8 rounded-full bg-primary-soft text-primary flex items-center justify-center font-bold text-sm">
                 1
               </span>
               <div>
@@ -94,7 +94,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex gap-4">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+              <span className="shrink-0 w-8 h-8 rounded-full bg-primary-soft text-primary flex items-center justify-center font-bold text-sm">
                 2
               </span>
               <div>
@@ -106,7 +106,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex gap-4">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+              <span className="shrink-0 w-8 h-8 rounded-full bg-primary-soft text-primary flex items-center justify-center font-bold text-sm">
                 3
               </span>
               <div>
@@ -120,7 +120,7 @@ export default function HomePage() {
 
           <div className="space-y-6">
             <div className="flex gap-4">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+              <span className="shrink-0 w-8 h-8 rounded-full bg-primary-soft text-primary flex items-center justify-center font-bold text-sm">
                 4
               </span>
               <div>
@@ -132,7 +132,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex gap-4">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+              <span className="shrink-0 w-8 h-8 rounded-full bg-primary-soft text-primary flex items-center justify-center font-bold text-sm">
                 5
               </span>
               <div>
@@ -144,7 +144,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex gap-4">
-              <span className="shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+              <span className="shrink-0 w-8 h-8 rounded-full bg-primary-soft text-primary flex items-center justify-center font-bold text-sm">
                 6
               </span>
               <div>
@@ -164,7 +164,7 @@ export default function HomePage() {
           <p className="text-foreground font-medium mb-4">准备好开始了吗？</p>
           <Link
             href={`/chapters/${chapters[0]?.id || '01-intro'}`}
-            className="inline-block px-8 py-3 bg-primary hover:bg-primary-hover text-white font-medium rounded-xl transition-colors"
+            className="inline-block px-8 py-3 bg-gradient-to-r from-primary to-primary-hover text-white font-medium rounded-xl shadow-lg shadow-primary/20 hover:shadow-glow transition-all duration-200 active:scale-95"
           >
             进入第一章：{chapters[0]?.title || 'C++ 简介'}
           </Link>
