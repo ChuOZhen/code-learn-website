@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "C++ 自学平台",
-  description: "基于菜鸟教程的 C++ 自学平台，包含结构化教程、练习题和 AI 辅导",
+  title: "编程自学平台",
+  description: "基于菜鸟教程的编程自学平台，包含结构化教程、练习题和 AI 辅导，支持 C++、Python 和 Java",
 };
 
 export default function RootLayout({

@@ -1,0 +1,93 @@
+{
+  "id": "40-hashmap",
+  "title": "Java HashMap",
+  "order": 40,
+  "source_url": "https://www.runoob.com/java/java-hashmap.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Java 集合框架\nHashMap 是一个散列表，它存储的内容是键值对(key-value)映射。\nHashMap 实现了 Map 接口，根据键的 HashCode 值存储数据，具有很快的访问速度，最多允许一条记录的键为 null，不支持线程同步。\nHashMap 是无序的，即不会记录插入的顺序。\nHashMap 继承于AbstractMap，实现了 Map、Cloneable、java.io.Serializable 接口。\nHashMap 的 key 与 value 类型可以相同也可以不同，可以是字符串（String）类型的 key 和 value，也可以是整型（Integer）的 key 和字符串（String）类型的 value。\nHashMap 中的元素实际上是对象，一些常见的基本类型可以使用它的包装类。\n基本类型对应的包装类表如下：\n基本类型引用类型\n    booleanBoolean\n    byteByte\n    shortShort\n    intInteger\n    longLong\n    floatFloat\n    doubleDouble\n    charCharacter\nHashMap 类位于 java.util 包中，使用前需要引入它，语法格式如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "import java.util.HashMap; // 引入 HashMap 类"
+    },
+    {
+      "type": "text",
+      "content": "以下实例我们创建一个 HashMap 对象 Sites， 整型（Integer）的 key 和字符串（String）类型的 value："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "HashMap<Integer, String> Sites = new HashMap<Integer, String>();"
+    },
+    {
+      "type": "text",
+      "content": "添加元素\nHashMap 类提供了很多有用的方法，添加键值对(key-value)可以使用 put() 方法:\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "{1=Google, 2=Runoob, 3=Taobao, 4=Zhihu}"
+    },
+    {
+      "type": "text",
+      "content": "以下实例创建一个字符串（String）类型的 key 和字符串（String）类型的 value：\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "{four=Zhihu, one=Google, two=Runoob, three=Taobao}"
+    },
+    {
+      "type": "text",
+      "content": "访问元素\n我们可以使用 get(key) 方法来获取 key 对应的 value:\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "Taobao"
+    },
+    {
+      "type": "text",
+      "content": "删除元素\n我们可以使用 remove(key) 方法来删除 key 对应的键值对(key-value):\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "{1=Google, 2=Runoob, 3=Taobao}"
+    },
+    {
+      "type": "text",
+      "content": "删除所有键值对(key-value)可以使用 clear 方法：\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "{}"
+    },
+    {
+      "type": "text",
+      "content": "计算大小\n如果要计算 HashMap 中的元素数量可以使用 size() 方法：\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "4"
+    },
+    {
+      "type": "text",
+      "content": "迭代 HashMap\n可以使用 for-each 来迭代 HashMap 中的元素。\n如果你只想获取 key，可以使用 keySet() 方法，然后可以通过 get(key) 获取对应的 value，如果你只想获取 value，可以使用 values() 方法。\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "key: 1 value: Google\nkey: 2 value: Runoob\nkey: 3 value: Taobao\nkey: 4 value: Zhihu\nGoogle, Runoob, Taobao, Zhihu,"
+    },
+    {
+      "type": "text",
+      "content": "Java HashMap 方法\nJava HashMap 常用方法列表如下：\n方法\n描述\nclear()\n删除 hashMap 中的所有键/值对\nclone()\n复制一份 hashMap\nisEmpty()\n判断 hashMap 是否为空\n    size()\n    计算 hashMap 中键/值对的数量\n    put()\n    将键/值对添加到 hashMap 中\n    putAll()\n    将所有键/值对添加到 hashMap 中\n    putIfAbsent()\n    如果 hashMap 中不存在指定的键，则将指定的键/值对插入到 hashMap 中。\n    remove()\n    删除 hashMap 中指定键 key 的映射关系\n    containsKey()\n    检查 hashMap 中是否存在指定的 key 对应的映射关系。\n    containsValue()\n    检查 hashMap 中是否存在指定的 value 对应的映射关系。\n    replace()\n    替换 hashMap 中是指定的 key 对应的 value。\n    replaceAll()\n    将 hashMap 中的所有映射关系替换成给定的函数所执行的结果。\n    get()\n    获取指定 key 对应对 value\n    getOrDefault()\n    获取指定 key 对应对 value，如果找不到 key ，则返回设置的默认值\n    forEach()\n    对 hashMap 中的每个映射执行指定的操作。\n    entrySet()\n    返回 hashMap 中所有映射项的集合集合视图。\n    keySet()\n    返回 hashMap 中所有 key 组成的集合视图。\n    values()\n    返回 hashMap 中存在的所有 value 值。\n    merge()\n    添加键值对到 hashMap 中\n    compute()\n    对 hashMap 中指定 key 的值进行重新计算\n    computeIfAbsent()\n    对 hashMap 中指定 key 的值进行重新计算，如果不存在这个 key，则添加到 hashMap 中\n    computeIfPresent()\n    对 hashMap 中指定 key 的值进行重新计算，前提是该 key 存在于 hashMap 中。\n更多 API 方法可以查看：https://www.runoob.com/manual/jdk11api/java.base/java/util/HashMap.html\nJava 集合框架"
+    }
+  ]
+}

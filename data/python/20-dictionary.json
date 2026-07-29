@@ -1,0 +1,143 @@
+{
+  "id": "20-dictionary",
+  "title": "Python 字典(Dictionary)",
+  "order": 20,
+  "source_url": "https://www.runoob.com/python/python-dictionary.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "字典是另一种可变容器模型，且可存储任意类型对象。\n字典的每个键值 key:value 对用冒号 : 分割，每个键值对之间用逗号 , 分割，整个字典包括在花括号 {} 中 ,格式如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "d = {key1 : value1, key2 : value2 }"
+    },
+    {
+      "type": "text",
+      "content": "注意：dict 作为 Python 的关键字和内置函数，变量名不建议命名为 dict。\n键一般是唯一的，如果重复最后的一个键值对会替换前面的，值不需要唯一。\n值可以取任何数据类型，但键必须是不可变的，如字符串，数字或元组。\n一个简单的字典实例："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "tinydict = {'Alice': '2341', 'Beth': '9102', 'Cecil': '3258'}"
+    },
+    {
+      "type": "text",
+      "content": "也可如此创建字典："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "tinydict1 = { 'abc': 456 }\ntinydict2 = { 'abc': 123, 98.6: 37 }"
+    },
+    {
+      "type": "text",
+      "content": "访问字典里的值\n把相应的键放入熟悉的方括弧，如下实例:"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n \ntinydict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'}\n \nprint \"tinydict['Name']: \", tinydict['Name']\nprint \"tinydict['Age']: \", tinydict['Age']"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "tinydict['Name']:  Zara\ntinydict['Age']:  7"
+    },
+    {
+      "type": "text",
+      "content": "如果用字典里没有的键访问数据，会输出错误如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n \ntinydict = {'Name': 'Runoob', 'Age': 7, 'Class': 'First'}\n \nprint \"tinydict['Alice']: \", tinydict['Alice']"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "tinydict['Alice']: \nTraceback (most recent call last):\n  File \"test.py\", line 5, in <module>\n    print \"tinydict['Alice']: \", tinydict['Alice']\nKeyError: 'Alice'"
+    },
+    {
+      "type": "text",
+      "content": "修改字典\n向字典添加新内容的方法是增加新的键/值对，修改或删除已有键/值对如下实例:"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \ntinydict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'}\n \ntinydict['Age'] = 8 # 更新\ntinydict['School'] = \"RUNOOB\" # 添加\n \n \nprint \"tinydict['Age']: \", tinydict['Age']\nprint \"tinydict['School']: \", tinydict['School']"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "tinydict['Age']:  8\ntinydict['School']:  RUNOOB"
+    },
+    {
+      "type": "text",
+      "content": "删除字典元素\n能删单一的元素也能清空字典，清空只需一项操作。\n显示删除一个字典用del命令，如下实例："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \ntinydict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'}\n \ndel tinydict['Name']  # 删除键是'Name'的条目\ntinydict.clear()      # 清空字典所有条目\ndel tinydict          # 删除字典\n \nprint \"tinydict['Age']: \", tinydict['Age'] \nprint \"tinydict['School']: \", tinydict['School']"
+    },
+    {
+      "type": "text",
+      "content": "但这会引发一个异常，因为用del后字典不再存在："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "tinydict['Age']: \nTraceback (most recent call last):\n  File \"test.py\", line 10, in <module>\n    print \"tinydict['Age']: \", tinydict['Age'] \nNameError: name 'tinydict' is not defined"
+    },
+    {
+      "type": "text",
+      "content": "注：del() 方法后面也会讨论。\n字典键的特性\n字典值可以没有限制地取任何 python 对象，既可以是标准的对象，也可以是用户定义的，但键不行。\n两个重要的点需要记住：\n1）不允许同一个键出现两次。创建时如果同一个键被赋值两次，后一个值会被记住，如下实例："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n \ntinydict = {'Name': 'Runoob', 'Age': 7, 'Name': 'Manni'} \n \nprint \"tinydict['Name']: \", tinydict['Name']"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "tinydict['Name']:  Manni"
+    },
+    {
+      "type": "text",
+      "content": "2）键必须不可变，所以可以用数字，字符串或元组充当，所以用列表就不行，如下实例："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n \ntinydict = {['Name']: 'Zara', 'Age': 7} \n \nprint \"tinydict['Name']: \", tinydict['Name']"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "Traceback (most recent call last):\n  File \"test.py\", line 3, in <module>\n    tinydict = {['Name']: 'Zara', 'Age': 7} \nTypeError: unhashable type: 'list'"
+    },
+    {
+      "type": "text",
+      "content": "字典内置函数&方法\nPython字典包含了以下内置函数：\n序号函数及描述\n1cmp(dict1, dict2)比较两个字典元素。\n2len(dict)计算字典元素个数，即键的总数。\n3str(dict)输出字典可打印的字符串表示。\n4type(variable)返回输入的变量类型，如果变量是字典就返回字典类型。\nPython字典包含了以下内置方法：\n序号函数及描述\n1dict.clear()删除字典内所有元素\n2dict.copy()返回一个字典的浅复制\n3dict.fromkeys(seq[, val]) 创建一个新字典，以序列 seq 中元素做字典的键，val 为字典所有键对应的初始值\n4dict.get(key, default=None)返回指定键的值，如果值不在字典中返回default值\n5dict.has_key(key)如果键在字典dict里返回true，否则返回false。Python3 不支持。\n6dict.items()以列表返回可遍历的(键, 值) 元组数组\n7dict.keys()以列表返回一个字典所有的键\n8dict.setdefault(key, default=None)\n和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default\n9dict.update(dict2)把字典dict2的键/值对更新到dict里\n10dict.values()以列表返回字典中的所有值\n11pop(key[,default])删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。\n否则，返回default值。\n12 popitem()返回并删除字典中的最后一对键和值。"
+    }
+  ]
+}

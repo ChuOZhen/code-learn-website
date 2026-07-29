@@ -1,0 +1,12 @@
+{
+  "id": "55-quiz",
+  "title": "Java 测验",
+  "order": 55,
+  "source_url": "https://www.runoob.com/quiz/java-quiz.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "知识挑战\n            通过这些互动问题测试学习情况\n                    测验完成！\n                    0/0\n                         重新开始\n                         上一题\n                        下一题\n更多测验\n1. Java 测验 1\n    2. Java 测验 2\n    3. Java 测验 3\n    4. Java 测验 4\n    5. Java 测验 5\n    6. Java 测验 6\n    7. Java 测验 7\n    8. Java 测验 8\n    9. Java 测验 9\n    10. Java 测验 10\n    11. Java 测验 11\n    12. Java 测验 12\n    13. Java 测验 13\n    14. Java 测验 14\n    15. Java 测验 15\n    16. Java 测验 16\n    17. Java 测验 17\n    18. Java 测验 18"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "15-pass-statement",
+  "title": "Python pass 语句",
+  "order": 15,
+  "source_url": "https://www.runoob.com/python/python-pass-statement.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Python pass 是空语句，是为了保持程序结构的完整性。\npass 不做任何事情，一般用做占位语句。\nPython 语言 pass 语句语法格式如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "pass"
+    },
+    {
+      "type": "text",
+      "content": "测试实例："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*- \n \n# 输出 Python 的每个字母\nfor letter in 'Python':\n   if letter == 'h':\n      pass\n      print '这是 pass 块'\n   print '当前字母 :', letter\n \nprint \"Good bye!\""
+    },
+    {
+      "type": "text",
+      "content": "以上实例执行结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "当前字母 : P\n当前字母 : y\n当前字母 : t\n这是 pass 块\n当前字母 : h\n当前字母 : o\n当前字母 : n\nGood bye!"
+    }
+  ]
+}

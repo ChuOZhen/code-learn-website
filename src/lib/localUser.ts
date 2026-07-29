@@ -264,6 +264,12 @@ export async function loadUserData(username: string, password: string): Promise<
 }
 
 export async function saveUserData(username: string, password: string, data: UserData): Promise<{ success: boolean; error?: string }> {
+  // Verify password by attempting to decrypt existing data before overwriting
+  const existing = await loadUserData(username, password);
+  if (existing.error) {
+    return { success: false, error: existing.error };
+  }
+
   const db = await getDB();
   const record = (await db.get(STORE_USERS, username)) as UserRecord | undefined;
   if (!record) return { success: false, error: '用户不存在' };

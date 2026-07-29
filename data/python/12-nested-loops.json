@@ -1,0 +1,44 @@
+{
+  "id": "12-nested-loops",
+  "title": "Python 循环嵌套",
+  "order": 12,
+  "source_url": "https://www.runoob.com/python/python-nested-loops.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Python 语言允许在一个循环体里面嵌入另一个循环。\nPython for 循环嵌套语法："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "for iterating_var in sequence:\n   for iterating_var in sequence:\n      statements(s)\n   statements(s)"
+    },
+    {
+      "type": "text",
+      "content": "Python while 循环嵌套语法："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "while expression:\n   while expression:\n      statement(s)\n   statement(s)"
+    },
+    {
+      "type": "text",
+      "content": "你可以在循环体内嵌入其他的循环体，如在while循环中可以嵌入for循环，\n反之，你可以在for循环中嵌入while循环。\n实例：\n以下实例使用了嵌套循环输出2~100之间的素数："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \ni = 2\nwhile(i < 100):\n   j = 2\n   while(j <= (i/j)):\n      if not(i%j): break\n      j = j + 1\n   if (j > i/j) : print i, \" 是素数\"\n   i = i + 1\n \nprint \"Good bye!\""
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果:"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "2 是素数\n3 是素数\n5 是素数\n7 是素数\n11 是素数\n13 是素数\n17 是素数\n19 是素数\n23 是素数\n29 是素数\n31 是素数\n37 是素数\n41 是素数\n43 是素数\n47 是素数\n53 是素数\n59 是素数\n61 是素数\n67 是素数\n71 是素数\n73 是素数\n79 是素数\n83 是素数\n89 是素数\n97 是素数\nGood bye!"
+    }
+  ]
+}

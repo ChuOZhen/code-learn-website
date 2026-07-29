@@ -1,0 +1,84 @@
+{
+  "id": "39-hashset",
+  "title": "Java HashSet",
+  "order": 39,
+  "source_url": "https://www.runoob.com/java/java-hashset.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Java 集合框架\nHashSet 基于 HashMap 来实现的，是一个不允许有重复元素的集合。\nHashSet 允许有 null 值。\nHashSet 是无序的，即不会记录插入的顺序。\nHashSet 不是线程安全的， 如果多个线程尝试同时修改 HashSet，则最终结果是不确定的。 您必须在多线程访问时显式同步对 HashSet 的并发访问。\nHashSet 实现了 Set 接口。\nHashSet 中的元素实际上是对象，一些常见的基本类型可以使用它的包装类。\n基本类型对应的包装类表如下：\n基本类型引用类型\n    booleanBoolean\n    byteByte\n    shortShort\n    intInteger\n    longLong\n    floatFloat\n    doubleDouble\n    charCharacter\nHashSet 类位于 java.util 包中，使用前需要引入它，语法格式如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "import java.util.HashSet; // 引入 HashSet 类"
+    },
+    {
+      "type": "text",
+      "content": "以下实例我们创建一个 HashSet 对象 sites，用于保存字符串元素："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "HashSet<String> sites = new HashSet<String>();"
+    },
+    {
+      "type": "text",
+      "content": "添加元素\nHashSet 类提供了很多有用的方法，添加元素可以使用 add() 方法:\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "[Google, Runoob, Zhihu, Taobao]"
+    },
+    {
+      "type": "text",
+      "content": "判断元素是否存在\n我们可以使用 contains() 方法来判断元素是否存在于集合当中:\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "true"
+    },
+    {
+      "type": "text",
+      "content": "删除元素\n我们可以使用 remove() 方法来删除集合中的元素:\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "[Google, Runoob, Zhihu]"
+    },
+    {
+      "type": "text",
+      "content": "删除集合中所有元素可以使用 clear 方法：\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "[]"
+    },
+    {
+      "type": "text",
+      "content": "计算大小\n如果要计算 HashSet 中的元素数量可以使用 size() 方法：\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "4"
+    },
+    {
+      "type": "text",
+      "content": "迭代 HashSet\n可以使用 for-each 来迭代 HashSet 中的元素。\n执行以上代码，输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "Google\nRunoob\nZhihu\nTaobao"
+    },
+    {
+      "type": "text",
+      "content": "HashSet 常用方法\n方法\n            返回值\n            说明\n            示例\n            add(E e)\n            boolean\n            添加元素到集合，成功返回 true，重复元素返回 false。\n            set.add(\"Java\");\n            remove(Object o)\n            boolean\n            删除指定元素，成功返回 true，元素不存在返回 false。\n            set.remove(\"Python\");\n            contains(Object o)\n            boolean\n            检查集合是否包含指定元素。\n            if (set.contains(\"Java\")) { ... }\n            size()\n            int\n            返回集合中的元素数量。\n            int count = set.size();\n            isEmpty()\n            boolean\n            判断集合是否为空。\n            if (set.isEmpty()) { ... }\n            clear()\n            void\n            清空集合中的所有元素。\n            set.clear();\n            iterator()\n            Iterator<E>\n            返回集合的迭代器，用于遍历元素。\n            for (String s : set) { ... }\n            toArray()\n            Object[]\n            将集合转换为数组。\n            Object[] arr = set.toArray();\n            toArray(T[] a)\n            T[]\n            将集合转换为指定类型的数组。\n            String[] arr = set.toArray(new String[0]);\n            addAll(Collection<? extends E> c)\n            boolean\n            添加另一个集合的所有元素（并集操作）。\n            set.addAll(Arrays.asList(\"A\", \"B\"));\n            retainAll(Collection<?> c)\n            boolean\n            仅保留与指定集合共有的元素（交集操作）。\n            set.retainAll(otherSet);\n            removeAll(Collection<?> c)\n            boolean\n            删除与指定集合共有的元素（差集操作）。\n            set.removeAll(otherSet);\n更多 API 方法可以查看：https://www.runoob.com/manual/jdk11api/java.base/java/util/HashSet.html\nJava 集合框架"
+    }
+  ]
+}

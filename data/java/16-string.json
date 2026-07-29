@@ -1,0 +1,147 @@
+{
+  "id": "16-string",
+  "title": "Java String 类",
+  "order": 16,
+  "source_url": "https://www.runoob.com/java/java-string.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "字符串广泛应用 在 Java 编程中，在 Java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。\n创建字符串\n创建字符串最简单的方式如下:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "String str = \"Runoob\";"
+    },
+    {
+      "type": "text",
+      "content": "在代码中遇到字符串常量时，这里的值是 \"Runoob\"，编译器会使用该值创建一个 String 对象。\n和其它对象一样，可以使用关键字和构造方法来创建 String 对象。\n用构造函数创建字符串："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "String str2=new String(\"Runoob\");"
+    },
+    {
+      "type": "text",
+      "content": "String 创建的字符串存储在公共池中，而 new 创建的字符串对象在堆上："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "String s1 = \"Runoob\";              // String 直接创建\nString s2 = \"Runoob\";              // String 直接创建\nString s3 = s1;                    // 相同引用\nString s4 = new String(\"Runoob\");   // String 对象创建\nString s5 = new String(\"Runoob\");   // String 对象创建"
+    },
+    {
+      "type": "text",
+      "content": "String 类有 11 种构造方法，这些方法提供不同的参数来初始化字符串，比如提供一个字符数组参数:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// StringDemo.java 文件代码：\npublic class StringDemo{\n   public static void main(String args[]){\n      char[] helloArray = { 'r', 'u', 'n', 'o', 'o', 'b'};\n      String helloString = new String(helloArray);  \n      System.out.println( helloString );\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "runoob"
+    },
+    {
+      "type": "text",
+      "content": "注意:String 类是不可改变的，所以你一旦创建了 String 对象，那它的值就无法改变了（详看笔记部分解析）。\n如果需要对字符串做很多修改，那么应该选择使用 StringBuffer & StringBuilder 类。\n字符串长度\n用于获取有关对象的信息的方法称为访问器方法。\nString 类的一个访问器方法是 length() 方法，它返回字符串对象包含的字符数。\n下面的代码执行后，len 变量等于 14:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// StringDemo.java 文件代码：\npublic class StringDemo {\n    public static void main(String args[]) {\n        String site = \"www.runoob.com\";\n        int len = site.length();\n        System.out.println( \"菜鸟教程网址长度 : \" + len );\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "菜鸟教程网址长度 : 14"
+    },
+    {
+      "type": "text",
+      "content": "连接字符串\nString 类提供了连接两个字符串的方法："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "string1.concat(string2);"
+    },
+    {
+      "type": "text",
+      "content": "返回 string2 连接 string1 的新字符串。也可以对字符串常量使用 concat() 方法，如："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "\"我的名字是 \".concat(\"Runoob\");"
+    },
+    {
+      "type": "text",
+      "content": "更常用的是使用'+'操作符来连接字符串，如："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "\"Hello,\" + \" runoob\" + \"!\""
+    },
+    {
+      "type": "text",
+      "content": "结果如下:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "\"Hello, runoob!\""
+    },
+    {
+      "type": "text",
+      "content": "下面是一个例子:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// StringDemo.java 文件代码：\npublic class StringDemo {\n    public static void main(String args[]) {     \n        String string1 = \"菜鸟教程网址：\";     \n        System.out.println(\"1、\" + string1 + \"www.runoob.com\");  \n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "1、菜鸟教程网址：www.runoob.com"
+    },
+    {
+      "type": "text",
+      "content": "创建格式化字符串\n我们知道输出格式化数字可以使用 printf() 和 format() 方法。\nString 类使用静态方法 format() 返回一个String 对象而不是 PrintStream 对象。\nString 类的静态方法 format() 能用来创建可复用的格式化字符串，而不仅仅是用于一次打印输出。\n如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "System.out.printf(\"浮点型变量的值为 \" +\n                  \"%f, 整型变量的值为 \" +\n                  \" %d, 字符串变量的值为 \" +\n                  \"is %s\", floatVar, intVar, stringVar);"
+    },
+    {
+      "type": "text",
+      "content": "你也可以这样写"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "String fs;\nfs = String.format(\"浮点型变量的值为 \" +\n                   \"%f, 整型变量的值为 \" +\n                   \" %d, 字符串变量的值为 \" +\n                   \" %s\", floatVar, intVar, stringVar);"
+    },
+    {
+      "type": "text",
+      "content": "String 方法\n下面是 String 类支持的方法，更多详细，参看 Java String API 文档:\nSN(序号)\n\t\t\t\t方法描述\n\t\t\t\t1\n\t\t\t\tchar charAt(int index)\n\t\t\t\t返回指定索引处的 char 值。\n\t\t\t\t2\n\t\t\t\tint compareTo(Object o)\n\t\t\t\t把这个字符串和另一个对象比较。\n\t\t\t\t3\n\t\t\t\tint compareTo(String anotherString)\n\t\t\t\t按字典顺序比较两个字符串。\n\t\t\t\t4\n\t\t\t\tint compareToIgnoreCase(String str)\n\t\t\t\t按字典顺序比较两个字符串，不考虑大小写。\n\t\t\t\t5\n\t\t\t\tString concat(String str)\n\t\t\t\t将指定字符串连接到此字符串的结尾。\n\t\t\t\t6\n\t\t\t\tboolean contentEquals(StringBuffer sb)\n\t\t\t\t当且仅当字符串与指定的StringBuffer有相同顺序的字符时候返回真。\n\t\t\t\t7\n\t\t\t\tstatic String copyValueOf(char[] data)\n\t\t\t\t返回指定数组中表示该字符序列的 String。\n\t\t\t\t8\n\t\t\t\tstatic String copyValueOf(char[] data, int offset, int count)\n\t\t\t\t返回指定数组中表示该字符序列的 String。\n\t\t\t\t9\n\t\t\t\tboolean endsWith(String suffix)\n\t\t\t\t测试此字符串是否以指定的后缀结束。\n\t\t\t\t10\n\t\t\t\tboolean equals(Object anObject)\n\t\t\t\t将此字符串与指定的对象比较。\n\t\t\t\t11\n\t\t\t\tboolean equalsIgnoreCase(String anotherString)\n\t\t\t\t将此 String 与另一个 String 比较，不考虑大小写。\n\t\t\t\t12\n\t\t\t\tbyte[] getBytes()\n\t\t\t\t 使用平台的默认字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中。\n\t\t\t\t13\n\t\t\t\tbyte[] getBytes(String charsetName)\n\t\t\t\t使用指定的字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中。\n\t\t\t\t14\n\t\t\t\tvoid getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin)\n\t\t\t\t将字符从此字符串复制到目标字符数组。\n\t\t\t\t15\n\t\t\t\tint hashCode()\n\t\t\t\t返回此字符串的哈希码。\n\t\t\t\t16\n\t\t\t\tint indexOf(int ch)\n\t\t\t\t返回指定字符在此字符串中第一次出现处的索引。\n\t\t\t\t17\n\t\t\t\tint indexOf(int ch, int fromIndex)\n\t\t\t\t返回在此字符串中第一次出现指定字符处的索引，从指定的索引开始搜索。\n\t\t\t\t18\n\t\t\t\tint indexOf(String str)\n\t\t\t\t 返回指定子字符串在此字符串中第一次出现处的索引。\n\t\t\t\t19\n\t\t\t\tint indexOf(String str, int fromIndex)\n\t\t\t\t返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始。\n\t\t\t\t20\n\t\t\t\tString intern()\n\t\t\t\t 返回字符串对象的规范化表示形式。\n\t\t\t\t21\n\t\t\t\tint lastIndexOf(int ch)\n\t\t\t\t 返回指定字符在此字符串中最后一次出现处的索引。\n\t\t\t\t22\n\t\t\t\tint lastIndexOf(int ch, int fromIndex)\n\t\t\t\t返回指定字符在此字符串中最后一次出现处的索引，从指定的索引处开始进行反向搜索。\n\t\t\t\t23\n\t\t\t\tint lastIndexOf(String str)\n\t\t\t\t返回指定子字符串在此字符串中最右边出现处的索引。\n\t\t\t\t24\n\t\t\t\tint lastIndexOf(String str, int fromIndex)\n\t\t\t\t 返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向搜索。\n\t\t\t\t25\n\t\t\t\tint length()\n\t\t\t\t返回此字符串的长度。\n\t\t\t\t26\n\t\t\t\tboolean matches(String regex)\n\t\t\t\t告知此字符串是否匹配给定的正则表达式。\n\t\t\t\t27\n\t\t\t\tboolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)\n\t\t\t\t测试两个字符串区域是否相等。\n\t\t\t\t28\n\t\t\t\tboolean regionMatches(int toffset, String other, int ooffset, int len)\n\t\t\t\t测试两个字符串区域是否相等。\n\t\t\t\t29\n\t\t\t\tString replace(char oldChar, char newChar)\n\t\t\t\t返回一个新的字符串，它是通过用 newChar 替换此字符串中出现的所有 oldChar 得到的。\n\t\t\t\t30\n\t\t\t\tString replaceAll(String regex, String replacement)\n\t\t\t\t使用给定的 replacement 替换此字符串所有匹配给定的正则表达式的子字符串。\n\t\t\t\t31\n\t\t\t\tString replaceFirst(String regex, String replacement)\n\t\t\t\t 使用给定的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串。\n\t\t\t\t32\n\t\t\t\tString[] split(String regex)\n\t\t\t\t根据给定正则表达式的匹配拆分此字符串。\n\t\t\t\t33\n\t\t\t\tString[] split(String regex, int limit)\n\t\t\t\t根据匹配给定的正则表达式来拆分此字符串。\n\t\t\t\t34\n\t\t\t\tboolean startsWith(String prefix)\n\t\t\t\t测试此字符串是否以指定的前缀开始。\n\t\t\t\t35\n\t\t\t\tboolean startsWith(String prefix, int toffset)\n\t\t\t\t测试此字符串从指定索引开始的子字符串是否以指定前缀开始。\n\t\t\t\t36\n\t\t\t\tCharSequence subSequence(int beginIndex, int endIndex)\n\t\t\t\t 返回一个新的字符序列，它是此序列的一个子序列。\n\t\t\t\t37\n\t\t\t\tString substring(int beginIndex)\n\t\t\t\t返回一个新的字符串，它是此字符串的一个子字符串。\n\t\t\t\t38\n\t\t\t\tString substring(int beginIndex, int endIndex)\n\t\t\t\t返回一个新字符串，它是此字符串的一个子字符串。\n\t\t\t\t39\n\t\t\t\tchar[] toCharArray()\n\t\t\t\t将此字符串转换为一个新的字符数组。\n\t\t\t\t40\n\t\t\t\tString toLowerCase()\n\t\t\t\t使用默认语言环境的规则将此 String 中的所有字符都转换为小写。\n\t\t\t\t41\n\t\t\t\tString toLowerCase(Locale locale)\n\t\t\t\t 使用给定 Locale 的规则将此 String 中的所有字符都转换为小写。\n\t\t\t\t42\n\t\t\t\tString toString()\n\t\t\t\t 返回此对象本身（它已经是一个字符串！）。\n\t\t\t\t43\n\t\t\t\tString toUpperCase()\n\t\t\t\t使用默认语言环境的规则将此 String 中的所有字符都转换为大写。\n\t\t\t\t44\n\t\t\t\tString toUpperCase(Locale locale)\n\t\t\t\t使用给定 Locale 的规则将此 String 中的所有字符都转换为大写。\n\t\t\t\t45\n\t\t\t\tString trim()\n\t\t\t\t返回字符串的副本，忽略前导空白和尾部空白。\n\t\t\t\t46\n\t\t\t\tstatic String valueOf(primitive data type x)\n\t\t\t\t返回给定data type类型x参数的字符串表示形式。\n\t\t\t\t47\n\t\t\t\tcontains(CharSequence chars)\n\t\t\t\t判断是否包含指定的字符系列。\n\t\t\t\t48\n\t\t\t\tisEmpty()\n\t\t\t\t判断字符串是否为空。"
+    }
+  ]
+}

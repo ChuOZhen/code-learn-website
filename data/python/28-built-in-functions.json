@@ -1,0 +1,12 @@
+{
+  "id": "28-built-in-functions",
+  "title": "Python 内置函数",
+  "order": 28,
+  "source_url": "https://www.runoob.com/python/python-built-in-functions.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "内置函数\nabs()\ndivmod()\ninput()\nopen()\nstaticmethod()\nall()\nenumerate()\nint()\nord()\nstr()\nany()\neval()\nisinstance()\npow()\nsum()\nbasestring()\nexecfile()\nissubclass()\nprint()\nsuper()\nbin()\nfile()\niter()\nproperty()\ntuple()\nbool()\nfilter()\nlen()\nrange()\ntype()\nbytearray()\nfloat()\nlist()\nraw_input()\nunichr()\ncallable()\nformat()\nlocals()\nreduce()\nunicode()\nchr()\nfrozenset()\nlong()\nreload()\nvars()\nclassmethod()\ngetattr()\nmap()\nrepr()\nxrange()\ncmp()\nglobals()\nmax()\nreverse()\nzip()\ncompile()\nhasattr()\nmemoryview()\nround()\n__import__()\ncomplex()\nhash()\nmin()\nset()\ndelattr()\nhelp()\nnext()\nsetattr()\ndict()\nhex()\nobject()\nslice()\ndir()\nid()\noct()\nsorted()\nexec 内置表达式"
+    }
+  ]
+}

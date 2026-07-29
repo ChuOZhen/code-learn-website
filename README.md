@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 编程自学平台 🚀
 
-## Getting Started
+基于 **Next.js** 构建的多语言交互式编程自学平台，支持 C++、Python、Java 三大语言，包含结构化教程、AI 生成练习题和智能助教。
 
-First, run the development server:
+## ✨ 功能特性
+
+- 📚 **多语言教程** — 支持 C++、Python、Java 三种编程语言
+- 🤖 **AI 练习题** — 基于 DeepSeek API 自动生成不同难度的练习题
+- 💬 **AI 助教** — 随时提问，获得引导式解答（不是直接给答案）
+- ✅ **答案检查** — AI 自动评价你的代码答案
+- 📊 **学习进度** — 自动保存进度，支持多账号
+- 🌙 **深色主题** — 专为长时间学习设计的护眼界面
+- 📱 **响应式设计** — 桌面和移动端均可使用
+- 🔒 **数据本地存储** — 学习进度和 API Key 仅保存在本地
+
+## 🛠️ 技术栈
+
+| 技术 | 用途 |
+|------|------|
+| Next.js 16 | 框架 |
+| TypeScript | 类型安全 |
+| Tailwind CSS 4 | UI 样式 |
+| DeepSeek API | AI 功能 |
+| highlight.js | 代码高亮 |
+| GitHub Actions | CI/CD 部署 |
+
+## 🚀 快速开始
 
 ```bash
+# 安装依赖
+npm install
+
+# 开发服务器
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# 构建静态站点
+npm run build
+
+# 预览构建结果
+npx serve@latest dist
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📖 使用说明
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. 启动后访问 `http://localhost:3000/code-learn-website`
+2. 在首页选择一门编程语言（C++ / Python / Java）
+3. 首次使用需要创建本地账号（数据存储在浏览器中）
+4. 在设置中配置 DeepSeek API Key 以启用 AI 功能
+5. 按左侧目录顺序学习，每章底部有练习题
+6. 遇到问题可点击右下角 AI 助教提问
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 部署
 
-## Learn More
+项目通过 GitHub Actions 自动部署到 GitHub Pages：
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+git push origin main
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+访问：`https://chuozhen.github.io/code-learn-website/`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+##  内容来源
 
-## Deploy on Vercel
+- C++ 内容基于 [菜鸟教程 C++ 教程](https://www.runoob.com/cplusplus/cpp-tutorial.html)
+- Python 内容基于 [菜鸟教程 Python 教程](https://www.runoob.com/python/python-tutorial.html)
+- Java 内容基于 [菜鸟教程 Java 教程](https://www.runoob.com/java/java-tutorial.html)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+感谢原作者的优质内容。

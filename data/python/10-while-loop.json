@@ -1,0 +1,93 @@
+{
+  "id": "10-while-loop",
+  "title": "Python While 循环语句",
+  "order": 10,
+  "source_url": "https://www.runoob.com/python/python-while-loop.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Python 编程中 while 语句用于循环执行程序，即在某条件下，循环执行某段程序，以处理需要重复处理的相同任务。其基本形式为："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "while 判断条件(condition)：\n    执行语句(statements)……"
+    },
+    {
+      "type": "text",
+      "content": "执行语句可以是单个语句或语句块。判断条件可以是任何表达式，任何非零、或非空（null）的值均为true。\n当判断条件假 false 时，循环结束。\n执行流程图如下：\nGif 演示 Python while 语句执行过程\n复杂一点:"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n \ncount = 0\nwhile (count < 9):\n   print 'The count is:', count\n   count = count + 1\n \nprint \"Good bye!\""
+    },
+    {
+      "type": "text",
+      "content": "以上代码执行输出结果:"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "The count is: 0\nThe count is: 1\nThe count is: 2\nThe count is: 3\nThe count is: 4\nThe count is: 5\nThe count is: 6\nThe count is: 7\nThe count is: 8\nGood bye!"
+    },
+    {
+      "type": "text",
+      "content": "while 语句时还有另外两个重要的命令 continue，break 来跳过循环，continue 用于跳过该次循环，break 则是用于退出循环，此外\"判断条件\"还可以是个常值，表示循环必定成立，具体用法如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# continue 和 break 用法\n \ni = 1\nwhile i < 10:   \n    i += 1\n    if i%2 > 0:     # 非双数时跳过输出\n        continue\n    print i         # 输出双数2、4、6、8、10\n \ni = 1\nwhile 1:            # 循环条件为1必定成立\n    print i         # 输出1~10\n    i += 1\n    if i > 10:     # 当i大于10时跳出循环\n        break"
+    },
+    {
+      "type": "text",
+      "content": "无限循环\n如果条件判断语句永远为 true，循环将会无限的执行下去，如下实例："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \nvar = 1\nwhile var == 1 :  # 该条件永远为true，循环将无限执行下去\n   num = raw_input(\"Enter a number  :\")\n   print \"You entered: \", num\n \nprint \"Good bye!\""
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "Enter a number  :20\nYou entered:  20\nEnter a number  :29\nYou entered:  29\nEnter a number  :3\nYou entered:  3\nEnter a number between :Traceback (most recent call last):\n  File \"test.py\", line 5, in <module>\n    num = raw_input(\"Enter a number :\")\nKeyboardInterrupt"
+    },
+    {
+      "type": "text",
+      "content": "注意：以上的无限循环你可以使用  CTRL+C 来中断循环。\n循环使用 else 语句\n在 python 中，while … else 在循环条件为 false 时执行 else 语句块："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n \ncount = 0\nwhile count < 5:\n   print count, \" is  less than 5\"\n   count = count + 1\nelse:\n   print count, \" is not less than 5\""
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "0 is less than 5\n1 is less than 5\n2 is less than 5\n3 is less than 5\n4 is less than 5\n5 is not less than 5"
+    },
+    {
+      "type": "text",
+      "content": "简单语句组\n类似 if 语句的语法，如果你的 while 循环体中只有一条语句，你可以将该语句与while写在同一行中，\n如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n \nflag = 1\n \nwhile (flag): print 'Given flag is really true!'\n \nprint \"Good bye!\""
+    },
+    {
+      "type": "text",
+      "content": "注意：以上的无限循环你可以使用  CTRL+C 来中断循环。"
+    }
+  ]
+}

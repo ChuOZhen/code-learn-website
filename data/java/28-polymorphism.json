@@ -1,0 +1,66 @@
+{
+  "id": "28-polymorphism",
+  "title": "Java 多态",
+  "order": 28,
+  "source_url": "https://www.runoob.com/java/java-polymorphism.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "多态是同一个行为具有多个不同表现形式或形态的能力。\n多态就是同一个接口，使用不同的实例而执行不同操作，如图所示：\n多态性是对象多种表现形式的体现。\n现实中，比如我们按下 F1 键这个动作：\n如果当前在 Flash 界面下弹出的就是 AS 3 的帮助文档；如果当前在 Word 下弹出的就是 Word 帮助；在 Windows 下弹出的就是 Windows 帮助和支持。同一个事件发生在不同的对象上会产生不同的结果。\n多态的优点\n1. 消除类型之间的耦合关系\n2. 可替换性\n3. 可扩充性\n4. 接口性\n5. 灵活性\n6. 简化性\n多态存在的三个必要条件\n继承重写父类引用指向子类对象：Parent p = new Child();\n当使用多态方式调用方法时，首先检查父类中是否有该方法，如果没有，则编译错误；如果有，再去调用子类的同名方法。\n多态的好处：可以使程序有良好的扩展，并可以对所有类的对象进行通用处理。\n以下是一个多态实例的演示，详细说明请看注释："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test {\n    public static void main(String[] args) {\n      show(new Cat());  // 以 Cat 对象调用 show 方法\n      show(new Dog());  // 以 Dog 对象调用 show 方法\n                \n      Animal a = new Cat();  // 向上转型  \n      a.eat();               // 调用的是 Cat 的 eat\n      Cat c = (Cat)a;        // 向下转型  \n      c.work();        // 调用的是 Cat 的 work\n  }  \n            \n    public static void show(Animal a)  {\n      a.eat();  \n        // 类型判断\n        if (a instanceof Cat)  {  // 猫做的事情 \n            Cat c = (Cat)a;  \n            c.work();  \n        } else if (a instanceof Dog) { // 狗做的事情 \n            Dog c = (Dog)a;  \n            c.work();  \n        }  \n    }  \n}\n \nabstract class Animal {  \n    abstract void eat();  \n}  \n  \nclass Cat extends Animal {  \n    public void eat() {  \n        System.out.println(\"吃鱼\");  \n    }  \n    public void work() {  \n        System.out.println(\"抓老鼠\");  \n    }  \n}  \n  \nclass Dog extends Animal {  \n    public void eat() {  \n        System.out.println(\"吃骨头\");  \n    }  \n    public void work() {  \n        System.out.println(\"看家\");  \n    }  \n}"
+    },
+    {
+      "type": "text",
+      "content": "执行以上程序，输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "吃鱼\n抓老鼠\n吃骨头\n看家\n吃鱼\n抓老鼠"
+    },
+    {
+      "type": "text",
+      "content": "虚函数\n虚函数的存在是为了多态。\nJava 中其实没有虚函数的概念，它的普通函数就相当于 C++ 的虚函数，动态绑定是Java的默认行为。如果 Java 中不希望某个函数具有虚函数特性，可以加上 final 关键字变成非虚函数。\n重写\n我们将介绍在 Java 中，当设计类时，被重写的方法的行为怎样影响多态性。\n我们已经讨论了方法的重写，也就是子类能够重写父类的方法。\n当子类对象调用重写的方法时，调用的是子类的方法，而不是父类中被重写的方法。\n要想调用父类中被重写的方法，则必须使用关键字 super。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Employee.java 文件代码：\n/* 文件名 : Employee.java */\npublic class Employee {\n   private String name;\n   private String address;\n   private int number;\n   public Employee(String name, String address, int number) {\n      System.out.println(\"Employee 构造函数\");\n      this.name = name;\n      this.address = address;\n      this.number = number;\n   }\n   public void mailCheck() {\n      System.out.println(\"邮寄支票给： \" + this.name\n       + \" \" + this.address);\n   }\n   public String toString() {\n      return name + \" \" + address + \" \" + number;\n   }\n   public String getName() {\n      return name;\n   }\n   public String getAddress() {\n      return address;\n   }\n   public void setAddress(String newAddress) {\n      address = newAddress;\n   }\n   public int getNumber() {\n     return number;\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "假设下面的类继承Employee类："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Salary.java 文件代码：\n/* 文件名 : Salary.java */\npublic class Salary extends Employee\n{\n   private double salary; // 全年工资\n   public Salary(String name, String address, int number, double salary) {\n       super(name, address, number);\n       setSalary(salary);\n   }\n   public void mailCheck() {\n       System.out.println(\"Salary 类的 mailCheck 方法 \");\n       System.out.println(\"邮寄支票给：\" + getName()\n       + \" ，工资为：\" + salary);\n   }\n   public double getSalary() {\n       return salary;\n   }\n   public void setSalary(double newSalary) {\n       if(newSalary >= 0.0) {\n          salary = newSalary;\n       }\n   }\n   public double computePay() {\n      System.out.println(\"计算工资，付给：\" + getName());\n      return salary/52;\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "现在我们仔细阅读下面的代码，尝试给出它的输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// VirtualDemo.java 文件代码：\n/* 文件名 : VirtualDemo.java */\npublic class VirtualDemo {\n   public static void main(String [] args) {\n      Salary s = new Salary(\"员工 A\", \"北京\", 3, 3600.00);\n      Employee e = new Salary(\"员工 B\", \"上海\", 2, 2400.00);\n      System.out.println(\"使用 Salary 的引用调用 mailCheck -- \");\n      s.mailCheck();\n      System.out.println(\"\\n使用 Employee 的引用调用 mailCheck--\");\n      e.mailCheck();\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "Employee 构造函数\nEmployee 构造函数\n使用 Salary 的引用调用 mailCheck -- \nSalary 类的 mailCheck 方法 \n邮寄支票给：员工 A ，工资为：3600.0\n\n使用 Employee 的引用调用 mailCheck--\nSalary 类的 mailCheck 方法 \n邮寄支票给：员工 B ，工资为：2400.0"
+    },
+    {
+      "type": "text",
+      "content": "例子解析\n实例中，实例化了两个 Salary 对象：一个使用 Salary 引用 s，另一个使用 Employee 引用 e。\n当调用 s.mailCheck() 时，编译器在编译时会在 Salary 类中找到  mailCheck()，执行过程 JVM 就调用 Salary 类的 mailCheck()。\ne 是 Employee 的引用，但引用 e 最终运行的是 Salary 类的 mailCheck() 方法。\n在编译的时候，编译器使用 Employee 类中的 mailCheck() 方法验证该语句，\n但是在运行的时候，Java虚拟机(JVM)调用的是 Salary 类中的 mailCheck() 方法。\n以上整个过程被称为虚拟方法调用，该方法被称为虚拟方法。\nJava中所有的方法都能以这种方式表现，因此，重写的方法能在运行时调用，不管编译的时候源代码中引用变量是什么数据类型。\n多态的实现方式\n方式一：重写：\n方式二：接口\n1. 生活中的接口最具代表性的就是插座，例如一个三接头的插头都能接在三孔插座中，因为这个是每个国家都有各自规定的接口规则，有可能到国外就不行，那是因为国外自己定义的接口类型。\n2. java中的接口类似于生活中的接口，就是一些方法特征的集合，但没有方法的实现。具体可以看 java接口 这一章节的内容。\n方式三：抽象类和抽象方法\n详情请看 Java抽象类 章节。"
+    }
+  ]
+}

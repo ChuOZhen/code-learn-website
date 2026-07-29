@@ -1,0 +1,217 @@
+[
+  {
+    "order": 1,
+    "title": "Python 简介",
+    "url": "https://www.runoob.com/python/python-intro.html"
+  },
+  {
+    "order": 2,
+    "title": "Python 环境搭建",
+    "url": "https://www.runoob.com/python/python-install.html"
+  },
+  {
+    "order": 3,
+    "title": "Python 中文编码",
+    "url": "https://www.runoob.com/python/python-chinese-encoding.html"
+  },
+  {
+    "order": 4,
+    "title": "Python VS Code",
+    "url": "https://www.runoob.com/python/python2-vscode-setup.html"
+  },
+  {
+    "order": 5,
+    "title": "Python 基础语法",
+    "url": "https://www.runoob.com/python/python-basic-syntax.html"
+  },
+  {
+    "order": 6,
+    "title": "Python 变量类型",
+    "url": "https://www.runoob.com/python/python-variable-types.html"
+  },
+  {
+    "order": 7,
+    "title": "Python 运算符",
+    "url": "https://www.runoob.com/python/python-operators.html"
+  },
+  {
+    "order": 8,
+    "title": "Python 条件语句",
+    "url": "https://www.runoob.com/python/python-if-statement.html"
+  },
+  {
+    "order": 9,
+    "title": "Python 循环语句",
+    "url": "https://www.runoob.com/python/python-loops.html"
+  },
+  {
+    "order": 10,
+    "title": "Python While 循环语句",
+    "url": "https://www.runoob.com/python/python-while-loop.html"
+  },
+  {
+    "order": 11,
+    "title": "Python for 循环语句",
+    "url": "https://www.runoob.com/python/python-for-loop.html"
+  },
+  {
+    "order": 12,
+    "title": "Python 循环嵌套",
+    "url": "https://www.runoob.com/python/python-nested-loops.html"
+  },
+  {
+    "order": 13,
+    "title": "Python break 语句",
+    "url": "https://www.runoob.com/python/python-break-statement.html"
+  },
+  {
+    "order": 14,
+    "title": "Python continue 语句",
+    "url": "https://www.runoob.com/python/python-continue-statement.html"
+  },
+  {
+    "order": 15,
+    "title": "Python pass 语句",
+    "url": "https://www.runoob.com/python/python-pass-statement.html"
+  },
+  {
+    "order": 16,
+    "title": "Python Number(数字)",
+    "url": "https://www.runoob.com/python/python-numbers.html"
+  },
+  {
+    "order": 17,
+    "title": "Python 字符串",
+    "url": "https://www.runoob.com/python/python-strings.html"
+  },
+  {
+    "order": 18,
+    "title": "Python 列表(List)",
+    "url": "https://www.runoob.com/python/python-lists.html"
+  },
+  {
+    "order": 19,
+    "title": "Python 元组",
+    "url": "https://www.runoob.com/python/python-tuples.html"
+  },
+  {
+    "order": 20,
+    "title": "Python 字典(Dictionary)",
+    "url": "https://www.runoob.com/python/python-dictionary.html"
+  },
+  {
+    "order": 21,
+    "title": "Python 日期和时间",
+    "url": "https://www.runoob.com/python/python-date-time.html"
+  },
+  {
+    "order": 22,
+    "title": "Python 函数",
+    "url": "https://www.runoob.com/python/python-functions.html"
+  },
+  {
+    "order": 23,
+    "title": "Python 模块",
+    "url": "https://www.runoob.com/python/python-modules.html"
+  },
+  {
+    "order": 24,
+    "title": "Python 文件I/O",
+    "url": "https://www.runoob.com/python/python-files-io.html"
+  },
+  {
+    "order": 25,
+    "title": "Python File 方法",
+    "url": "https://www.runoob.com/python/file-methods.html"
+  },
+  {
+    "order": 26,
+    "title": "Python 异常处理",
+    "url": "https://www.runoob.com/python/python-exceptions.html"
+  },
+  {
+    "order": 27,
+    "title": "Python OS 文件/目录方法",
+    "url": "https://www.runoob.com/python/os-file-methods.html"
+  },
+  {
+    "order": 28,
+    "title": "Python 内置函数",
+    "url": "https://www.runoob.com/python/python-built-in-functions.html"
+  },
+  {
+    "order": 29,
+    "title": "Python 面向对象",
+    "url": "https://www.runoob.com/python/python-object.html"
+  },
+  {
+    "order": 30,
+    "title": "Python 正则表达式",
+    "url": "https://www.runoob.com/python/python-reg-expressions.html"
+  },
+  {
+    "order": 31,
+    "title": "Python CGI 编程",
+    "url": "https://www.runoob.com/python/python-cgi.html"
+  },
+  {
+    "order": 32,
+    "title": "Python MySQL",
+    "url": "https://www.runoob.com/python/python-mysql.html"
+  },
+  {
+    "order": 33,
+    "title": "Python 网络编程",
+    "url": "https://www.runoob.com/python/python-socket.html"
+  },
+  {
+    "order": 34,
+    "title": "Python SMTP",
+    "url": "https://www.runoob.com/python/python-email.html"
+  },
+  {
+    "order": 35,
+    "title": "Python 多线程",
+    "url": "https://www.runoob.com/python/python-multithreading.html"
+  },
+  {
+    "order": 36,
+    "title": "Python XML 解析",
+    "url": "https://www.runoob.com/python/python-xml.html"
+  },
+  {
+    "order": 37,
+    "title": "Python GUI 编程(Tkinter)",
+    "url": "https://www.runoob.com/python/python-gui-tkinter.html"
+  },
+  {
+    "order": 38,
+    "title": "Python2.x 与 3.x 版本区别",
+    "url": "https://www.runoob.com/python/python-2x-3x.html"
+  },
+  {
+    "order": 39,
+    "title": "Python IDE",
+    "url": "https://www.runoob.com/python/python-ide.html"
+  },
+  {
+    "order": 40,
+    "title": "Python JSON",
+    "url": "https://www.runoob.com/python/python-json.html"
+  },
+  {
+    "order": 41,
+    "title": "Python AI 绘画",
+    "url": "https://www.runoob.com/python3/python-ai-draw.html"
+  },
+  {
+    "order": 42,
+    "title": "Python 100例",
+    "url": "https://www.runoob.com/python/python-100-examples.html"
+  },
+  {
+    "order": 43,
+    "title": "Python 测验",
+    "url": "https://www.runoob.com/quiz/python-quiz.html"
+  }
+]

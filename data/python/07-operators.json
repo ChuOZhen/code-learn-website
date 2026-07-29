@@ -1,0 +1,161 @@
+{
+  "id": "07-operators",
+  "title": "Python 运算符",
+  "order": 7,
+  "source_url": "https://www.runoob.com/python/python-operators.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "什么是运算符？\n本章节主要说明Python的运算符。举个简单的例子 4 +5 = 9 。\n例子中，4 和 5 被称为操作数，+ 称为运算符。\nPython语言支持以下类型的运算符:\n算术运算符\n比较（关系）运算符\n赋值运算符\n逻辑运算符\n位运算符\n成员运算符\n身份运算符\n运算符优先级\n接下来让我们一个个来学习Python的运算符。\nPython算术运算符\n以下假设变量： a=10，b=20：\n运算符描述实例\n+加 - 两个对象相加 a + b 输出结果 30\n-减 - 得到负数或是一个数减去另一个数 a - b 输出结果 -10\n*乘 - 两个数相乘或是返回一个被重复若干次的字符串 a * b 输出结果 200\n/除 - x除以y b / a 输出结果 2\n%取模 - 返回除法的余数 b % a 输出结果 0\n**幂 - 返回x的y次幂 a**b 为10的20次方， 输出结果 100000000000000000000\n//取整除 - 返回商的整数部分（向下取整）\n>>> 9//2\n4\n>>> -9//2\n-5\n以下实例演示了Python所有算术运算符的操作："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例(Python 2.0+)\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \na = 21\nb = 10\nc = 0\n \nc = a + b\nprint \"1 - c 的值为：\", c\n \nc = a - b\nprint \"2 - c 的值为：\", c \n \nc = a * b\nprint \"3 - c 的值为：\", c \n \nc = a / b\nprint \"4 - c 的值为：\", c \n \nc = a % b\nprint \"5 - c 的值为：\", c\n \n# 修改变量 a 、b 、c\na = 2\nb = 3\nc = a**b \nprint \"6 - c 的值为：\", c\n \na = 10\nb = 5\nc = a//b \nprint \"7 - c 的值为：\", c"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "1 - c 的值为： 31\n2 - c 的值为： 11\n3 - c 的值为： 210\n4 - c 的值为： 2\n5 - c 的值为： 1\n6 - c 的值为： 8\n7 - c 的值为： 2"
+    },
+    {
+      "type": "text",
+      "content": "注意：Python2.x 里，整数除整数，只能得出整数。如果要得到小数部分，把其中一个数改成浮点数即可。\n>>> 1/2\n0\n>>> 1.0/2\n0.5\n>>> 1/float(2)\n0.5\nPython比较运算符\n以下假设变量a为10，变量b为20：\n运算符描述实例\n== 等于 - 比较对象是否相等 (a == b) 返回 False。\n!= 不等于 - 比较两个对象是否不相等 (a != b) 返回 True。\n<>不等于 -  比较两个对象是否不相等。python3 已废弃。 (a <> b) 返回 True。这个运算符类似 != 。\n> 大于 - 返回x是否大于y (a > b) 返回 False。\n< 小于 - 返回x是否小于y。所有比较运算符返回1表示真，返回0表示假。这分别与特殊的变量 True 和 False 等价。 (a < b) 返回 True。\n>= 大于等于\t- 返回x是否大于等于y。 (a >= b) 返回 False。\n<= 小于等于 -\t返回x是否小于等于y。 (a <= b) 返回 True。\n以下实例演示了Python所有比较运算符的操作："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例(Python 2.0+)\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \na = 21\nb = 10\nc = 0\n \nif  a == b :\n   print \"1 - a 等于 b\"\nelse:\n   print \"1 - a 不等于 b\"\n \nif  a != b :\n   print \"2 - a 不等于 b\"\nelse:\n   print \"2 - a 等于 b\"\n \nif  a <> b :\n   print \"3 - a 不等于 b\"\nelse:\n   print \"3 - a 等于 b\"\n \nif  a < b :\n   print \"4 - a 小于 b\" \nelse:\n   print \"4 - a 大于等于 b\"\n \nif  a > b :\n   print \"5 - a 大于 b\"\nelse:\n   print \"5 - a 小于等于 b\"\n \n# 修改变量 a 和 b 的值\na = 5\nb = 20\nif  a <= b :\n   print \"6 - a 小于等于 b\"\nelse:\n   print \"6 - a 大于  b\"\n \nif  b >= a :\n   print \"7 - b 大于等于 a\"\nelse:\n   print \"7 - b 小于 a\""
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "1 - a 不等于 b\n2 - a 不等于 b\n3 - a 不等于 b\n4 - a 大于等于 b\n5 - a 大于 b\n6 - a 小于等于 b\n7 - b 大于等于 a"
+    },
+    {
+      "type": "text",
+      "content": "Python赋值运算符\n以下假设变量a为10，变量b为20：\n运算符描述实例\n=简单的赋值运算符 c = a + b 将 a + b 的运算结果赋值为 c\n+=加法赋值运算符 c += a 等效于 c = c + a\n-=减法赋值运算符 c -= a 等效于 c = c - a\n*=乘法赋值运算符 c *= a 等效于 c = c * a\n/=除法赋值运算符 c /= a 等效于 c = c / a\n%=取模赋值运算符 c %= a 等效于 c = c % a\n**=幂赋值运算符 c **= a 等效于 c = c ** a\n//= 取整除赋值运算符 c //= a 等效于 c = c // a\n以下实例演示了Python所有赋值运算符的操作："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例(Python 2.0+)\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \na = 21\nb = 10\nc = 0\n \nc = a + b\nprint \"1 - c 的值为：\", c\n \nc += a\nprint \"2 - c 的值为：\", c \n \nc *= a\nprint \"3 - c 的值为：\", c \n \nc /= a \nprint \"4 - c 的值为：\", c \n \nc = 2\nc %= a\nprint \"5 - c 的值为：\", c\n \nc **= a\nprint \"6 - c 的值为：\", c\n \nc //= a\nprint \"7 - c 的值为：\", c"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "1 - c 的值为： 31\n2 - c 的值为： 52\n3 - c 的值为： 1092\n4 - c 的值为： 52\n5 - c 的值为： 2\n6 - c 的值为： 2097152\n7 - c 的值为： 99864"
+    },
+    {
+      "type": "text",
+      "content": "Python位运算符\n按位运算符是把数字看作二进制来进行计算的。Python中的按位运算法则如下：\n下表中变量 a 为 60，b 为 13，二进制格式如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "a = 0011 1100\n\nb = 0000 1101\n\n-----------------\n\na&b = 0000 1100\n\na|b = 0011 1101\n\na^b = 0011 0001\n\n~a  = 1100 0011"
+    },
+    {
+      "type": "text",
+      "content": "运算符描述实例\n&按位与运算符：参与运算的两个值,如果两个相应位都为1,则该位的结果为1,否则为0 (a & b) 输出结果 12 ，二进制解释： 0000 1100\n| 按位或运算符：只要对应的二个二进位有一个为1时，结果位就为1。 (a | b) 输出结果 61 ，二进制解释： 0011 1101\n^按位异或运算符：当两对应的二进位相异时，结果为1  (a ^ b) 输出结果 49 ，二进制解释： 0011 0001\n~ 按位取反运算符：将二进制表示中的每一位取反，0 变为 1，1 变为 0。~x 类似于 -x-1 (~a ) 输出结果 -61 ，二进制解释： 1100 0011 (以补码形式表示)，在一个有符号二进制数的补码形式。\n<<左移动运算符：运算数的各二进位全部左移若干位，由 << 右边的数字指定了移动的位数，高位丢弃，低位补0。 a << 2 输出结果 240 ，二进制解释： 1111 0000\n>>右移动运算符：把\">>\"左边的运算数的各二进位全部右移若干位，>> 右边的数字指定了移动的位数  a >> 2 输出结果 15 ，二进制解释： 0000 1111\n以下实例演示了Python所有位运算符的操作："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例(Python 2.0+)\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \na = 60            # 60 = 0011 1100 \nb = 13            # 13 = 0000 1101 \nc = 0\n \nc = a & b;        # 12 = 0000 1100\nprint \"1 - c 的值为：\", c\n \nc = a | b;        # 61 = 0011 1101 \nprint \"2 - c 的值为：\", c\n \nc = a ^ b;        # 49 = 0011 0001\nprint \"3 - c 的值为：\", c\n \nc = ~a;           # -61 = 1100 0011\nprint \"4 - c 的值为：\", c\n \nc = a << 2;       # 240 = 1111 0000\nprint \"5 - c 的值为：\", c\n \nc = a >> 2;       # 15 = 0000 1111\nprint \"6 - c 的值为：\", c"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "1 - c 的值为： 12\n2 - c 的值为： 61\n3 - c 的值为： 49\n4 - c 的值为： -61\n5 - c 的值为： 240\n6 - c 的值为： 15"
+    },
+    {
+      "type": "text",
+      "content": "Python逻辑运算符\nPython语言支持逻辑运算符，以下假设变量 a 为 10, b为 20:\n运算符逻辑表达式描述实例\nandx and y 布尔\"与\" - 如果 x 为 False，x and y 返回 False，否则它返回 y 的计算值。\t (a and b) 返回 20。\norx or y布尔\"或\"\t- 如果 x 是非 0，它返回 x 的计算值，否则它返回 y 的计算值。 (a or b) 返回 10。\nnotnot x布尔\"非\" - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。 not(a and b) 返回 False\n以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例(Python 2.0+)\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \na = 10\nb = 20\n \nif  a and b :\n   print \"1 - 变量 a 和 b 都为 True\"\nelse:\n   print \"1 - 变量 a 和 b 有一个不为 True\"\n \nif  a or b :\n   print \"2 - 变量 a 和 b 都为 True，或其中一个变量为 True\"\nelse:\n   print \"2 - 变量 a 和 b 都不为 True\"\n \n# 修改变量 a 的值\na = 0\nif  a and b :\n   print \"3 - 变量 a 和 b 都为 True\"\nelse:\n   print \"3 - 变量 a 和 b 有一个不为 True\"\n \nif  a or b :\n   print \"4 - 变量 a 和 b 都为 True，或其中一个变量为 True\"\nelse:\n   print \"4 - 变量 a 和 b 都不为 True\"\n \nif not( a and b ):\n   print \"5 - 变量 a 和 b 都为 False，或其中一个变量为 False\"\nelse:\n   print \"5 - 变量 a 和 b 都为 True\""
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "1 - 变量 a 和 b 都为 True\n2 - 变量 a 和 b 都为 True，或其中一个变量为 True\n3 - 变量 a 和 b 有一个不为 True\n4 - 变量 a 和 b 都为 True，或其中一个变量为 True\n5 - 变量 a 和 b 都为 False，或其中一个变量为 False"
+    },
+    {
+      "type": "text",
+      "content": "Python成员运算符\n除了以上的一些运算符之外，Python还支持成员运算符，测试实例中包含了一系列的成员，包括字符串，列表或元组。\n运算符描述实例\nin\n如果在指定的序列中找到值返回 True，否则返回 False。\n x 在 y 序列中 , 如果 x 在 y 序列中返回 True。\nnot in如果在指定的序列中没有找到值返回 True，否则返回 False。\nx 不在 y 序列中 , 如果 x 不在 y 序列中返回 True。\n以下实例演示了Python所有成员运算符的操作："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例(Python 2.0+)\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \na = 10\nb = 20\nlist = [1, 2, 3, 4, 5 ];\n \nif ( a in list ):\n   print \"1 - 变量 a 在给定的列表中 list 中\"\nelse:\n   print \"1 - 变量 a 不在给定的列表中 list 中\"\n \nif ( b not in list ):\n   print \"2 - 变量 b 不在给定的列表中 list 中\"\nelse:\n   print \"2 - 变量 b 在给定的列表中 list 中\"\n \n# 修改变量 a 的值\na = 2\nif ( a in list ):\n   print \"3 - 变量 a 在给定的列表中 list 中\"\nelse:\n   print \"3 - 变量 a 不在给定的列表中 list 中\""
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "1 - 变量 a 不在给定的列表中 list 中\n2 - 变量 b 不在给定的列表中 list 中\n3 - 变量 a 在给定的列表中 list 中"
+    },
+    {
+      "type": "text",
+      "content": "Python身份运算符\n身份运算符用于比较两个对象的存储单元\n运算符描述实例\nis\nis 是判断两个标识符是不是引用自一个对象 x is y, 类似 id(x) == id(y) , 如果引用的是同一个对象则返回 True，否则返回 False\nis notis not 是判断两个标识符是不是引用自不同对象 x is not y ， 类似 id(a) != id(b)。如果引用的不是同一个对象则返回结果 True，否则返回 False。\n注： id() 函数用于获取对象内存地址。\n以下实例演示了Python所有身份运算符的操作："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例(Python 2.0+)\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \na = 20\nb = 20\n \nif ( a is b ):\n   print \"1 - a 和 b 有相同的标识\"\nelse:\n   print \"1 - a 和 b 没有相同的标识\"\n \nif ( a is not b ):\n   print \"2 - a 和 b 没有相同的标识\"\nelse:\n   print \"2 - a 和 b 有相同的标识\"\n \n# 修改变量 b 的值\nb = 30\nif ( a is b ):\n   print \"3 - a 和 b 有相同的标识\"\nelse:\n   print \"3 - a 和 b 没有相同的标识\"\n \nif ( a is not b ):\n   print \"4 - a 和 b 没有相同的标识\"\nelse:\n   print \"4 - a 和 b 有相同的标识\""
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "1 - a 和 b 有相同的标识\n2 - a 和 b 有相同的标识\n3 - a 和 b 没有相同的标识\n4 - a 和 b 没有相同的标识"
+    },
+    {
+      "type": "text",
+      "content": "is 与 == 区别：\nis 用于判断两个变量引用对象是否为同一个(同一块内存空间)， == 用于判断引用变量的值是否相等。\n>>> a = [1, 2, 3]\n>>> b = a\n>>> b is a\nTrue\n>>> b == a\nTrue\n>>> b = a[:]\n>>> b is a\nFalse\n>>> b == a\nTrue\nPython运算符优先级\n以下表格列出了从最高到最低优先级的所有运算符：\n运算符描述\n**\n指数 (最高优先级)\n~ + -\n按位翻转, 一元加号和减号 (最后两个的方法名为 +@ 和 -@)\n* / % //\n乘，除，取模和取整除\n+ -\n加法减法\n>> <<\n右移，左移运算符\n&\n位 'AND'\n^ |\n位运算符\n<= < > >=\n比较运算符\n<> == !=\n等于运算符\n= %= /= //= -= += *= **=\n赋值运算符\nis is not\n身份运算符\nin not in\n成员运算符\nnot and or\n逻辑运算符\n以下实例演示了Python所有运算符优先级的操作："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例(Python 2.0+)\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \na = 20\nb = 10\nc = 15\nd = 5\ne = 0\n \ne = (a + b) * c / d       #( 30 * 15 ) / 5\nprint \"(a + b) * c / d 运算结果为：\",  e\n \ne = ((a + b) * c) / d     # (30 * 15 ) / 5\nprint \"((a + b) * c) / d 运算结果为：\",  e\n \ne = (a + b) * (c / d);    # (30) * (15/5)\nprint \"(a + b) * (c / d) 运算结果为：\",  e\n \ne = a + (b * c) / d;      #  20 + (150/5)\nprint \"a + (b * c) / d 运算结果为：\",  e"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "(a + b) * c / d 运算结果为： 90\n((a + b) * c) / d 运算结果为： 90\n(a + b) * (c / d) 运算结果为： 90\na + (b * c) / d 运算结果为： 50"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "15-character",
+  "title": "Java Character 类",
+  "order": 15,
+  "source_url": "https://www.runoob.com/java/java-character.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Character 类用于对单个字符进行操作。\nCharacter 类在对象中包装一个基本类型 char 的值"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// 实例\nchar ch = 'a';\n \n// Unicode 字符表示形式\nchar uniChar = '\\u039A'; \n \n// 字符数组\nchar[] charArray ={ 'a', 'b', 'c', 'd', 'e' };"
+    },
+    {
+      "type": "text",
+      "content": "然而，在实际开发过程中，我们经常会遇到需要使用对象，而不是内置数据类型的情况。为了解决这个问题，Java语言为内置数据类型char提供了包装类Character类。\nCharacter类提供了一系列方法来操纵字符。你可以使用Character的构造方法创建一个Character类对象，例如："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "Character ch = new Character('a');"
+    },
+    {
+      "type": "text",
+      "content": "在某些情况下，Java编译器会自动创建一个Character对象。\n例如，将一个char类型的参数传递给需要一个Character类型参数的方法时，那么编译器会自动地将char类型参数转换为Character对象。\n这种特征称为装箱，反过来称为拆箱。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// 实例\n// 原始字符 'a' 装箱到 Character 对象 ch 中\nCharacter ch = 'a';\n \n// 原始字符 'x' 用 test 方法装箱\n// 返回拆箱的值到 'c'\nchar c = test('x');"
+    },
+    {
+      "type": "text",
+      "content": "转义序列\n前面有反斜杠（\\）的字符代表转义字符，它对编译器来说是有特殊含义的。\n下面列表展示了Java的转义序列：\n转义序列\n\t\t\t\t描述\n\t\t\t\t\\t\n\t\t\t\t在文中该处插入一个tab键\n\t\t\t\t\\b\n\t\t\t\t在文中该处插入一个后退键\n\t\t\t\t\\n\n\t\t\t\t在文中该处换行\n\t\t\t\t\\r\n\t\t\t\t在文中该处插入回车\n\t\t\t\t\\f\n\t\t\t\t在文中该处插入换页符\n\t\t\t\t\\'\n\t\t\t\t在文中该处插入单引号\n\t\t\t\t\\\"\n\t\t\t\t在文中该处插入双引号\n\t\t\t\t\\\\\n\t\t\t\t在文中该处插入反斜杠\n实例\n当打印语句遇到一个转义序列时，编译器可以正确地对其进行解释。\n以下实例转义双引号并输出："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test {\n \n   public static void main(String[] args) {\n      System.out.println(\"访问\\\"菜鸟教程!\\\"\");\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "访问\"菜鸟教程!\""
+    },
+    {
+      "type": "text",
+      "content": "Character 方法\n下面是Character类的方法：\n序号\n\t\t\t\t方法与描述\n\t\t\t\t1\n\t\t\t\tisLetter()\n\t\t\t\t是否是一个字母\n\t\t\t\t2\n\t\t\t\tisDigit()\n\t\t\t\t是否是一个数字字符\n\t\t\t\t3\n\t\t\t\tisWhitespace()\n\t\t\t\t是否是一个空白字符\n\t\t\t\t4\n\t\t\t\tisUpperCase()\n\t\t\t\t是否是大写字母\n\t\t\t\t5\n\t\t\t\tisLowerCase()\n\t\t\t\t是否是小写字母\n\t\t\t\t6\n\t\t\t\ttoUpperCase()\n\t\t\t\t指定字母的大写形式\n\t\t\t\t7\n\t\t\t\ttoLowerCase()\n\t\t\t\t指定字母的小写形式\n\t\t\t\t8\n\t\t\t\ttoString()\n\t\t\t\t返回字符的字符串形式，字符串的长度仅为1\n对于方法的完整列表，请参考的 java.lang.Character API 规范。"
+    }
+  ]
+}

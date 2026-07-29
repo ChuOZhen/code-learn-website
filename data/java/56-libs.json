@@ -1,0 +1,12 @@
+{
+  "id": "56-libs",
+  "title": "Java 常用类库",
+  "order": 56,
+  "source_url": "https://www.runoob.com/java/java-libs.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Java 提供了丰富的类库，以下是一些最常用的类。\n1. 核心 Java 类库\nJava 标准库提供了丰富的内置类库，以下是常用的一些核心类库：\n类别\n类库名称\n主要功能\n集合框架\njava.util.ArrayList\n动态数组实现\njava.util.LinkedList\n双向链表实现\njava.util.HashMap\n哈希表实现的 Map\njava.util.Vector\n实现了一个动态数组\njava.util.HashSet\n基于哈希表的 Set\njava.util.Scanner\n获取用户的输入\njava.util.regex.Pattern\n正则表达式\njava.util.regex.Macher\n正则表达式\nIO/NIO\njava.io.File\n文件和目录操作\njava.nio.file.Files\n文件操作工具类\njava.io.InputStream\n字节流基础类\njava.io.OutputStream\n字节流基础类\n多线程\njava.lang.Thread\n线程操作类\njava.util.concurrent.ExecutorService\n线程池管理\n日期时间\njava.time.LocalDate\n日期处理\njava.time.LocalDateTime\n日期时间处理\njava.time.ZonedDateTime\n带有时区的日期和时间\njava.util.Date\n当前的日期\njava.text.SimpleDateFormat\n时间日期格式化\njava.util.Calendar\n处理时间日期\njava.util.GregorianCalendar\n 实现了公历日历\njava.time.Instant\n 表示时间线上的一个瞬时点\njava.time.ChronoUnit\n 用于测量时间的标准单位\njava.time.Period\n 表示两个日期之间的时间间隔\njava.time.Duration\n 表示基于时间的时段（小时、分钟、秒、纳秒）\n网络编程\njava.net.URL\nURL 处理\njava.net.Socket\n套接字编程\n2. 常用第三方库\n以下是 Java 生态系统中广泛使用的第三方库：\n类别\n库名称\n主要功能\n官方网站\nJSON 处理\nJackson\nJSON 序列化/反序列化\nhttps://github.com/FasterXML/jackson\nGson\nGoogle 的 JSON 库\nhttps://github.com/google/gson\n单元测试\nJUnit\nJava 单元测试框架\nhttps://junit.org/junit5/\nMockito\nMock 测试框架\nhttps://site.mockito.org/\n日志记录\nLog4j\n日志记录框架\nhttps://logging.apache.org/log4j/\nSLF4J\n日志门面框架\nhttps://www.slf4j.org/\nWeb 开发\nSpring Framework\n企业级应用框架\nhttps://spring.io/projects/spring-framework\nSpring Boot\n快速应用开发框架\nhttps://spring.io/projects/spring-boot\n数据库\nHibernate\nORM 框架\nhttps://hibernate.org/\nMyBatis\nSQL 映射框架\nhttps://mybatis.org/mybatis-3/\n构建工具\nMaven\n项目构建和依赖管理\nhttps://maven.apache.org/\nGradle\n灵活构建工具\nhttps://gradle.org/\n3. 如何选择适合的类库\n3.1 评估标准\n功能需求：首先明确项目需要什么功能\n社区支持：活跃的社区意味着更好的支持和文档\n性能表现：对于性能敏感的应用需要特别考虑\n学习曲线：考虑团队的学习成本\n维护状态：检查项目是否还在积极维护\n3.2 版本选择建议\n优先选择 LTS (长期支持) 版本\n避免使用已经停止维护的版本\n新项目可以考虑较新的稳定版本\n4. 使用示例\n4.1 使用 Jackson 处理 JSON\n4.2 使用 JUnit 进行单元测试"
+    }
+  ]
+}

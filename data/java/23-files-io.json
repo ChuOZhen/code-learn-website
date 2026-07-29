@@ -1,0 +1,193 @@
+{
+  "id": "23-files-io",
+  "title": "Java 流(Stream)、文件(File)和IO",
+  "order": 23,
+  "source_url": "https://www.runoob.com/java/java-files-io.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Java 中的流（Stream）、文件（File）和 IO（输入输出）是处理数据读取和写入的基础设施，它们允许程序与外部数据（如文件、网络、系统输入等）进行交互。\njava.io 包是 Java 标准库中的一个核心包，提供了用于系统输入和输出的类，它包含了处理数据流（字节流和字符流）、文件读写、序列化以及数据格式化的工具。\njava.io 是处理文件操作、流操作以及低级别 IO 操作的基础包。\njava.io 包中的流支持很多种格式，比如：基本类型、对象、本地化字符集等等。\n一个流可以理解为一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据。\n读取控制台输入\nJava 的控制台输入由 System.in 完成。\n为了获得一个绑定到控制台的字符流，你可以把 System.in 包装在一个 BufferedReader 对象中来创建一个字符流。\n下面是创建 BufferedReader 的基本语法："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "BufferedReader br = new BufferedReader(new \n                      InputStreamReader(System.in));"
+    },
+    {
+      "type": "text",
+      "content": "BufferedReader 对象创建后，我们便可以使用 read() 方法从控制台读取一个字符，或者用 readLine() 方法读取一个字符串。\n从控制台读取多字符输入\n从 BufferedReader 对象读取一个字符要使用 read() 方法，它的语法如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "int read( ) throws IOException"
+    },
+    {
+      "type": "text",
+      "content": "每次调用 read() 方法，它从输入流读取一个字符并把该字符作为整数值返回。 当流结束的时候返回 -1。该方法抛出 IOException。\n下面的程序示范了用 read() 方法从控制台不断读取字符直到用户输入 q。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// BRRead.java 文件代码：\n//使用 BufferedReader 在控制台读取字符\n \nimport java.io.*;\n \npublic class BRRead {\n    public static void main(String[] args) throws IOException {\n        char c;\n        // 使用 System.in 创建 BufferedReader\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        System.out.println(\"输入字符, 按下 'q' 键退出。\");\n        // 读取字符\n        do {\n            c = (char) br.read();\n            System.out.println(c);\n        } while (c != 'q');\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "输入字符, 按下 'q' 键退出。\nrunoob\nr\nu\nn\no\no\nb\n\n\nq\nq"
+    },
+    {
+      "type": "text",
+      "content": "从控制台读取字符串\n从标准输入读取一个字符串需要使用 BufferedReader 的 readLine() 方法。\n它的一般格式是："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "String readLine( ) throws IOException"
+    },
+    {
+      "type": "text",
+      "content": "下面的程序读取和显示字符行直到你输入了单词\"end\"。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// BRReadLines.java 文件代码：\n//使用 BufferedReader 在控制台读取字符\nimport java.io.*;\n \npublic class BRReadLines {\n    public static void main(String[] args) throws IOException {\n        // 使用 System.in 创建 BufferedReader\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String str;\n        System.out.println(\"Enter lines of text.\");\n        System.out.println(\"Enter 'end' to quit.\");\n        do {\n            str = br.readLine();\n            System.out.println(str);\n        } while (!str.equals(\"end\"));\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "Enter lines of text.\nEnter 'end' to quit.\nThis is line one\nThis is line one\nThis is line two\nThis is line two\nend\nend"
+    },
+    {
+      "type": "text",
+      "content": "JDK 5 后的版本我们也可以使用 Java Scanner 类来获取控制台的输入。\n控制台输出\n在此前已经介绍过，控制台的输出由 print( ) 和 println() 完成。这些方法都由类 PrintStream 定义，System.out 是该类对象的一个引用。\nPrintStream 继承了 OutputStream类，并且实现了方法 write()。这样，write() 也可以用来往控制台写操作。\nPrintStream 定义 write() 的最简单格式如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "void write(int byteval)"
+    },
+    {
+      "type": "text",
+      "content": "该方法将 byteval 的低八位字节写到流中。\n实例\n下面的例子用 write() 把字符 \"A\" 和紧跟着的换行符输出到屏幕："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// WriteDemo.java 文件代码：\nimport java.io.*;\n \n//演示 System.out.write().\npublic class WriteDemo {\n    public static void main(String[] args) {\n        int b;\n        b = 'A';\n        System.out.write(b);\n        System.out.write('\\n');\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "运行以上实例在输出窗口输出 \"A\" 字符"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "A"
+    },
+    {
+      "type": "text",
+      "content": "注意：write() 方法不经常使用，因为 print() 和 println() 方法用起来更为方便。\n读写文件\n如前所述，一个流被定义为一个数据序列。输入流用于从源读取数据，输出流用于向目标写数据。\n下图是一个描述输入流和输出流的类层次图。\n字节流（处理二进制数据）\n字节流用于处理二进制数据，例如文件、图像、视频等。\n类名类型描述InputStream抽象类 (输入流)所有字节输入流的超类，处理字节的输入操作。OutputStream抽象类 (输出流)所有字节输出流的超类，处理字节的输出操作。FileInputStream输入流从文件中读取字节数据。FileOutputStream输出流将字节数据写入文件。BufferedInputStream输入流为字节输入流提供缓冲功能，提高读取效率。BufferedOutputStream输出流为字节输出流提供缓冲功能，提高写入效率。ByteArrayInputStream输入流将内存中的字节数组作为输入源。ByteArrayOutputStream输出流将数据写入到内存中的字节数组。DataInputStream输入流允许从输入流中读取 Java 原生数据类型（如 int、float、boolean）。DataOutputStream输出流允许向输出流中写入 Java 原生数据类型。ObjectInputStream输入流从输入流中读取序列化对象。ObjectOutputStream输出流将对象序列化并写入输出流中。PipedInputStream输入流用于在管道中读取字节数据，通常与 PipedOutputStream 配合使用。PipedOutputStream输出流用于在管道中写入字节数据，通常与 PipedInputStream 配合使用。FilterInputStream输入流字节输入流的包装类，用于对其他输入流进行过滤处理。FilterOutputStream输出流字节输出流的包装类，用于对其他输出流进行过滤处理。SequenceInputStream输入流将多个输入流串联为一个输入流进行处理。\n字符流（处理文本数据）\n字符流用于处理文本数据，例如读取和写入字符串或文件。\n类名类型描述Reader抽象类 (输入流)所有字符输入流的超类，处理字符的输入操作。Writer抽象类 (输出流)所有字符输出流的超类，处理字符的输出操作。FileReader输入流从文件中读取字符数据。FileWriter输出流将字符数据写入文件。BufferedReader输入流为字符输入流提供缓冲功能，支持按行读取，提高读取效率。BufferedWriter输出流为字符输出流提供缓冲功能，支持按行写入，提高写入效率。CharArrayReader输入流将字符数组作为输入源。CharArrayWriter输出流将数据写入到字符数组。StringReader输入流将字符串作为输入源。StringWriter输出流将数据写入到字符串缓冲区。PrintWriter输出流便捷的字符输出流，支持自动刷新和格式化输出。PipedReader输入流用于在管道中读取字符数据，通常与 PipedWriter 配合使用。PipedWriter输出流用于在管道中写入字符数据，通常与 PipedReader 配合使用。LineNumberReader输入流带行号的缓冲字符输入流，允许跟踪读取的行号。PushbackReader输入流允许在读取字符后将字符推回流中，以便再次读取。\n辅助类（其他重要类）\n辅助类提供对文件、目录以及随机文件访问的支持。\n类名类型描述File文件和目录操作用于表示文件或目录，并提供文件操作，如创建、删除、重命名等。RandomAccessFile随机访问文件支持文件的随机访问，可以从文件的任意位置读写数据。Console控制台输入输出提供对系统控制台的输入和输出支持。\n下面将要讨论的两个重要的流是 FileInputStream 和 FileOutputStream。\nFileInputStream\n该流用于从文件读取数据，它的对象可以用关键字 new 来创建。\n有多种构造方法可用来创建对象。\n可以使用字符串类型的文件名来创建一个输入流对象来读取文件："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "InputStream f = new FileInputStream(\"C:/java/hello\");"
+    },
+    {
+      "type": "text",
+      "content": "也可以使用一个文件对象来创建一个输入流对象来读取文件。我们首先得使用 File() 方法来创建一个文件对象："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "File f = new File(\"C:/java/hello\");\nInputStream in = new FileInputStream(f);"
+    },
+    {
+      "type": "text",
+      "content": "创建了 InputStream 对象，就可以使用下面的方法来读取流或者进行其他的流操作。\n方法描述示例代码int read()读取一个字节的数据，返回值为 0 到 255 之间的整数。如果到达流的末尾，返回 -1。int data = inputStream.read();int read(byte[] b)从输入流中读取字节，并将其存储在字节数组 b 中，返回实际读取的字节数。如果到达流的末尾，返回 -1。byte[] buffer = new byte[1024]; int bytesRead = inputStream.read(buffer);int read(byte[] b, int off, int len)从输入流中读取最多 len 个字节，并将它们存储在字节数组 b 的 off 偏移位置，返回实际读取的字节数。如果到达流的末尾，返回 -1。byte[] buffer = new byte[1024]; int bytesRead = inputStream.read(buffer, 0, buffer.length);long skip(long n)跳过并丢弃输入流中的 n 个字节，返回实际跳过的字节数。long skippedBytes = inputStream.skip(100);int available()返回可以读取的字节数（不阻塞）。int availableBytes = inputStream.available();void close()关闭输入流并释放与该流相关的所有资源。inputStream.close();void mark(int readlimit)在流中的当前位置设置标记，readlimit 是可以读取的字节数上限。inputStream.mark(1024);void reset()将流重新定位到上次标记的位置，如果没有标记或标记失效，抛出 IOException。inputStream.reset();boolean markSupported()检查当前输入流是否支持 mark() 和 reset() 操作。boolean isMarkSupported = inputStream.markSupported();\n除了 InputStream 外，还有一些其他的输入流，更多的细节参考下面链接：\nByteArrayInputStream\nDataInputStream\nFileOutputStream\n该类用来创建一个文件并向文件中写数据。\n如果该流在打开文件进行输出前，目标文件不存在，那么该流会创建该文件。\n有两个构造方法可以用来创建 FileOutputStream 对象。\n使用字符串类型的文件名来创建一个输出流对象："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "OutputStream f = new FileOutputStream(\"C:/java/hello\")"
+    },
+    {
+      "type": "text",
+      "content": "也可以使用一个文件对象来创建一个输出流来写文件。我们首先得使用File()方法来创建一个文件对象："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "File f = new File(\"C:/java/hello\");\nOutputStream fOut = new FileOutputStream(f);"
+    },
+    {
+      "type": "text",
+      "content": "创建 OutputStream 对象完成后，就可以使用下面的方法来写入流或者进行其他的流操作。\n方法描述示例代码void write(int b)将指定的字节写入输出流，b 的低 8 位将被写入流中。outputStream.write(255);void write(byte[] b)将字节数组 b 中的所有字节写入输出流。byte[] data = \"Hello\".getBytes(); outputStream.write(data);void write(byte[] b, int off, int len)将字节数组 b 中从偏移量 off 开始的 len 个字节写入输出流。byte[] data = \"Hello\".getBytes(); outputStream.write(data, 0, data.length);void flush()刷新输出流并强制写出所有缓冲的数据，确保数据被立即写入目标输出。outputStream.flush();void close()关闭输出流并释放与该流相关的所有资源。关闭后不能再写入。outputStream.close();\n除了 OutputStream 外，还有一些其他的输出流，更多的细节参考下面链接：\nByteArrayOutputStream\nDataOutputStream\n实例\n下面是一个演示 InputStream 和 OutputStream 用法的例子："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// fileStreamTest.java 文件代码：\nimport java.io.*;\n \npublic class fileStreamTest {\n    public static void main(String[] args) {\n        try {\n            byte bWrite[] = { 11, 21, 3, 40, 5 };\n            OutputStream os = new FileOutputStream(\"test.txt\");\n            for (int x = 0; x < bWrite.length; x++) {\n                os.write(bWrite[x]); // writes the bytes\n            }\n            os.close();\n \n            InputStream is = new FileInputStream(\"test.txt\");\n            int size = is.available();\n \n            for (int i = 0; i < size; i++) {\n                System.out.print((char) is.read() + \"  \");\n            }\n            is.close();\n        } catch (IOException e) {\n            System.out.print(\"Exception\");\n        }\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "上面的程序首先创建文件test.txt，并把给定的数字以二进制形式写进该文件，同时输出到控制台上。\n以上代码由于是二进制写入，可能存在乱码，你可以使用以下代码实例来解决乱码问题："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// fileStreamTest2.java 文件代码：\n//文件名 :fileStreamTest2.java\nimport java.io.*;\n \npublic class fileStreamTest2 {\n    public static void main(String[] args) throws IOException {\n \n        File f = new File(\"a.txt\");\n        FileOutputStream fop = new FileOutputStream(f);\n        // 构建FileOutputStream对象,文件不存在会自动新建\n \n        OutputStreamWriter writer = new OutputStreamWriter(fop, \"UTF-8\");\n        // 构建OutputStreamWriter对象,参数可以指定编码,默认为操作系统默认编码,windows上是gbk\n \n        writer.append(\"中文输入\");\n        // 写入到缓冲区\n \n        writer.append(\"\\r\\n\");\n        // 换行\n \n        writer.append(\"English\");\n        // 刷新缓存冲,写入到文件,如果下面已经没有写入的内容了,直接close也会写入\n \n        writer.close();\n        // 关闭写入流,同时会把缓冲区内容写入文件,所以上面的注释掉\n \n        fop.close();\n        // 关闭输出流,释放系统资源\n \n        FileInputStream fip = new FileInputStream(f);\n        // 构建FileInputStream对象\n \n        InputStreamReader reader = new InputStreamReader(fip, \"UTF-8\");\n        // 构建InputStreamReader对象,编码与写入相同\n \n        StringBuffer sb = new StringBuffer();\n        while (reader.ready()) {\n            sb.append((char) reader.read());\n            // 转成char加到StringBuffer对象中\n        }\n        System.out.println(sb.toString());\n        reader.close();\n        // 关闭读取流\n \n        fip.close();\n        // 关闭输入流,释放系统资源\n \n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "文件和I/O\n还有一些关于文件和I/O的类，我们也需要知道：\nFile Class(类)\nFileReader Class(类)\nFileWriter Class(类)\nJava中的目录\n创建目录：\nFile类中有两个方法可以用来创建文件夹：\nmkdir( )方法创建一个文件夹，成功则返回true，失败则返回false。失败表明File对象指定的路径已经存在，或者由于整个路径还不存在，该文件夹不能被创建。\n\t\tmkdirs()方法创建一个文件夹和它的所有父文件夹。\n下面的例子创建 \"/tmp/user/java/bin\"文件夹："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// CreateDir.java 文件代码：\nimport java.io.File;\n \npublic class CreateDir {\n    public static void main(String[] args) {\n        String dirname = \"/tmp/user/java/bin\";\n        File d = new File(dirname);\n        // 现在创建目录\n        d.mkdirs();\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "编译并执行上面代码来创建目录 \"/tmp/user/java/bin\"。\n注意： Java 在 UNIX 和 Windows 自动按约定分辨文件路径分隔符。如果你在 Windows 版本的 Java 中使用分隔符 (/) ，路径依然能够被正确解析。\n读取目录\n一个目录其实就是一个 File 对象，它包含其他文件和文件夹。\n如果创建一个 File 对象并且它是一个目录，那么调用 isDirectory() 方法会返回 true。\n可以通过调用该对象上的 list() 方法，来提取它包含的文件和文件夹的列表。\n下面展示的例子说明如何使用 list() 方法来检查一个文件夹中包含的内容："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// DirList.java 文件代码：\nimport java.io.File;\n \npublic class DirList {\n    public static void main(String args[]) {\n        String dirname = \"/tmp\";\n        File f1 = new File(dirname);\n        if (f1.isDirectory()) {\n            System.out.println(\"目录 \" + dirname);\n            String s[] = f1.list();\n            for (int i = 0; i < s.length; i++) {\n                File f = new File(dirname + \"/\" + s[i]);\n                if (f.isDirectory()) {\n                    System.out.println(s[i] + \" 是一个目录\");\n                } else {\n                    System.out.println(s[i] + \" 是一个文件\");\n                }\n            }\n        } else {\n            System.out.println(dirname + \" 不是一个目录\");\n        }\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "目录 /tmp\nbin 是一个目录\nlib 是一个目录\ndemo 是一个目录\ntest.txt 是一个文件\nREADME 是一个文件\nindex.html 是一个文件\ninclude 是一个目录"
+    },
+    {
+      "type": "text",
+      "content": "删除目录或文件\n删除文件可以使用  java.io.File.delete() 方法。\n以下代码会删除目录 /tmp/java/，需要注意的是当删除某一目录时，必须保证该目录下没有其他文件才能正确删除，否则将删除失败。\n测试目录结构："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "/tmp/java/\n|-- 1.log\n|-- test"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// DeleteFileDemo.java 文件代码：\nimport java.io.File;\n \npublic class DeleteFileDemo {\n    public static void main(String[] args) {\n        // 这里修改为自己的测试目录\n        File folder = new File(\"/tmp/java/\");\n        deleteFolder(folder);\n    }\n \n    // 删除文件及目录\n    public static void deleteFolder(File folder) {\n        File[] files = folder.listFiles();\n        if (files != null) {\n            for (File f : files) {\n                if (f.isDirectory()) {\n                    deleteFolder(f);\n                } else {\n                    f.delete();\n                }\n            }\n        }\n        folder.delete();\n    }\n}"
+    }
+  ]
+}

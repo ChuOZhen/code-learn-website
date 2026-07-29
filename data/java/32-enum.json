@@ -1,0 +1,80 @@
+{
+  "id": "32-enum",
+  "title": "Java 枚举(enum)",
+  "order": 32,
+  "source_url": "https://www.runoob.com/java/java-enum.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Java 枚举是一个特殊的类，一般表示一组常量，比如一年的 4 个季节，一年的 12 个月份，一个星期的 7 天，方向有东南西北等。\nJava 枚举类使用 enum 关键字来定义，各个常量使用逗号 , 来分割。\n例如定义一个颜色的枚举类。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "enum Color \n{ \n    RED, GREEN, BLUE; \n}"
+    },
+    {
+      "type": "text",
+      "content": "以上枚举类 Color 颜色常量有 RED, GREEN, BLUE，分别表示红色，绿色，蓝色。\n使用实例：\n执行以上代码输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "RED"
+    },
+    {
+      "type": "text",
+      "content": "内部类中使用枚举\n枚举类也可以声明在内部类中：\n执行以上代码输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "RED"
+    },
+    {
+      "type": "text",
+      "content": "每个枚举都是通过 Class 在内部实现的，且所有的枚举值都是 public static final 的。\n以上的枚举类 Color 转化在内部类实现："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "class Color\n{\n     public static final Color RED = new Color();\n     public static final Color BLUE = new Color();\n     public static final Color GREEN = new Color();\n}"
+    },
+    {
+      "type": "text",
+      "content": "迭代枚举元素\n可以使用 for 语句来迭代枚举元素：\n执行以上代码输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "RED\nGREEN\nBLUE"
+    },
+    {
+      "type": "text",
+      "content": "在 switch 中使用枚举类\n枚举类常应用于 switch 语句中：\n执行以上代码输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "蓝色"
+    },
+    {
+      "type": "text",
+      "content": "values(), ordinal() 和 valueOf() 方法\nenum 定义的枚举类默认继承了 java.lang.Enum 类，并实现了 java.lang.Serializable 和 java.lang.Comparable 两个接口。\nvalues(), ordinal() 和 valueOf() 方法位于 java.lang.Enum 类中：\nvalues() 返回枚举类中所有的值。\nordinal()方法可以找到每个枚举常量的索引，就像数组索引一样。\nvalueOf()方法返回指定字符串值的枚举常量。\n执行以上代码输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "RED at index 0\nGREEN at index 1\nBLUE at index 2\nRED"
+    },
+    {
+      "type": "text",
+      "content": "枚举类成员\n枚举跟普通类一样可以用自己的变量、方法和构造函数，构造函数只能使用 private 访问修饰符，所以外部无法调用。\n枚举既可以包含具体方法，也可以包含抽象方法。 如果枚举类具有抽象方法，则枚举类的每个实例都必须实现它。\n执行以上代码输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "Constructor called for : RED\nConstructor called for : GREEN\nConstructor called for : BLUE\nRED\nUniversal Color"
+    }
+  ]
+}

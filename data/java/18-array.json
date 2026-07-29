@@ -1,0 +1,192 @@
+{
+  "id": "18-array",
+  "title": "Java 数组",
+  "order": 18,
+  "source_url": "https://www.runoob.com/java/java-array.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "数组对于每一门编程语言来说都是重要的数据结构之一，当然不同语言对数组的实现及处理也不尽相同。\nJava 语言中提供的数组是用来存储固定大小的同类型元素。\n你可以声明一个数组变量，如 numbers[100] 来代替直接声明 100 个独立变量 number0，number1，....，number99。\n本教程将为大家介绍 Java 数组的声明、创建和初始化，并给出其对应的代码。\n声明数组变量\n首先必须声明数组变量，才能在程序中使用数组。下面是声明数组变量的语法："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "dataType[] arrayRefVar;   // 首选的方法\n \n或\n \ndataType arrayRefVar[];  // 效果相同，但不是首选方法"
+    },
+    {
+      "type": "text",
+      "content": "注意: 建议使用 dataType[] arrayRefVar 的声明风格声明数组变量。\ndataType arrayRefVar[] 风格是来自 C/C++ 语言 ，在Java中采用是为了让 C/C++ 程序员能够快速理解java语言。\n实例\n下面是这两种语法的代码示例："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "double[] myList;         // 首选的方法\n \n或\n \ndouble myList[];         //  效果相同，但不是首选方法"
+    },
+    {
+      "type": "text",
+      "content": "创建数组\nJava语言使用new操作符来创建数组，语法如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "arrayRefVar = new dataType[arraySize];"
+    },
+    {
+      "type": "text",
+      "content": "上面的语法语句做了两件事：\n一、使用 dataType[arraySize] 创建了一个数组。\n二、把新创建的数组的引用赋值给变量 arrayRefVar。\n数组变量的声明，和创建数组可以用一条语句完成，如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "dataType[] arrayRefVar = new dataType[arraySize];"
+    },
+    {
+      "type": "text",
+      "content": "另外，你还可以使用如下的方式创建数组。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "dataType[] arrayRefVar = {value0, value1, ..., valuek};"
+    },
+    {
+      "type": "text",
+      "content": "数组的元素是通过索引访问的。数组索引从 0 开始，所以索引值从 0 到 arrayRefVar.length-1。\n实例\n下面的语句首先声明了一个数组变量 myList，接着创建了一个包含 10 个 double 类型元素的数组，并且把它的引用赋值给 myList 变量。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// TestArray.java 文件代码：\npublic class TestArray {\n   public static void main(String[] args) {\n      // 数组大小\n      int size = 10;\n      // 定义数组\n      double[] myList = new double[size];\n      myList[0] = 5.6;\n      myList[1] = 4.5;\n      myList[2] = 3.3;\n      myList[3] = 13.2;\n      myList[4] = 4.0;\n      myList[5] = 34.33;\n      myList[6] = 34.0;\n      myList[7] = 45.45;\n      myList[8] = 99.993;\n      myList[9] = 11123;\n      // 计算所有元素的总和\n      double total = 0;\n      for (int i = 0; i < size; i++) {\n         total += myList[i];\n      }\n      System.out.println(\"总和为： \" + total);\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "总和为： 11367.373"
+    },
+    {
+      "type": "text",
+      "content": "下面的图片描绘了数组 myList。这里 myList 数组里有 10 个 double 元素，它的下标从 0 到 9。\n处理数组\n数组的元素类型和数组的大小都是确定的，所以当处理数组元素时候，我们通常使用基本循环或者 For-Each 循环。\n示例\n该实例完整地展示了如何创建、初始化和操纵数组："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// TestArray.java 文件代码：\npublic class TestArray {\n   public static void main(String[] args) {\n      double[] myList = {1.9, 2.9, 3.4, 3.5};\n \n      // 打印所有数组元素\n      for (int i = 0; i < myList.length; i++) {\n         System.out.println(myList[i] + \" \");\n      }\n      // 计算所有元素的总和\n      double total = 0;\n      for (int i = 0; i < myList.length; i++) {\n         total += myList[i];\n      }\n      System.out.println(\"Total is \" + total);\n      // 查找最大元素\n      double max = myList[0];\n      for (int i = 1; i < myList.length; i++) {\n         if (myList[i] > max) max = myList[i];\n      }\n      System.out.println(\"Max is \" + max);\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "1.9\n2.9\n3.4\n3.5\nTotal is 11.7\nMax is 3.5"
+    },
+    {
+      "type": "text",
+      "content": "For-Each 循环\nJDK 1.5 引进了一种新的循环类型，被称为 For-Each 循环或者加强型循环，它能在不使用下标的情况下遍历数组。\n语法格式如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "for(type element: array)\n{\n    System.out.println(element);\n}"
+    },
+    {
+      "type": "text",
+      "content": "实例\n该实例用来显示数组 myList 中的所有元素："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// TestArray.java 文件代码：\npublic class TestArray {\n   public static void main(String[] args) {\n      double[] myList = {1.9, 2.9, 3.4, 3.5};\n \n      // 打印所有数组元素\n      for (double element: myList) {\n         System.out.println(element);\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "1.9\n2.9\n3.4\n3.5"
+    },
+    {
+      "type": "text",
+      "content": "数组作为函数的参数\n数组可以作为参数传递给方法。\n例如，下面的例子就是一个打印 int 数组中元素的方法:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "public static void printArray(int[] array) {\n  for (int i = 0; i < array.length; i++) {\n    System.out.print(array[i] + \" \");\n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "下面例子调用 printArray 方法打印出 3，1，2，6，4 和 2："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "printArray(new int[]{3, 1, 2, 6, 4, 2});"
+    },
+    {
+      "type": "text",
+      "content": "数组作为函数的返回值"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "public static int[] reverse(int[] list) {\n  int[] result = new int[list.length];\n \n  for (int i = 0, j = result.length - 1; i < list.length; i++, j--) {\n    result[j] = list[i];\n  }\n  return result;\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例中 result 数组作为函数的返回值。\n多维数组\n多维数组可以看成是数组的数组，比如二维数组就是一个特殊的一维数组，其每一个元素都是一个一维数组，例如："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "String[][] str = new String[3][4];"
+    },
+    {
+      "type": "text",
+      "content": "多维数组的动态初始化（以二维数组为例）\n1. 直接为每一维分配空间，格式如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "type[][] typeName = new type[typeLength1][typeLength2];"
+    },
+    {
+      "type": "text",
+      "content": "type 可以为基本数据类型和复合数据类型，typeLength1 和 typeLength2 必须为正整数，typeLength1 为行数，typeLength2 为列数。\n例如："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "int[][] a = new int[2][3];"
+    },
+    {
+      "type": "text",
+      "content": "解析：\n二维数组 a 可以看成一个两行三列的数组。\n2. 从最高维开始，分别为每一维分配空间，例如："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "String[][] s = new String[2][];\ns[0] = new String[2];\ns[1] = new String[3];\ns[0][0] = new String(\"Good\");\ns[0][1] = new String(\"Luck\");\ns[1][0] = new String(\"to\");\ns[1][1] = new String(\"you\");\ns[1][2] = new String(\"!\");"
+    },
+    {
+      "type": "text",
+      "content": "解析：\ns[0]=new String[2] 和 s[1]=new String[3] 是为最高维分配引用空间，也就是为最高维限制其能保存数据的最长的长度，然后再为其每个数组元素单独分配空间 s0=new String(\"Good\") 等操作。\n多维数组的引用（以二维数组为例）\n对二维数组中的每个元素，引用方式为 arrayName[index1][index2]，例如："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "num[1][0];"
+    },
+    {
+      "type": "text",
+      "content": "Arrays 类\njava.util.Arrays 类能方便地操作数组，它提供的所有方法都是静态的。\n具有以下功能：\n给数组赋值：通过 fill 方法。\n对数组排序：通过 sort 方法,按升序。\n比较数组：通过 equals 方法比较数组中元素值是否相等。\n查找数组元素：通过 binarySearch 方法能对排序好的数组进行二分查找法操作。\n具体说明请查看下表：\n序号\n\t\t\t\t方法和说明\n\t\t\t\t1\n\t\t\t\tpublic static int binarySearch(Object[] a, Object key)\n\t\t\t\t用二分查找算法在给定数组中搜索给定值的对象(Byte,Int,double等)。数组在调用前必须排序好的。如果查找值包含在数组中，则返回搜索键的索引；否则返回 (-(插入点) - 1)。\n\t\t\t\t2\n\t\t\t\tpublic static boolean equals(long[] a, long[] a2)\n\t\t\t\t如果两个指定的 long 型数组彼此相等，则返回 true。如果两个数组包含相同数量的元素，并且两个数组中的所有相应元素对都是相等的，则认为这两个数组是相等的。换句话说，如果两个数组以相同顺序包含相同的元素，则两个数组是相等的。同样的方法适用于所有的其他基本数据类型（Byte，short，Int等）。\n\t\t\t\t3\n\t\t\t\tpublic static void fill(int[] a, int val)\n\t\t\t\t将指定的 int 值分配给指定 int 型数组指定范围中的每个元素。同样的方法适用于所有的其他基本数据类型（Byte，short，Int等）。\n\t\t\t\t4\n\t\t\t\tpublic static void sort(Object[] a)\n\t\t\t\t对指定对象数组根据其元素的自然顺序进行升序排列。同样的方法适用于所有的其他基本数据类型（Byte，short，Int等）。\n练习\nJava 数组测验"
+    }
+  ]
+}

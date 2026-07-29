@@ -4,7 +4,7 @@ import type { ChapterSection } from '@/lib/db';
 export default function ChapterViewer({ sections }: { sections: ChapterSection[] }) {
   if (!sections || sections.length === 0) {
     return (
-      <div className="text-muted text-center py-20">
+      <div className="text-foreground-muted text-center py-20">
         <p className="text-lg">暂无内容</p>
         <p className="text-sm mt-2">本章节内容正在准备中</p>
       </div>

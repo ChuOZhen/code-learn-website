@@ -1,0 +1,75 @@
+{
+  "id": "11-for-loop",
+  "title": "Python for 循环语句",
+  "order": 11,
+  "source_url": "https://www.runoob.com/python/python-for-loop.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Python for循环可以遍历任何序列的项目，如一个列表或者一个字符串。\n语法：\nfor循环的语法格式如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "for iterating_var in sequence:\n   statements(s)"
+    },
+    {
+      "type": "text",
+      "content": "流程图：\n实例："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \nfor letter in 'Python':     # 第一个实例\n   print(\"当前字母: %s\" % letter)\n \nfruits = ['banana', 'apple',  'mango']\nfor fruit in fruits:        # 第二个实例\n   print ('当前水果: %s'% fruit)\n \nprint (\"Good bye!\")"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果:"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "当前字母: P\n当前字母: y\n当前字母: t\n当前字母: h\n当前字母: o\n当前字母: n\n当前水果: banana\n当前水果: apple\n当前水果: mango\nGood bye!"
+    },
+    {
+      "type": "text",
+      "content": "通过序列索引迭代\n另外一种执行循环的遍历方式是通过索引，如下实例："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \nfruits = ['banana', 'apple',  'mango']\nfor index in range(len(fruits)):\n   print ('当前水果 : %s' % fruits[index])\n \nprint (\"Good bye!\")"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "当前水果 : banana\n当前水果 : apple\n当前水果 : mango\nGood bye!"
+    },
+    {
+      "type": "text",
+      "content": "以上实例我们使用了内置函数 len() 和 range(),函数 len() 返回列表的长度，即元素的个数。\nrange返回一个序列的数。\n循环使用 else 语句\n在 python 中，for … else 表示这样的意思，for 中的语句和普通的没有区别，else 中的语句会在循环正常执行完（即 for 不是通过 break 跳出而中断的）的情况下执行，while … else 也是一样。"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \nfor num in range(10,20):  # 迭代 10 到 20 (不包含) 之间的数字\n   for i in range(2,num): # 根据因子迭代\n      if num%i == 0:      # 确定第一个因子\n         j=num/i          # 计算第二个因子\n         print ('%d 等于 %d * %d' % (num,i,j))\n         break            # 跳出当前循环\n   else:                  # 循环的 else 部分\n      print ('%d 是一个质数' % num)"
+    },
+    {
+      "type": "text",
+      "content": "以上实例输出结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "10 等于 2 * 5\n11 是一个质数\n12 等于 2 * 6\n13 是一个质数\n14 等于 2 * 7\n15 等于 3 * 5\n16 等于 2 * 8\n17 是一个质数\n18 等于 2 * 9\n19 是一个质数"
+    },
+    {
+      "type": "text",
+      "content": "更多实例：python 打印菱形、三角形、矩形"
+    }
+  ]
+}

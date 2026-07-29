@@ -1,0 +1,35 @@
+{
+  "id": "13-break-statement",
+  "title": "Python break 语句",
+  "order": 13,
+  "source_url": "https://www.runoob.com/python/python-break-statement.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Python break语句，就像在C语言中，打破了最小封闭for或while循环。\nbreak语句用来终止循环语句，即循环条件没有False条件或者序列还没被完全递归完，也会停止执行循环语句。\nbreak语句用在while和for循环中。\n如果您使用嵌套循环，break语句将停止执行最深层的循环，并开始执行下一行代码。\nPython语言 break 语句语法："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "break"
+    },
+    {
+      "type": "text",
+      "content": "流程图："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例(Python 2.0+)\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \nfor letter in 'Python':     # 第一个实例\n   if letter == 'h':\n      break\n   print '当前字母 :', letter\n  \nvar = 10                    # 第二个实例\nwhile var > 0:              \n   print '当前变量值 :', var\n   var = var -1\n   if var == 5:   # 当变量 var 等于 5 时退出循环\n      break\n \nprint \"Good bye!\""
+    },
+    {
+      "type": "text",
+      "content": "以上实例执行结果："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "当前字母 : P\n当前字母 : y\n当前字母 : t\n当前变量值 : 10\n当前变量值 : 9\n当前变量值 : 8\n当前变量值 : 7\n当前变量值 : 6\nGood bye!"
+    }
+  ]
+}

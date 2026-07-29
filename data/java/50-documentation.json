@@ -1,0 +1,35 @@
+{
+  "id": "50-documentation",
+  "title": "Java 文档注释",
+  "order": 50,
+  "source_url": "https://www.runoob.com/java/java-documentation.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Java 支持三种注释方式：\n单行注释\n多行注释\n文档注释\n前两种分别是 // 和 /* */，第三种被称作文档注释，它以  /** 开始，以 */ 结束。\n前两种注释内容可以参考：Java 注释\n文档注释允许你在程序中嵌入关于程序的信息。\n你可以使用 javadoc 工具软件来生成信息，并输出到 HTML 文件中。\n文档注释，使你更加方便的记录你的程序信息。\njavadoc 标签\njavadoc 工具软件识别以下标签：\n标签\n\t\t\t\t描述\n\t\t\t\t示例\n\t\t\t\t@author\n\t\t\t\t标识一个类的作者\n\t\t\t\t@author description\n\t\t\t\t@deprecated\n\t\t\t\t指名一个过期的类或成员\n\t\t\t\t@deprecated description\n\t\t\t\t{@docRoot}\n\t\t\t\t指明当前文档根目录的路径\n\t\t\t\tDirectory Path\n\t\t\t\t@exception\n\t\t\t\t标志一个类抛出的异常\n\t\t\t\t@exception exception-name explanation\n\t\t\t\t{@inheritDoc}\n\t\t\t\t从直接父类继承的注释\n\t\t\t\tInherits a comment from the immediate surperclass.\n\t\t\t\t{@link}\n\t\t\t\t插入一个到另一个主题的链接\n\t\t\t\t{@link name text}\n\t\t\t\t{@linkplain}\n\t\t\t\t插入一个到另一个主题的链接，但是该链接显示纯文本字体\n\t\t\t\tInserts an in-line link to another topic.\n\t\t\t\t@param\n\t\t\t\t说明一个方法的参数\n\t\t\t\t@param parameter-name explanation\n\t\t\t\t@return\n\t\t\t\t说明返回值类型\n\t\t\t\t@return explanation\n\t\t\t\t@see\n\t\t\t\t指定一个到另一个主题的链接\n\t\t\t\t@see anchor\n\t\t\t\t@serial\n\t\t\t\t说明一个序列化属性\n\t\t\t\t@serial description\n\t\t\t\t@serialData\n\t\t\t\t说明通过writeObject( ) 和 writeExternal( )方法写的数据\n\t\t\t\t@serialData description\n\t\t\t\t@serialField\n\t\t\t\t说明一个ObjectStreamField组件\n\t\t\t\t@serialField name type description\n\t\t\t\t@since\n\t\t\t\t标记当引入一个特定的变化时\n\t\t\t\t@since release\n\t\t\t\t@throws\n\t\t\t\t和 @exception标签一样.\n\t\t\t\tThe @throws tag has the same meaning as the @exception tag.\n\t\t\t\t{@value}\n\t\t\t\t显示常量的值，该常量必须是static属性。\n\t\t\t\tDisplays the value of a constant, which must be a static field.\n\t\t\t\t@version\n\t\t\t\t指定类的版本\n\t\t\t\t@version info\n文档注释\n在开始的 /** 之后，第一行或几行是关于类、变量和方法的主要描述。\n之后，你可以包含一个或多个各种各样的 @ 标签。每一个 @ 标签必须在一个新行的开始或者在一行的开始紧跟星号 *。\n多个相同类型的标签应该放成一组。例如，如果你有三个 @see 标签，可以将它们一个接一个的放在一起。\n下面是一个类的稳定注释的实例："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "/*** 这个类绘制一个条形图\n* @author runoob\n* @version 1.2\n*/"
+    },
+    {
+      "type": "text",
+      "content": "javadoc 输出什么\njavadoc 工具将你 Java 程序的源代码作为输入，输出一些包含你程序注释的HTML文件。\n每一个类的信息将在独自的HTML文件里。javadoc 也可以输出继承的树形结构和索引。\n由于 javadoc 的实现不同，工作也可能不同，你需要检查你的 Java 开发系统的版本等细节，选择合适的 Javadoc 版本。\n实例\n下面是一个使用说明注释的简单实例。注意每一个注释都在它描述的项目的前面。\n在经过 javadoc 处理之后，SquareNum 类的注释将在 SquareNum.html 中找到。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// SquareNum.java 文件代码：\nimport java.io.*;\n \n/**\n* 这个类演示了文档注释\n* @author Ayan Amhed\n* @version 1.2\n*/\npublic class SquareNum {\n   /**\n   * This method returns the square of num.\n   * This is a multiline description. You can use\n   * as many lines as you like.\n   * @param num The value to be squared.\n   * @return num squared.\n   */\n   public double square(double num) {\n      return num * num;\n   }\n   /**\n   * This method inputs a number from the user.\n   * @return The value input as a double.\n   * @exception IOException On input error.\n   * @see IOException\n   */\n   public double getNumber() throws IOException {\n      InputStreamReader isr = new InputStreamReader(System.in);\n      BufferedReader inData = new BufferedReader(isr);\n      String str;\n      str = inData.readLine();\n      return (new Double(str)).doubleValue();\n   }\n   /**\n   * This method demonstrates square().\n   * @param args Unused.\n   * @return Nothing.\n   * @exception IOException On input error.\n   * @see IOException\n   */\n   public static void main(String args[]) throws IOException\n   {\n      SquareNum ob = new SquareNum();\n      double val;\n      System.out.println(\"Enter value to be squared: \");\n      val = ob.getNumber();\n      val = ob.square(val);\n      System.out.println(\"Squared value is \" + val);\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "如下，使用 javadoc 工具处理 SquareNum.java 文件："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "$ javadoc SquareNum.java\nLoading source file SquareNum.java...\nConstructing Javadoc information...\nStandard Doclet version 1.5.0_13\nBuilding tree for all the packages and classes...\nGenerating SquareNum.html...\nSquareNum.java:39: warning - @return tag cannot be used\\\n                      in method with void return type.\nGenerating package-frame.html...\nGenerating package-summary.html...\nGenerating package-tree.html...\nGenerating constant-values.html...\nBuilding index for all the packages and classes...\nGenerating overview-tree.html...\nGenerating index-all.html...\nGenerating deprecated-list.html...\nBuilding index for all classes...\nGenerating allclasses-frame.html...\nGenerating allclasses-noframe.html...\nGenerating index.html...\nGenerating help-doc.html...\nGenerating stylesheet.css...\n1 warning\n$"
+    }
+  ]
+}

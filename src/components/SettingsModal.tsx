@@ -1,19 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAuth } from './AuthProvider';
 
 export default function SettingsModal({ onClose }: { onClose: () => void }) {
   const { apiKey: storedApiKey, updateApiKey } = useAuth();
-  const [apiKey, setApiKey] = useState('');
+  const [apiKey, setApiKey] = useState(storedApiKey);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  useEffect(() => {
-    if (storedApiKey) {
-      setApiKey(storedApiKey);
-    }
-  }, [storedApiKey]);
 
   const handleSave = async () => {
     if (!apiKey.trim()) return;
@@ -37,9 +32,9 @@ export default function SettingsModal({ onClose }: { onClose: () => void }) {
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
       {/* Modal */}
-      <div className="relative bg-sidebar border border-border rounded-xl p-6 w-full max-w-md mx-4 shadow-2xl">
+      <div className="relative bg-background-soft border border-border rounded-2xl shadow-2xl p-6 w-full max-w-md mx-4">
         <h2 className="text-xl font-bold text-foreground mb-1">DeepSeek 设置</h2>
-        <p className="text-sm text-muted mb-5">
+        <p className="text-sm text-foreground-muted mb-5">
           输入你的 DeepSeek API Key，仅存储在本地当前账号下，不会上传到任何第三方服务器。
         </p>
 
@@ -51,7 +46,7 @@ export default function SettingsModal({ onClose }: { onClose: () => void }) {
           value={apiKey}
           onChange={e => { setApiKey(e.target.value); setSaved(false); }}
           placeholder={storedApiKey ? 'sk-****（已配置，输入新 Key 可覆盖）' : 'sk-xxxxxxxxxxxxxxxx'}
-          className="w-full px-4 py-2.5 bg-background border border-border rounded-lg text-foreground placeholder:text-muted/50 focus:outline-none focus:border-primary transition-colors text-sm font-mono"
+          className="w-full px-4 py-2.5 bg-background border border-border rounded-lg text-foreground placeholder:text-foreground-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 text-sm font-mono"
         />
 
         <p className="text-xs text-muted mt-2">
@@ -62,14 +57,14 @@ export default function SettingsModal({ onClose }: { onClose: () => void }) {
           <div className="flex gap-3">
             <button
               onClick={onClose}
-              className="flex-1 px-4 py-2.5 bg-background border border-border text-muted hover:text-foreground rounded-lg transition-colors text-sm"
+              className="flex-1 px-4 py-2.5 bg-background border border-border text-foreground-muted hover:text-foreground rounded-lg transition-all duration-200 text-sm hover:shadow-md"
             >
               取消
             </button>
             <button
               onClick={handleSave}
               disabled={saving || !apiKey.trim()}
-              className="flex-1 px-4 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-primary to-primary-hover hover:from-primary-hover hover:to-primary text-white rounded-lg transition-all duration-200 text-sm font-medium active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {saving ? '保存中...' : saved ? '已保存 ✓' : '保存'}
             </button>
@@ -83,7 +78,7 @@ export default function SettingsModal({ onClose }: { onClose: () => void }) {
                 setSaved(true);
                 setTimeout(() => onClose(), 1000);
               }}
-              className="w-full px-4 py-2.5 text-red-400 hover:text-red-300 border border-red-400/30 hover:border-red-400/60 rounded-lg transition-colors text-sm"
+              className="w-full px-4 py-2.5 text-danger hover:text-red-300 border border-danger/30 hover:border-danger/60 rounded-lg transition-all duration-200 text-sm"
             >
               删除当前账号的 API Key
             </button>

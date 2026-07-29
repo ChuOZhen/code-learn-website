@@ -1,0 +1,107 @@
+{
+  "id": "05-object-classes",
+  "title": "Java 对象和类",
+  "order": 5,
+  "source_url": "https://www.runoob.com/java/java-object-classes.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Java 作为一种面向对象的编程语言，支持以下基本概念：\n1、类（Class）：\n定义对象的蓝图，包括属性和方法。\n            示例：public class Car { ... }\n2、对象（Object）：\n类的实例，具有状态和行为。\n            示例：Car myCar = new Car();\n3、继承（Inheritance）：\n一个类可以继承另一个类的属性和方法。\n            示例：public class Dog extends Animal { ... }\n4、封装（Encapsulation）：\n将对象的状态（字段）私有化，通过公共方法访问。\n            示例：private String name;\npublic String getName() { return name; }\n5、多态（Polymorphism）：\n对象可以表现为多种形态，主要通过方法重载和方法重写实现。\n            示例：\n                    方法重载：public int add(int a, int b) { ... } 和 public double add(double a, double b) { ... }\n                    方法重写：@Override public void makeSound() { System.out.println(\"Meow\"); }\n6、抽象（Abstraction）：\n使用抽象类和接口来定义必须实现的方法，不提供具体实现。\n            示例：\n                    抽象类：public abstract class Shape { abstract void draw(); }\n                    接口：public interface Animal { void eat(); }\n7、接口（Interface）：\n定义类必须实现的方法，支持多重继承。\n            示例：public interface Drivable { void drive(); }\n8、方法（Method）：\n定义类的行为，包含在类中的函数。\n            示例：public void displayInfo() { System.out.println(\"Info\"); }\n9、方法重载（Method Overloading）：\n同一个类中可以有多个同名的方法，但参数不同。\n            示例：\n                public class MathUtils {\n    public int add(int a, int b) {\n        return a + b;\n    }\n    public double add(double a, double b) {\n        return a + b;\n    }\n}\n本节我们重点研究对象和类的概念。\n对象：对象是类的一个实例（对象不是找个女朋友），有状态和行为。例如，一条狗是一个对象，它的状态有：颜色、名字、品种；行为有：摇尾巴、叫、吃等。\n\t\t类：类是一个模板，它描述一类对象的行为和状态。\n下图中男孩（boy）、女孩（girl）为类（class），而具体的每个人为该类的对象（object）：\n下图中汽车为类（class），而具体的每辆车为该汽车类的对象（object），对象包含了汽车的颜色、品牌、名称等。\nJava中的对象\n现在让我们深入了解什么是对象。看看周围真实的世界，会发现身边有很多对象，车，狗，人等等。所有这些对象都有自己的状态和行为。\n拿一条狗来举例，它的状态有：名字、品种、颜色，行为有：叫、摇尾巴和跑。\n对比现实对象和软件对象，它们之间十分相似。\n软件对象也有状态和行为。软件对象的状态就是属性，行为通过方法体现。\n在软件开发中，方法操作对象内部状态的改变，对象的相互调用也是通过方法来完成。\nJava 中的类\n类可以看成是创建 Java 对象的模板。\n通过上图创建一个简单的类来理解下 Java 中类的定义："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "public class Dog {\n    String breed;\n    int size;\n    String colour;\n    int age;\n \n    void eat() {\n    }\n \n    void run() {\n    }\n \n    void sleep(){\n    }\n \n    void name(){\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "一个类可以包含以下类型变量：\n局部变量：在方法、构造方法或者语句块中定义的变量被称为局部变量。变量声明和初始化都是在方法中，方法结束后，变量就会自动销毁。\n\t\t成员变量：成员变量是定义在类中，方法体之外的变量。这种变量在创建对象的时候实例化。成员变量可以被类中方法、构造方法和特定类的语句块访问。\n\t\t类变量：类变量也声明在类中，方法体之外，但必须声明为 static 类型。\n一个类可以拥有多个方法，在上面的例子中：eat()、run()、sleep() 和 name() 都是 Dog 类的方法。\n构造方法\n每个类都有构造方法。如果没有显式地为类定义构造方法，Java 编译器将会为该类提供一个默认构造方法。\n在创建一个对象的时候，至少要调用一个构造方法。构造方法的名称必须与类同名，一个类可以有多个构造方法。\n下面是一个构造方法示例："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "public class Puppy{\n    public Puppy(){\n    }\n \n    public Puppy(String name){\n        // 这个构造器仅有一个参数：name\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "创建对象\n对象是根据类创建的。在Java中，使用关键字 new 来创建一个新的对象。创建对象需要以下三步：\n声明：声明一个对象，包括对象名称和对象类型。\n\t\t实例化：使用关键字 new 来创建一个对象。\n\t\t初始化：使用 new 创建对象时，会调用构造方法初始化对象。\n下面是一个创建对象的例子："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "public class Puppy{\n   public Puppy(String name){\n      //这个构造器仅有一个参数：name\n      System.out.println(\"小狗的名字是 : \" + name ); \n   }\n   public static void main(String[] args){\n      // 下面的语句将创建一个Puppy对象\n      Puppy myPuppy = new Puppy( \"tommy\" );\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "编译并运行上面的程序，会打印出下面的结果："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "小狗的名字是 : tommy"
+    },
+    {
+      "type": "text",
+      "content": "访问实例变量和方法\n通过已创建的对象来访问成员变量和成员方法，如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "/* 实例化对象 */\nObject referenceVariable = new Constructor();\n/* 访问类中的变量 */\nreferenceVariable.variableName;\n/* 访问类中的方法 */\nreferenceVariable.methodName();"
+    },
+    {
+      "type": "text",
+      "content": "使用 Object 类型声明变量只能在编译时访问 Object 类中的方法和属性，但在运行时，你可以通过强制类型转换将其转换为特定类型，以便访问特定类型的方法和属性。\n实例\n下面的例子展示如何访问实例变量和调用成员方法："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Puppy.java 文件代码：\npublic class Puppy {\n    private int age;\n    private String name;\n \n    // 构造器\n    public Puppy(String name) {\n        this.name = name;\n        System.out.println(\"小狗的名字是 : \" + name);\n    }\n \n    // 设置 age 的值\n    public void setAge(int age) {\n        this.age = age;\n    }\n \n    // 获取 age 的值\n    public int getAge() {\n        return age;\n    }\n \n    // 获取 name 的值\n    public String getName() {\n        return name;\n    }\n \n    // 主方法\n    public static void main(String[] args) {\n        // 创建对象\n        Puppy myPuppy = new Puppy(\"Tommy\");\n \n        // 通过方法来设定 age\n        myPuppy.setAge(2);\n \n        // 调用另一个方法获取 age\n        int age = myPuppy.getAge();\n        System.out.println(\"小狗的年龄为 : \" + age);\n \n        // 也可以直接访问成员变量（通过 getter 方法）\n        System.out.println(\"变量值 : \" + myPuppy.getAge());\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "编译并运行上面的程序，产生如下结果："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "小狗的名字是 : tommy\n小狗的年龄为 : 2\n变量值 : 2"
+    },
+    {
+      "type": "text",
+      "content": "源文件声明规则\n在本节的最后部分，我们将学习源文件的声明规则。当在一个源文件中定义多个类，并且还有 import 语句和 package 语句时，要特别注意这些规则。\n一个源文件中只能有一个 public 类\n\t\t一个源文件可以有多个非 public 类\n\t\t源文件的名称应该和 public 类的类名保持一致。例如：源文件中 public 类的类名是 Employee，那么源文件应该命名为Employee.java。\n\t\t如果一个类定义在某个包中，那么 package 语句应该在源文件的首行。\n\t\t如果源文件包含 import 语句，那么应该放在 package 语句和类定义之间。如果没有 package 语句，那么 import 语句应该在源文件中最前面。\n\t\timport 语句和 package 语句对源文件中定义的所有类都有效。在同一源文件中，不能给不同的类不同的包声明。\n类有若干种访问级别，并且类也分不同的类型：抽象类和 final 类等。这些将在访问控制章节介绍。\n除了上面提到的几种类型，Java 还有一些特殊的类，如：内部类、匿名类。\nJava 包\n包主要用来对类和接口进行分类。当开发 Java 程序时，可能编写成百上千的类，因此很有必要对类和接口进行分类。\nimport 语句\n在 Java 中，如果给出一个完整的限定名，包括包名、类名，那么 Java 编译器就可以很容易地定位到源代码或者类。import 语句就是用来提供一个合理的路径，使得编译器可以找到某个类。\n例如，下面的命令行将会命令编译器载入 java_installation/java/io 路径下的所有类"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "import java.io.*;"
+    },
+    {
+      "type": "text",
+      "content": "一个简单的例子\n在该例子中，我们创建两个类：Employee 和 EmployeeTest。\n首先打开代码编辑器，把下面的代码粘贴进去，将文件保存为 Employee.java。\nEmployee 类有四个成员变量：name、age、designation 和 salary，该类显式声明了一个构造方法，该方法只有一个参数。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Employee.java 文件代码：\nimport java.io.*;\n \npublic class Employee {\n    private String name;\n    private int age;\n    private String designation;\n    private double salary;\n \n    // Employee 类的构造器\n    public Employee(String name) {\n        this.name = name;\n    }\n \n    // 设置 age 的值\n    public void setAge(int age) {\n        this.age = age;\n    }\n \n    // 获取 age 的值\n    public int getAge() {\n        return age;\n    }\n \n    // 设置 designation 的值\n    public void setDesignation(String designation) {\n        this.designation = designation;\n    }\n \n    // 获取 designation 的值\n    public String getDesignation() {\n        return designation;\n    }\n \n    // 设置 salary 的值\n    public void setSalary(double salary) {\n        this.salary = salary;\n    }\n \n    // 获取 salary 的值\n    public double getSalary() {\n        return salary;\n    }\n \n    // 打印信息\n    public void printEmployee() {\n        System.out.println(this);\n    }\n \n    // 重写 toString 方法\n    @Override\n    public String toString() {\n        return \"名字: \" + name + \"\\n\" +\n               \"年龄: \" + age + \"\\n\" +\n               \"职位: \" + designation + \"\\n\" +\n               \"薪水: \" + salary;\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "Java 程序都是从 main 方法开始执行，为了能运行这个程序，必须包含 main 方法并且创建一个实例对象。\n下面给出 EmployeeTest 类，该类实例化 2 个 Employee 类的实例，并调用方法设置变量的值。\n将下面的代码保存在 EmployeeTest.java文件中。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// EmployeeTest.java 文件代码：\nimport java.io.*;\n \npublic class EmployeeTest {\n    public static void main(String[] args) {\n        // 使用构造器创建两个对象\n        Employee empOne = new Employee(\"RUNOOB1\");\n        Employee empTwo = new Employee(\"RUNOOB2\");\n \n        // 调用这两个对象的成员方法\n        empOne.setAge(26);\n        empOne.setDesignation(\"高级程序员\");\n        empOne.setSalary(1000);\n        empOne.printEmployee();\n \n        empTwo.setAge(21);\n        empTwo.setDesignation(\"菜鸟程序员\");\n        empTwo.setSalary(500);\n        empTwo.printEmployee();\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "编译这两个文件并且运行 EmployeeTest 类，可以看到如下结果："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "$ javac EmployeeTest.java Employee.java\n$ java EmployeeTest \n名字:RUNOOB1\n年龄:26\n职位:高级程序员\n薪水:1000.0\n名字:RUNOOB2\n年龄:21\n职位:菜鸟程序员\n薪水:500.0"
+    }
+  ]
+}

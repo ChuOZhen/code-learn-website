@@ -1,0 +1,12 @@
+{
+  "id": "43-quiz",
+  "title": "Python 测验",
+  "order": 43,
+  "source_url": "https://www.runoob.com/quiz/python-quiz.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "知识挑战\n            通过这些互动问题测试学习情况\n                    测验完成！\n                    0/0\n                         重新开始\n                         上一题\n                        下一题\n其他相关测试\n1. Python 测验 1\n    2. Python 测验 2\n    3. Python 测验 3\n    4. Python 测验 4\n    5. Python 测验 5\n    6. Python 测验 6\n    7. Python 测验 7\n    8. Python 测验 8\n    9. Python 测验 9\n    10. Python 测验 10\n    11. Python 测验 11\n    12. Python 测验 12\n    13. Python 测验 13\n    14. Python 测验 14\n    15. Python 测验 15\n    16. Python 测验 16\n    17. Python 测验 17\n    18. Python 测验 - 操作符\n    19. Python 测验 - 条件判断与循环\n    20. Python 测验 – 函数"
+    }
+  ]
+}

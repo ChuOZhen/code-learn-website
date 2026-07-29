@@ -1,0 +1,89 @@
+{
+  "id": "47-email",
+  "title": "Java 发送邮件",
+  "order": 47,
+  "source_url": "https://www.runoob.com/java/java-sending-email.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "使用Java应用程序发送 E-mail 十分简单，但是首先你应该在你的机器上安装 JavaMail API 和Java Activation Framework (JAF) 。\n您可以从 Java 网站下载最新版本的 JavaMail，打开网页右侧有个 Downloads 链接，点击它下载。\n您可以从 Java 网站下载最新版本的 JAF（版本 1.1.1）。\n你也可以使用本站提供的下载链接：\nJavaMail mail.jar 1.4.5\n JAF（版本 1.1.1） activation.jar\n下载并解压缩这些文件，在新创建的顶层目录中，您会发现这两个应用程序的一些 jar 文件。您需要把 mail.jar 和 activation.jar 文件添加到您的 CLASSPATH 中。\n如果你使用第三方邮件服务器如QQ的SMTP服务器，可查看文章底部用户认证完整的实例。\n发送一封简单的 E-mail\n下面是一个发送简单E-mail的例子。假设你的本地主机已经连接到网络。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// SendEmail.java 文件代码：\n// 文件名 SendEmail.java\n \nimport java.util.*;\nimport javax.mail.*;\nimport javax.mail.internet.*;\nimport javax.activation.*;\n \npublic class SendEmail\n{\n   public static void main(String [] args)\n   {   \n      // 收件人电子邮箱\n      String to = \"abcd@gmail.com\";\n \n      // 发件人电子邮箱\n      String from = \"web@gmail.com\";\n \n      // 指定发送邮件的主机为 localhost\n      String host = \"localhost\";\n \n      // 获取系统属性\n      Properties properties = System.getProperties();\n \n      // 设置邮件服务器\n      properties.setProperty(\"mail.smtp.host\", host);\n \n      // 获取默认session对象\n      Session session = Session.getDefaultInstance(properties);\n \n      try{\n         // 创建默认的 MimeMessage 对象\n         MimeMessage message = new MimeMessage(session);\n \n         // Set From: 头部头字段\n         message.setFrom(new InternetAddress(from));\n \n         // Set To: 头部头字段\n         message.addRecipient(Message.RecipientType.TO,\n                                  new InternetAddress(to));\n \n         // Set Subject: 头部头字段\n         message.setSubject(\"This is the Subject Line!\");\n \n         // 设置消息体\n         message.setText(\"This is actual message\");\n \n         // 发送消息\n         Transport.send(message);\n         System.out.println(\"Sent message successfully....\");\n      }catch (MessagingException mex) {\n         mex.printStackTrace();\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "编译并运行这个程序来发送一封简单的E-mail："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "$ java SendEmail\nSent message successfully...."
+    },
+    {
+      "type": "text",
+      "content": "如果你想发送一封e-mail给多个收件人，那么使用下面的方法来指定多个收件人ID："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "void addRecipients(Message.RecipientType type,\n                   Address[] addresses)\nthrows MessagingException"
+    },
+    {
+      "type": "text",
+      "content": "下面是对于参数的描述：\ntype:要被设置为 TO, CC 或者 BCC，这里 CC 代表抄送、BCC 代表秘密抄送。举例：Message.RecipientType.TO\naddresses: 这是 email ID 的数组。在指定电子邮件 ID 时，你将需要使用 InternetAddress() 方法。\n发送一封 HTML E-mail\n下面是一个发送 HTML E-mail 的例子。假设你的本地主机已经连接到网络。\n和上一个例子很相似，除了我们要使用 setContent() 方法来通过第二个参数为 \"text/html\"，来设置内容来指定要发送HTML 内容。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// SendHTMLEmail.java 文件代码：\n// 文件名 SendHTMLEmail.java\n \nimport java.util.*;\nimport javax.mail.*;\nimport javax.mail.internet.*;\nimport javax.activation.*;\n \npublic class SendHTMLEmail\n{\n   public static void main(String [] args)\n   {\n     \n      // 收件人电子邮箱\n      String to = \"abcd@gmail.com\";\n \n      // 发件人电子邮箱\n      String from = \"web@gmail.com\";\n \n      // 指定发送邮件的主机为 localhost\n      String host = \"localhost\";\n \n      // 获取系统属性\n      Properties properties = System.getProperties();\n \n      // 设置邮件服务器\n      properties.setProperty(\"mail.smtp.host\", host);\n \n      // 获取默认的 Session 对象。\n      Session session = Session.getDefaultInstance(properties);\n \n      try{\n         // 创建默认的 MimeMessage 对象。\n         MimeMessage message = new MimeMessage(session);\n \n         // Set From: 头部头字段\n         message.setFrom(new InternetAddress(from));\n \n         // Set To: 头部头字段\n         message.addRecipient(Message.RecipientType.TO,\n                                  new InternetAddress(to));\n \n         // Set Subject: 头字段\n         message.setSubject(\"This is the Subject Line!\");\n \n         // 发送 HTML 消息, 可以插入html标签\n         message.setContent(\"<h1>This is actual message</h1>\",\n                            \"text/html\" );\n \n         // 发送消息\n         Transport.send(message);\n         System.out.println(\"Sent message successfully....\");\n      }catch (MessagingException mex) {\n         mex.printStackTrace();\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "编译并运行此程序来发送HTML e-mail："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "$ java SendHTMLEmail\nSent message successfully...."
+    },
+    {
+      "type": "text",
+      "content": "发送带有附件的 E-mail\n下面是一个发送带有附件的 E-mail的例子。假设你的本地主机已经连接到网络。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// SendFileEmail.java 文件代码：\n// 文件名 SendFileEmail.java\n \nimport java.util.*;\nimport javax.mail.*;\nimport javax.mail.internet.*;\nimport javax.activation.*;\n \npublic class SendFileEmail\n{\n   public static void main(String [] args)\n   {\n     \n      // 收件人电子邮箱\n      String to = \"abcd@gmail.com\";\n \n      // 发件人电子邮箱\n      String from = \"web@gmail.com\";\n \n      // 指定发送邮件的主机为 localhost\n      String host = \"localhost\";\n \n      // 获取系统属性\n      Properties properties = System.getProperties();\n \n      // 设置邮件服务器\n      properties.setProperty(\"mail.smtp.host\", host);\n \n      // 获取默认的 Session 对象。\n      Session session = Session.getDefaultInstance(properties);\n \n      try{\n         // 创建默认的 MimeMessage 对象。\n         MimeMessage message = new MimeMessage(session);\n \n         // Set From: 头部头字段\n         message.setFrom(new InternetAddress(from));\n \n         // Set To: 头部头字段\n         message.addRecipient(Message.RecipientType.TO,\n                                  new InternetAddress(to));\n \n         // Set Subject: 头字段\n         message.setSubject(\"This is the Subject Line!\");\n \n         // 创建消息部分\n         BodyPart messageBodyPart = new MimeBodyPart();\n \n         // 消息\n         messageBodyPart.setText(\"This is message body\");\n        \n         // 创建多重消息\n         Multipart multipart = new MimeMultipart();\n \n         // 设置文本消息部分\n         multipart.addBodyPart(messageBodyPart);\n \n         // 附件部分\n         messageBodyPart = new MimeBodyPart();\n         String filename = \"file.txt\";\n         DataSource source = new FileDataSource(filename);\n         messageBodyPart.setDataHandler(new DataHandler(source));\n         messageBodyPart.setFileName(filename);\n         multipart.addBodyPart(messageBodyPart);\n \n         // 发送完整消息\n         message.setContent(multipart );\n \n         //   发送消息\n         Transport.send(message);\n         System.out.println(\"Sent message successfully....\");\n      }catch (MessagingException mex) {\n         mex.printStackTrace();\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "编译并运行你的程序来发送一封带有附件的邮件。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "$ java SendFileEmail\nSent message successfully...."
+    },
+    {
+      "type": "text",
+      "content": "用户认证部分\n如果需要提供用户名和密码给e-mail服务器来达到用户认证的目的，你可以通过如下设置来完成："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "props.put(\"mail.smtp.auth\", \"true\");\nprops.setProperty(\"mail.user\", \"myuser\");\nprops.setProperty(\"mail.password\", \"mypwd\");"
+    },
+    {
+      "type": "text",
+      "content": "e-mail其他的发送机制和上述保持一致。\n需要用户名密码验证邮件发送实例:\n本实例以 QQ 邮件服务器为例，你需要在登录QQ邮箱后台在\"设置\"=》账号中开启POP3/SMTP服务 ，如下图所示：\nQQ 邮箱通过生成授权码来设置密码：\nJava 代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// SendEmail2.java 文件代码：\n// 需要用户名密码邮件发送实例\n//文件名 SendEmail2.java\n//本实例以QQ邮箱为例，你需要在qq后台设置\n \nimport java.util.Properties;\n \nimport javax.mail.Authenticator;\nimport javax.mail.Message;\nimport javax.mail.MessagingException;\nimport javax.mail.PasswordAuthentication;\nimport javax.mail.Session;\nimport javax.mail.Transport;\nimport javax.mail.internet.InternetAddress;\nimport javax.mail.internet.MimeMessage;\n \npublic class SendEmail2\n{\n   public static void main(String [] args)\n   {\n      // 收件人电子邮箱\n      String to = \"xxx@qq.com\";\n \n      // 发件人电子邮箱\n      String from = \"xxx@qq.com\";\n \n      // 指定发送邮件的主机为 smtp.qq.com\n      String host = \"smtp.qq.com\";  //QQ 邮件服务器\n \n      // 获取系统属性\n      Properties properties = System.getProperties();\n \n      // 设置邮件服务器\n      properties.setProperty(\"mail.smtp.host\", host);\n \n      properties.put(\"mail.smtp.auth\", \"true\");\n      // 获取默认session对象\n      Session session = Session.getDefaultInstance(properties,new Authenticator(){\n        public PasswordAuthentication getPasswordAuthentication()\n        {\n         return new PasswordAuthentication(\"xxx@qq.com\", \"qq邮箱授权码\"); //发件人邮件用户名、授权码\n        }\n       });\n \n      try{\n         // 创建默认的 MimeMessage 对象\n         MimeMessage message = new MimeMessage(session);\n \n         // Set From: 头部头字段\n         message.setFrom(new InternetAddress(from));\n \n         // Set To: 头部头字段\n         message.addRecipient(Message.RecipientType.TO,\n                                  new InternetAddress(to));\n \n         // Set Subject: 头部头字段\n         message.setSubject(\"This is the Subject Line!\");\n \n         // 设置消息体\n         message.setText(\"This is actual message\");\n \n         // 发送消息\n         Transport.send(message);\n         System.out.println(\"Sent message successfully....from runoob.com\");\n      }catch (MessagingException mex) {\n         mex.printStackTrace();\n      }\n   }\n}"
+    }
+  ]
+}

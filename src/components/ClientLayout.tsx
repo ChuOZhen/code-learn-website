@@ -1,17 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 import { AuthProvider, useAuth } from './AuthProvider';
 import AuthModal from './AuthModal';
 import Sidebar from './Sidebar';
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const { currentUser } = useAuth();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   if (!mounted) return null;
 

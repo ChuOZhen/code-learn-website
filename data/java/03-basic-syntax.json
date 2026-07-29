@@ -1,0 +1,57 @@
+{
+  "id": "03-basic-syntax",
+  "title": "Java 基础语法",
+  "order": 3,
+  "source_url": "https://www.runoob.com/java/java-basic-syntax.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "一个 Java 程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。下面简要介绍下类、对象、方法和实例变量的概念。\n对象：对象是类的一个实例，有状态和行为。例如，一条狗是一个对象，它的状态有：颜色、名字、品种；行为有：摇尾巴、叫、吃等。\n\t\t类：类是一个模板，它描述一类对象的行为和状态。\n\t\t方法：方法就是行为，一个类可以有很多方法。逻辑运算、数据修改以及所有动作都是在方法中完成的。\n\t\t实例变量：每个对象都有独特的实例变量，对象的状态由这些实例变量的值决定。\n第一个Java程序\n下面看一个简单的 Java 程序，它将输出字符串 Hello World"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// 实例\npublic class HelloWorld {\n    /* 第一个Java程序\n     * 它将输出字符串 Hello World\n     */\n    public static void main(String[] args) {\n        System.out.println(\"Hello World\"); // 输出 Hello World\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "下面将逐步介绍如何保存、编译以及运行这个程序：\n打开代码编辑器，把上面的代码添加进去；\n\t\t把文件名保存为：HelloWorld.java；\n\t\t打开 cmd 命令窗口，进入目标文件所在的位置，假设是 C:\\\n\t\t在命令行窗口输入 javac HelloWorld.java  按下回车键编译代码。如果代码没有错误，cmd 命令提示符会进入下一行（假设环境变量都设置好了）。\n\t\t再键输入 java HelloWorld 按下回车键就可以运行程序了\n你将会在窗口看到 Hello World"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "$ javac HelloWorld.java\n$ java HelloWorld \nHello World"
+    },
+    {
+      "type": "text",
+      "content": "如果遇到编码问题，我们可以使用 -encoding 选项设置 utf-8 来编译："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "javac -encoding UTF-8 HelloWorld.java \njava HelloWorld"
+    },
+    {
+      "type": "text",
+      "content": "Gif 图演示：\n基本语法\n编写 Java 程序时，应注意以下几点：\n大小写敏感：Java 是大小写敏感的，这就意味着标识符 Hello 与 hello 是不同的。\n\t\t类名：对于所有的类来说，类名的首字母应该大写。如果类名由若干单词组成，那么每个单词的首字母应该大写，例如 MyFirstJavaClass 。\n\t\t方法名：所有的方法名都应该以小写字母开头。如果方法名含有若干单词，则后面的每个单词首字母大写。\n\t\t源文件名：源文件名必须和类名相同。当保存文件的时候，你应该使用类名作为文件名保存（切记 Java 是大小写敏感的），文件名的后缀为 .java。（如果文件名和类名不相同则会导致编译错误）。\n\t\t主方法入口：所有的 Java 程序由 public static void main(String[] args) 方法开始执行。\nJava 标识符\nJava 所有的组成部分都需要名字。类名、变量名以及方法名都被称为标识符。\n关于 Java 标识符，有以下几点需要注意：\n所有的标识符都应该以字母（A-Z 或者 a-z）,美元符（$）、或者下划线（_）开始\n\t\t首字符之后可以是字母（A-Z 或者 a-z）,美元符（$）、下划线（_）或数字的任何字符组合\n\t\t关键字不能用作标识符\n\t\t标识符是大小写敏感的\n\t\t合法标识符举例：age、$salary、_value、__1_value\n\t\t非法标识符举例：123abc、-salary\nJava修饰符\n像其他语言一样，Java可以使用修饰符来修饰类中方法和属性。主要有两类修饰符：\n访问控制修饰符 : default, public , protected, private\n\t非访问控制修饰符 : final, abstract, static, synchronized\n在后面的章节中我们会深入讨论 Java 修饰符。\nJava 变量\n局部变量\n\t类变量（静态变量）\n\t成员变量（非静态变量）\nJava 数组\n数组是储存在堆上的对象，可以保存多个同类型变量。在后面的章节中，我们将会学到如何声明、构造以及初始化一个数组。\nJava 枚举\nJava 5.0引入了枚举，枚举限制变量只能是预先设定好的值。使用枚举可以减少代码中的 bug。\n例如，我们为果汁店设计一个程序，它将限制果汁为小杯、中杯、大杯。这就意味着它不允许顾客点除了这三种尺寸外的果汁。\n实例"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "class FreshJuice {\n   enum FreshJuiceSize{ SMALL, MEDIUM , LARGE }\n   FreshJuiceSize size;\n}\n \npublic class FreshJuiceTest {\n   public static void main(String[] args){\n      FreshJuice juice = new FreshJuice();\n      juice.size = FreshJuice.FreshJuiceSize.MEDIUM  ;\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "注意：枚举可以单独声明或者声明在类里面。方法、变量、构造函数也可以在枚举中定义。\nJava 关键字\n下面列出了 Java 关键字。这些保留字不能用于常量、变量、和任何标识符的名称。\n类别\n关键字\n说明\n访问控制\nprivate\n私有的\nprotected\n受保护的\npublic\n公共的\ndefault\n默认\n类、方法和变量修饰符\nabstract\n声明抽象\nclass\n类\nextends\n扩充、继承\nfinal\n最终值、不可改变的\nimplements\n实现（接口）\ninterface\n接口\nnative\n本地、原生方法（非 Java 实现）\nnew\n创建\nstatic\n静态\nstrictfp\n严格浮点、精准浮点\nsynchronized\n线程、同步\ntransient\n短暂\nvolatile\n易失\n程序控制语句\nbreak\n跳出循环\ncase\n定义一个值以供 switch 选择\ncontinue\n继续\ndo\n运行\nelse\n否则\nfor\n循环\nif\n如果\ninstanceof\n实例\nreturn\n返回\nswitch\n根据值选择执行\nwhile\n循环\n错误处理\nassert\n断言表达式是否为真\ncatch\n捕捉异常\nfinally\n有没有异常都执行\nthrow\n抛出一个异常对象\nthrows\n声明一个异常可能被抛出\ntry\n捕获异常\n包相关\nimport\n引入\npackage\n包\n基本类型\nboolean\n布尔型\nbyte\n字节型\nchar\n字符型\ndouble\n双精度浮点\nfloat\n单精度浮点\nint\n整型\nlong\n长整型\nshort\n短整型\n变量引用\nsuper\n父类、超类\nthis\n本类\nvoid\n无返回值\n保留关键字\ngoto\n是关键字，但不能使用\nconst\n是关键字，但不能使用\n注意：Java 的 null 不是关键字，类似于 true 和 false，它是一个字面常量，不允许作为标识符使用。\nJava注释\n类似于 C/C++、Java 也支持单行以及多行注释。\n注释中的字符将被 Java 编译器忽略。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "public class HelloWorld {\n   /* 这是第一个Java程序\n    * 它将输出 Hello World\n    * 这是一个多行注释的示例\n    */\n    public static void main(String[] args){\n       // 这是单行注释的示例\n       /* 这个也是单行注释的示例 */\n       System.out.println(\"Hello World\"); \n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "更多内容可以参考：Java 注释。\nJava 空行\n空白行或者有注释的行，Java 编译器都会忽略掉。\n继承\n在 Java 中，一个类可以由其他类派生。如果你要创建一个类，而且已经存在一个类具有你所需要的属性或方法，那么你可以将新创建的类继承该类。\n利用继承的方法，可以重用已存在类的方法和属性，而不用重写这些代码。被继承的类称为超类（super class），派生类称为子类（sub class）。\n接口\n在 Java 中，接口可理解为对象间相互通信的协议。接口在继承中扮演着很重要的角色。\n接口只定义派生要用到的方法，但是方法的具体实现完全取决于派生类。\nJava 源程序与编译型运行区别\n如下图所示：\n下一节介绍 Java 编程中的类和对象。之后你将会对 Java 中的类和对象有更清楚的认识。"
+    }
+  ]
+}

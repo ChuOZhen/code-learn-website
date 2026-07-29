@@ -1,0 +1,44 @@
+{
+  "id": "46-networking",
+  "title": "Java 网络编程",
+  "order": 46,
+  "source_url": "https://www.runoob.com/java/java-networking.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "网络编程是指编写运行在多个设备（计算机）的程序，这些设备都通过网络连接起来。\njava.net 包中 J2SE 的 API 包含有类和接口，它们提供低层次的通信细节。你可以直接使用这些类和接口，来专注于解决问题，而不用关注通信细节。\njava.net 包中提供了两种常见的网络协议的支持：\nTCP：TCP（英语：Transmission Control Protocol，传输控制协议） 是一种面向连接的、可靠的、基于字节流的传输层通信协议，TCP 层是位于 IP 层之上，应用层之下的中间层。TCP 保障了两个应用程序之间的可靠通信。通常用于互联网协议，被称 TCP / IP。\n\tUDP：UDP （英语：User Datagram Protocol，用户数据报协议），位于 OSI 模型的传输层。一个无连接的协议。提供了应用程序之间要发送数据的数据报。由于UDP缺乏可靠性且属于无连接协议，所以应用程序通常必须容许一些丢失、错误或重复的数据包。\n本教程主要讲解以下两个主题。\nSocket 编程：这是使用最广泛的网络概念，它已被解释地非常详细。\n\tURL 处理：这部分会在另外的篇幅里讲，点击这里更详细地了解在 Java 语言中的 URL 处理。\nSocket 编程\n套接字使用TCP提供了两台计算机之间的通信机制。 客户端程序创建一个套接字，并尝试连接服务器的套接字。\n当连接建立时，服务器会创建一个 Socket 对象。客户端和服务器现在可以通过对 Socket 对象的写入和读取来进行通信。\njava.net.Socket 类代表一个套接字，并且 java.net.ServerSocket 类为服务器程序提供了一种来监听客户端，并与他们建立连接的机制。\n以下步骤在两台计算机之间使用套接字建立TCP连接时会出现：\n服务器实例化一个 ServerSocket 对象，表示通过服务器上的端口通信。\n\t服务器调用 ServerSocket 类的 accept() 方法，该方法将一直等待，直到客户端连接到服务器上给定的端口。\n\t服务器正在等待时，一个客户端实例化一个 Socket 对象，指定服务器名称和端口号来请求连接。\n\tSocket 类的构造函数试图将客户端连接到指定的服务器和端口号。如果通信被建立，则在客户端创建一个 Socket 对象能够与服务器进行通信。\n\t在服务器端，accept() 方法返回服务器上一个新的 socket 引用，该 socket 连接到客户端的 socket。\n连接建立后，通过使用 I/O 流在进行通信，每一个socket都有一个输出流和一个输入流，客户端的输出流连接到服务器端的输入流，而客户端的输入流连接到服务器端的输出流。\nTCP 是一个双向的通信协议，因此数据可以通过两个数据流在同一时间发送。以下是一些类提供的一套完整的有用的方法来实现 socket。\nServerSocket 类的方法\n服务器应用程序通过使用 java.net.ServerSocket 类以获取一个端口,并且侦听客户端请求。\nServerSocket 类有四个构造方法：\n序号\n\t\t\t\t方法描述\n\t\t\t\t1\n\t\t\t\tpublic ServerSocket(int port) throws IOException\n\t\t\t\t创建绑定到特定端口的服务器套接字。\n\t\t\t\t2\n\t\t\t\tpublic ServerSocket(int port, int backlog) throws IOException\n\t\t\t\t利用指定的 backlog 创建服务器套接字并将其绑定到指定的本地端口号。\n\t\t\t\t3\n\t\t\t\tpublic ServerSocket(int port, int backlog, InetAddress address) throws IOException\n\t\t\t\t使用指定的端口、侦听 backlog 和要绑定到的本地 IP 地址创建服务器。\n\t\t\t\t4\n\t\t\t\tpublic ServerSocket() throws IOException\n\t\t\t\t创建非绑定服务器套接字。\n创建非绑定服务器套接字。 如果 ServerSocket 构造方法没有抛出异常，就意味着你的应用程序已经成功绑定到指定的端口，并且侦听客户端请求。\n这里有一些 ServerSocket 类的常用方法：\n序号\n\t\t\t\t方法描述\n\t\t\t\t1\n\t\t\t\tpublic int getLocalPort()\n\t\t\t\t  返回此套接字在其上侦听的端口。\n\t\t\t\t2\n\t\t\t\tpublic Socket accept() throws IOException\n\t\t\t\t侦听并接受到此套接字的连接。\n\t\t\t\t3\n\t\t\t\tpublic void setSoTimeout(int timeout)\n\t\t\t\t 通过指定超时值启用/禁用 SO_TIMEOUT，以毫秒为单位。\n\t\t\t\t4\n\t\t\t\tpublic void bind(SocketAddress host, int backlog)\n\t\t\t\t将 ServerSocket 绑定到特定地址（IP 地址和端口号）。\nSocket 类的方法\njava.net.Socket 类代表客户端和服务器都用来互相沟通的套接字。客户端要获取一个 Socket 对象通过实例化 ，而 服务器获得一个 Socket 对象则通过 accept() 方法的返回值。\nSocket 类有五个构造方法.\n序号\n\t\t\t\t方法描述\n\t\t\t\t1\n\t\t\t\tpublic Socket(String host, int port) throws UnknownHostException, IOException.\n\t\t\t\t创建一个流套接字并将其连接到指定主机上的指定端口号。\n\t\t\t\t2\n\t\t\t\tpublic Socket(InetAddress host, int port) throws IOException\n\t\t\t\t创建一个流套接字并将其连接到指定 IP 地址的指定端口号。\n\t\t\t\t3\n\t\t\t\tpublic Socket(String host, int port, InetAddress localAddress, int localPort) throws IOException.\n\t\t\t\t创建一个套接字并将其连接到指定远程主机上的指定远程端口。\n\t\t\t\t4\n\t\t\t\tpublic Socket(InetAddress host, int port, InetAddress localAddress, int localPort) throws IOException.\n\t\t\t\t创建一个套接字并将其连接到指定远程地址上的指定远程端口。\n\t\t\t\t5\n\t\t\t\tpublic Socket()\n\t\t\t\t通过系统默认类型的 SocketImpl 创建未连接套接字\n当 Socket 构造方法返回，并没有简单的实例化了一个 Socket 对象，它实际上会尝试连接到指定的服务器和端口。\n下面列出了一些感兴趣的方法，注意客户端和服务器端都有一个 Socket 对象，所以无论客户端还是服务端都能够调用这些方法。\n序号\n\t\t\t\t方法描述\n\t\t\t\t1\n\t\t\t\tpublic void connect(SocketAddress host, int timeout) throws IOException\n\t\t\t\t将此套接字连接到服务器，并指定一个超时值。\n\t\t\t\t2\n\t\t\t\tpublic InetAddress getInetAddress()\n\t\t\t\t 返回套接字连接的地址。\n\t\t\t\t3\n\t\t\t\tpublic int getPort()\n\t\t\t\t返回此套接字连接到的远程端口。\n\t\t\t\t4\n\t\t\t\tpublic int getLocalPort()\n\t\t\t\t返回此套接字绑定到的本地端口。\n\t\t\t\t5\n\t\t\t\tpublic SocketAddress getRemoteSocketAddress()\n\t\t\t\t返回此套接字连接的端点的地址，如果未连接则返回 null。\n\t\t\t\t6\n\t\t\t\tpublic InputStream getInputStream() throws IOException\n\t\t\t\t返回此套接字的输入流。\n\t\t\t\t7\n\t\t\t\tpublic OutputStream getOutputStream() throws IOException\n\t\t\t\t返回此套接字的输出流。\n\t\t\t\t8\n\t\t\t\tpublic void close() throws IOException\n\t\t\t\t关闭此套接字。\nInetAddress 类的方法\n这个类表示互联网协议(IP)地址。下面列出了 Socket 编程时比较有用的方法：\n序号\n\t\t\t\t方法描述\n\t\t\t\t1\n\t\t\t\tstatic InetAddress getByAddress(byte[] addr)\n\t\t\t\t在给定原始 IP 地址的情况下，返回 InetAddress 对象。\n\t\t\t\t2\n\t\t\t\tstatic InetAddress getByAddress(String host, byte[] addr)\n\t\t\t\t根据提供的主机名和 IP 地址创建 InetAddress。\n\t\t\t\t3\n\t\t\t\tstatic InetAddress getByName(String host)\n\t\t\t\t在给定主机名的情况下确定主机的 IP 地址。\n\t\t\t\t4\n\t\t\t\tString getHostAddress()\n\t\t\t\t返回 IP 地址字符串（以文本表现形式）。\n\t\t\t\t5\n\t\t\t\tString getHostName()\n\t\t\t\t 获取此 IP 地址的主机名。\n\t\t\t\t6\n\t\t\t\tstatic InetAddress getLocalHost()\n\t\t\t\t返回本地主机。\n\t\t\t\t7\n\t\t\t\tString toString()\n\t\t\t\t将此 IP 地址转换为 String。\nSocket 客户端实例\n如下的 GreetingClient 是一个客户端程序，该程序通过 socket 连接到服务器并发送一个请求，然后等待一个响应。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// GreetingClient.java 文件代码：\n// 文件名 GreetingClient.java\n \nimport java.net.*;\nimport java.io.*;\n \npublic class GreetingClient\n{\n   public static void main(String [] args)\n   {\n      String serverName = args[0];\n      int port = Integer.parseInt(args[1]);\n      try\n      {\n         System.out.println(\"连接到主机：\" + serverName + \" ，端口号：\" + port);\n         Socket client = new Socket(serverName, port);\n         System.out.println(\"远程主机地址：\" + client.getRemoteSocketAddress());\n         OutputStream outToServer = client.getOutputStream();\n         DataOutputStream out = new DataOutputStream(outToServer);\n \n         out.writeUTF(\"Hello from \" + client.getLocalSocketAddress());\n         InputStream inFromServer = client.getInputStream();\n         DataInputStream in = new DataInputStream(inFromServer);\n         System.out.println(\"服务器响应： \" + in.readUTF());\n         client.close();\n      }catch(IOException e)\n      {\n         e.printStackTrace();\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "Socket 服务端实例\n如下的GreetingServer 程序是一个服务器端应用程序，使用 Socket 来监听一个指定的端口。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// GreetingServer.java 文件代码：\n// 文件名 GreetingServer.java\n \nimport java.net.*;\nimport java.io.*;\n \npublic class GreetingServer extends Thread\n{\n   private ServerSocket serverSocket;\n   \n   public GreetingServer(int port) throws IOException\n   {\n      serverSocket = new ServerSocket(port);\n      serverSocket.setSoTimeout(10000);\n   }\n \n   public void run()\n   {\n      while(true)\n      {\n         try\n         {\n            System.out.println(\"等待远程连接，端口号为：\" + serverSocket.getLocalPort() + \"...\");\n            Socket server = serverSocket.accept();\n            System.out.println(\"远程主机地址：\" + server.getRemoteSocketAddress());\n            DataInputStream in = new DataInputStream(server.getInputStream());\n            System.out.println(in.readUTF());\n            DataOutputStream out = new DataOutputStream(server.getOutputStream());\n            out.writeUTF(\"谢谢连接我：\" + server.getLocalSocketAddress() + \"\\nGoodbye!\");\n            server.close();\n         }catch(SocketTimeoutException s)\n         {\n            System.out.println(\"Socket timed out!\");\n            break;\n         }catch(IOException e)\n         {\n            e.printStackTrace();\n            break;\n         }\n      }\n   }\n   public static void main(String [] args)\n   {\n      int port = Integer.parseInt(args[0]);\n      try\n      {\n         Thread t = new GreetingServer(port);\n         t.run();\n      }catch(IOException e)\n      {\n         e.printStackTrace();\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "编译以上两个 java 文件代码，并执行以下命令来启动服务，使用端口号为 6066："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "$ javac GreetingServer.java \n$ java GreetingServer 6066\n等待远程连接，端口号为：6066..."
+    },
+    {
+      "type": "text",
+      "content": "新开一个命令窗口，执行以上命令来开启客户端："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "$ javac GreetingClient.java \n$ java GreetingClient localhost 6066\n连接到主机：localhost ，端口号：6066\n远程主机地址：localhost/127.0.0.1:6066\n服务器响应： 谢谢连接我：/127.0.0.1:6066\nGoodbye!"
+    }
+  ]
+}

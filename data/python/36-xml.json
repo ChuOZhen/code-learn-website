@@ -1,0 +1,21 @@
+{
+  "id": "36-xml",
+  "title": "Python XML 解析",
+  "order": 36,
+  "source_url": "https://www.runoob.com/python/python-xml.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "什么是 XML？\nXML 指可扩展标记语言（eXtensible Markup Language）。\n你可以通过本站学习 XML 教程\nXML 被设计用来传输和存储数据。\nXML 是一套定义语义标记的规则，这些标记将文档分成许多部件并对这些部件加以标识。\n它也是元标记语言，即定义了用于定义其他与特定领域有关的、语义的、结构化的标记语言的句法语言。\nPython 对 XML 的解析\n常见的 XML 编程接口有 DOM 和 SAX，这两种接口处理 XML 文件的方式不同，当然使用场合也不同。\nPython 有三种方法解析 XML，SAX，DOM，以及 ElementTree:\n1.SAX (simple API for XML )\nPython 标准库包含 SAX 解析器，SAX 用事件驱动模型，通过在解析XML的过程中触发一个个的事件并调用用户定义的回调函数来处理XML文件。\n2.DOM(Document Object Model)\n将 XML 数据在内存中解析成一个树，通过对树的操作来操作XML。\n3.ElementTree(元素树)\nElementTree就像一个轻量级的DOM，具有方便友好的API。代码可用性好，速度快，消耗内存少。\n注：因DOM需要将XML数据映射到内存中的树，一是比较慢，二是比较耗内存，而SAX流式读取XML文件，比较快，占用内存少，但需要用户实现回调函数（handler）。\n本章节使用到的 XML 实例文件 movies.xml 内容如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# movies.xml\n<collection shelf=\"New Arrivals\">\n<movie title=\"Enemy Behind\">\n   <type>War, Thriller</type>\n   <format>DVD</format>\n   <year>2003</year>\n   <rating>PG</rating>\n   <stars>10</stars>\n   <description>Talk about a US-Japan war</description>\n</movie>\n<movie title=\"Transformers\">\n   <type>Anime, Science Fiction</type>\n   <format>DVD</format>\n   <year>1989</year>\n   <rating>R</rating>\n   <stars>8</stars>\n   <description>A schientific fiction</description>\n</movie>\n   <movie title=\"Trigun\">\n   <type>Anime, Action</type>\n   <format>DVD</format>\n   <episodes>4</episodes>\n   <rating>PG</rating>\n   <stars>10</stars>\n   <description>Vash the Stampede!</description>\n</movie>\n<movie title=\"Ishtar\">\n   <type>Comedy</type>\n   <format>VHS</format>\n   <rating>PG</rating>\n   <stars>2</stars>\n   <description>Viewable boredom</description>\n</movie>\n</collection>"
+    },
+    {
+      "type": "text",
+      "content": "python使用SAX解析xml\nSAX是一种基于事件驱动的 API。\n利用SAX解析XML文档牵涉到两个部分: 解析器和事件处理器。\n解析器负责读取XML文档，并向事件处理器发送事件，如元素开始跟元素结束事件。\n而事件处理器则负责对事件作出响应，对传递的XML数据进行处理。"
+    }
+  ]
+}

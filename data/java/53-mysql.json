@@ -1,0 +1,39 @@
+{
+  "id": "53-mysql",
+  "title": "Java MySQL 连接",
+  "order": 53,
+  "source_url": "https://www.runoob.com/java/java-mysql-connect.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "本章节我们为大家介绍 Java 如何使用 使用 JDBC 连接 MySQL 数据库。\nJava 连接 MySQL 需要驱动包，最新版下载地址为：http://dev.mysql.com/downloads/connector/j/，解压后得到 jar 库文件，然后在对应的项目中导入该库文件。\n你可以下载本站提供的 jar 包：mysql-connector-java-5.1.39-bin.jar\n本实例使用的是 Eclipse，导入 jar 包：\nMySQL 8.0 以上版本的数据库连接有所不同：\n1、MySQL 8.0 以上版本驱动包版本 mysql-connector-java-8.0.16.jar。\n2、com.mysql.jdbc.Driver 更换为 com.mysql.cj.jdbc.Driver。\nMySQL 8.0 以上版本不需要建立 SSL 连接的，需要显示关闭。\nallowPublicKeyRetrieval=true 允许客户端从服务器获取公钥。\n最后还需要设置 CST。\n加载驱动与连接数据库方式如下：\nClass.forName(\"com.mysql.cj.jdbc.Driver\");\nconn = DriverManager.getConnection(\"jdbc:mysql://localhost:3306/test_demo?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC\",\"root\",\"password\");\n创建测试数据\n接下来我们在 MySQL 中创建 RUNOOB 数据库，并创建 websites 数据表，表结构如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "CREATE TABLE `websites` (\n  `id` int(11) NOT NULL AUTO_INCREMENT,\n  `name` char(20) NOT NULL DEFAULT '' COMMENT '站点名称',\n  `url` varchar(255) NOT NULL DEFAULT '',\n  `alexa` int(11) NOT NULL DEFAULT '0' COMMENT 'Alexa 排名',\n  `country` char(10) NOT NULL DEFAULT '' COMMENT '国家',\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;"
+    },
+    {
+      "type": "text",
+      "content": "插入一些数据："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "INSERT INTO `websites` VALUES ('1', 'Google', 'https://www.google.cm/', '1', 'USA'), ('2', '淘宝', 'https://www.taobao.com/', '13', 'CN'), ('3', '菜鸟教程', 'http://www.runoob.com', '5892', ''), ('4', '微博', 'http://weibo.com/', '20', 'CN'), ('5', 'Facebook', 'https://www.facebook.com/', '3', 'USA');"
+    },
+    {
+      "type": "text",
+      "content": "数据表显示如下：\n连接数据库\n以下实例使用了 JDBC 连接 MySQL 数据库，注意一些数据如用户名，密码需要根据你的开发环境来配置："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// MySQLDemo.java 文件代码：\npackage com.runoob.test;\n \nimport java.sql.*;\n \npublic class MySQLDemo {\n \n    // MySQL 8.0 以下版本 - JDBC 驱动名及数据库 URL\n    static final String JDBC_DRIVER = \"com.mysql.jdbc.Driver\";  \n    static final String DB_URL = \"jdbc:mysql://localhost:3306/RUNOOB\";\n \n    // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL\n    //static final String JDBC_DRIVER = \"com.mysql.cj.jdbc.Driver\";  \n    //static final String DB_URL = \"jdbc:mysql://localhost:3306/RUNOOB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC\";\n \n \n    // 数据库的用户名与密码，需要根据自己的设置\n    static final String USER = \"root\";\n    static final String PASS = \"123456\";\n \n    public static void main(String[] args) {\n        Connection conn = null;\n        Statement stmt = null;\n        try{\n            // 注册 JDBC 驱动\n            Class.forName(JDBC_DRIVER);\n        \n            // 打开链接\n            System.out.println(\"连接数据库...\");\n            conn = DriverManager.getConnection(DB_URL,USER,PASS);\n        \n            // 执行查询\n            System.out.println(\" 实例化Statement对象...\");\n            stmt = conn.createStatement();\n            String sql;\n            sql = \"SELECT id, name, url FROM websites\";\n            ResultSet rs = stmt.executeQuery(sql);\n        \n            // 展开结果集数据库\n            while(rs.next()){\n                // 通过字段检索\n                int id  = rs.getInt(\"id\");\n                String name = rs.getString(\"name\");\n                String url = rs.getString(\"url\");\n    \n                // 输出数据\n                System.out.print(\"ID: \" + id);\n                System.out.print(\", 站点名称: \" + name);\n                System.out.print(\", 站点 URL: \" + url);\n                System.out.print(\"\\n\");\n            }\n            // 完成后关闭\n            rs.close();\n            stmt.close();\n            conn.close();\n        }catch(SQLException se){\n            // 处理 JDBC 错误\n            se.printStackTrace();\n        }catch(Exception e){\n            // 处理 Class.forName 错误\n            e.printStackTrace();\n        }finally{\n            // 关闭资源\n            try{\n                if(stmt!=null) stmt.close();\n            }catch(SQLException se2){\n            }// 什么都不做\n            try{\n                if(conn!=null) conn.close();\n            }catch(SQLException se){\n                se.printStackTrace();\n            }\n        }\n        System.out.println(\"Goodbye!\");\n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例执行输出结果如下："
+    }
+  ]
+}

@@ -11,7 +11,6 @@ import {
   saveUserData,
   setCurrentUser,
   type PublicUser,
-  type UserData,
   type UserProgress,
 } from '@/lib/localUser';
 
@@ -52,11 +51,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUsers(u);
   };
 
+  // On init: restore both session (IndexedDB) and password (sessionStorage)
   useEffect(() => {
     const init = async () => {
       const session = await getCurrentUser();
       if (session) {
         setCurrentUserState(session.username);
+        // Restore password from sessionStorage so we can decrypt data on reload
+        const savedPwd = sessionStorage.getItem('cpp_learn_pwd');
+        if (savedPwd) {
+          setPassword(savedPwd);
+        }
       }
       await refreshUsers();
       setLoading(false);
@@ -95,6 +100,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await setCurrentUser(username);
     setCurrentUserState(username);
     setPassword(pwd);
+    sessionStorage.setItem('cpp_learn_pwd', pwd);
     setProgress(data.progress);
     setApiKey(data.apiKey);
     return { success: true };
@@ -106,6 +112,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await setCurrentUser(username);
     setCurrentUserState(username);
     setPassword(pwd);
+    sessionStorage.setItem('cpp_learn_pwd', pwd);
     setProgress({});
     setApiKey('');
     await refreshUsers();
@@ -114,6 +121,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = async () => {
     await clearCurrentUser();
+    sessionStorage.removeItem('cpp_learn_pwd');
     setCurrentUserState(null);
     setPassword('');
     setProgress({});

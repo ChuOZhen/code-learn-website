@@ -1,0 +1,368 @@
+{
+  "id": "31-cgi",
+  "title": "Python CGI 编程",
+  "order": 31,
+  "source_url": "https://www.runoob.com/python/python-cgi.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "什么是 CGI\nCGI 目前由 NCSA 维护，NCSA 定义 CGI 如下：\nCGI(Common Gateway Interface)，通用网关接口，它是一段程序，运行在服务器上如：HTTP 服务器，提供同客户端 HTML 页面的接口。\n注意：\n自 Python 3.11 起，cgi 模块被官方标记为\"弃用\"（Deprecated），从 Python 3.13 开始被移除。\n推荐迁移到 Flask、Django 或 FastAPI 等现代 Web 框架。\n网页浏览\n为了更好的了解 CGI 是如何工作的，我们可以从在网页上点击一个链接或 URL 的流程：\n1、使用你的浏览器访问 URL 并连接到 HTTP web 服务器。\n2、Web 服务器接收到请求信息后会解析 URL，并查找访问的文件在服务器上是否存在，如果存在返回文件的内容，否则返回错误信息。\n3、浏览器从服务器上接收信息，并显示接收的文件或者错误信息。\nCGI 程序可以是 Python 脚本，PERL 脚本，SHELL 脚本，C 或者 C++ 程序等。\nCGI架构图\nWeb 服务器支持及配置\n在你进行 CGI 编程前，确保您的 Web 服务器支持 CGI 及已经配置了 CGI 的处理程序。\nApache 支持 CGI 配置：\n设置好CGI目录："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "ScriptAlias /cgi-bin/ /var/www/cgi-bin/"
+    },
+    {
+      "type": "text",
+      "content": "所有的HTTP服务器执行 CGI 程序都保存在一个预先配置的目录。这个目录被称为 CGI 目录，并按照惯例，它被命名为 /var/www/cgi-bin 目录。\nCGI 文件的扩展名为 .cgi，python 也可以使用 .py 扩展名。\n默认情况下，Linux 服务器配置运行的 cgi-bin 目录中为 /var/www。\n如果你想指定其他运行 CGI 脚本的目录，可以修改 httpd.conf 配置文件，如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "<Directory \"/var/www/cgi-bin\">\n   AllowOverride None\n   Options +ExecCGI\n   Order allow,deny\n   Allow from all\n</Directory>"
+    },
+    {
+      "type": "text",
+      "content": "在 AddHandler 中添加 .py 后缀，这样我们就可以访问 .py 结尾的 python 脚本文件："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "AddHandler cgi-script .cgi .pl .py"
+    },
+    {
+      "type": "text",
+      "content": "第一个CGI程序\n我们使用 Python 创建第一个 CGI 程序，文件名为 hello.py，文件位于 /var/www/cgi-bin 目录中，内容如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n\nprint \"Content-type:text/html\"\nprint                               # 空行，告诉服务器结束头部\nprint '<html>'\nprint '<head>'\nprint '<meta charset=\"utf-8\">'\nprint '<title>Hello World - 我的第一个 CGI 程序！</title>'\nprint '</head>'\nprint '<body>'\nprint '<h2>Hello World! 我是来自菜鸟教程的第一CGI程序</h2>'\nprint '</body>'\nprint '</html>'"
+    },
+    {
+      "type": "text",
+      "content": "文件保存后修改 hello.py，修改文件权限为 755："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "chmod 755 hello.py"
+    },
+    {
+      "type": "text",
+      "content": "以上程序在浏览器访问 http://localhost/cgi-bin/hello.py 显示结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "Hello World! 我是来自菜鸟教程的第一CGI程序"
+    },
+    {
+      "type": "text",
+      "content": "这个的hello.py脚本是一个简单的Python脚本，脚本第一行的输出内容\"Content-type:text/html\"发送到浏览器并告知浏览器显示的内容类型为\"text/html\"。\n用 print 输出一个空行用于告诉服务器结束头部信息。\nHTTP头部\nhello.py文件内容中的\" Content-type:text/html\"即为HTTP头部的一部分，它会发送给浏览器告诉浏览器文件的内容类型。\nHTTP头部的格式如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "HTTP 字段名: 字段内容"
+    },
+    {
+      "type": "text",
+      "content": "例如："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "Content-type: text/html"
+    },
+    {
+      "type": "text",
+      "content": "以下表格介绍了CGI程序中HTTP头部经常使用的信息：\n头描述\n Content-type: 请求的与实体对应的MIME信息。例如: Content-type:text/html\n Expires: Date 响应过期的日期和时间\n Location: URL 用来重定向接收方到非请求URL的位置来完成请求或标识新的资源\n Last-modified: Date请求资源的最后修改时间\n Content-length: N请求的内容长度\n Set-Cookie: String 设置Http Cookie\nCGI环境变量\n所有的CGI程序都接收以下的环境变量，这些变量在CGI程序中发挥了重要的作用：\n变量名描述\n CONTENT_TYPE这个环境变量的值指示所传递来的信息的MIME类型。目前，环境变量CONTENT_TYPE一般都是：application/x-www-form-urlencoded,他表示数据来自于HTML表单。\n CONTENT_LENGTH如果服务器与CGI程序信息的传递方式是POST，这个环境变量为从标准输入STDIN中可以读到的有效数据的字节数。这个环境变量在读取所输入的数据时必须使用。\n HTTP_COOKIE客户机内的 COOKIE 内容。\n HTTP_USER_AGENT提供包含了版本数或其他专有数据的客户浏览器信息。\n PATH_INFO这个环境变量的值表示紧接在CGI程序名之后的其他路径信息。它常常作为CGI程序的参数出现。\n QUERY_STRING如果服务器与CGI程序信息的传递方式是GET，这个环境变量的值即为所传递的信息。这个信息经跟在CGI程序名的后面，两者中间用一个问号'?'分隔。\n REMOTE_ADDR这个环境变量的值是发送请求的客户机的IP地址，例如上面的192.168.1.67。这个值总是存在的。而且它是Web客户机需要提供给Web服务器的唯一标识，可以在CGI程序中用它来区分不同的Web客户机。\n REMOTE_HOST这个环境变量的值包含发送CGI请求的客户机的主机名。如果不支持你想查询，则无需定义此环境变量。\n REQUEST_METHOD提供脚本被调用的方法。对于使用 HTTP/1.0 协议的脚本，仅 GET 和 POST 有意义。\n SCRIPT_FILENAMECGI脚本的完整路径\n SCRIPT_NAMECGI脚本的的名称\n SERVER_NAME这是你的 WEB 服务器的主机名、别名或IP地址。\n SERVER_SOFTWARE这个环境变量的值包含了调用CGI程序的HTTP服务器的名称和版本号。例如，上面的值为Apache/2.2.14(Unix)\n以下是一个简单的CGI脚本输出CGI的环境变量："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n# filename:test.py\n\nimport os\n\nprint \"Content-type: text/html\"\nprint\nprint \"<meta charset=\\\"utf-8\\\">\"\nprint \"<b>环境变量</b><br>\";\nprint \"<ul>\"\nfor key in os.environ.keys():\n    print \"<li><span style='color:green'>%30s </span> : %s </li>\" % (key,os.environ[key])\nprint \"</ul>\""
+    },
+    {
+      "type": "text",
+      "content": "将以上点保存为 test.py ,并修改文件权限为 755，执行结果如下：\nGET和POST方法\n浏览器客户端通过两种方法向服务器传递信息，这两种方法就是 GET 方法和 POST 方法。\n使用GET方法传输数据\nGET方法发送编码后的用户信息到服务端，数据信息包含在请求页面的URL上，以\"?\"号分割, 如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "http://www.test.com/cgi-bin/hello.py?key1=value1&key2=value2"
+    },
+    {
+      "type": "text",
+      "content": "GET 请求可被缓存\nGET 请求保留在浏览器历史记录中\nGET 请求可被收藏为书签\nGET 请求不应在处理敏感数据时使用\nGET 请求有长度限制\nGET 请求只应当用于取回数据\n简单的url实例：GET方法\n以下是一个简单的URL，使用GET方法向hello_get.py程序发送两个参数："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "/cgi-bin/test.py?name=菜鸟教程&url=http://www.runoob.com"
+    },
+    {
+      "type": "text",
+      "content": "以下为hello_get.py文件的代码："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n\n# filename：test.py\n\n# CGI处理模块\nimport cgi, cgitb \n\n# 创建 FieldStorage 的实例化\nform = cgi.FieldStorage() \n\n# 获取数据\nsite_name = form.getvalue('name')\nsite_url  = form.getvalue('url')\n\nprint \"Content-type:text/html\"\nprint\nprint \"<html>\"\nprint \"<head>\"\nprint \"<meta charset=\\\"utf-8\\\">\"\nprint \"<title>菜鸟教程 CGI 测试实例</title>\"\nprint \"</head>\"\nprint \"<body>\"\nprint \"<h2>%s官网：%s</h2>\" % (site_name, site_url)\nprint \"</body>\"\nprint \"</html>\""
+    },
+    {
+      "type": "text",
+      "content": "文件保存后修改 hello_get.py，修改文件权限为 755："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "chmod 755 hello_get.py"
+    },
+    {
+      "type": "text",
+      "content": "浏览器请求输出结果：\n简单的表单实例：GET方法\n以下是一个通过HTML的表单使用GET方法向服务器发送两个数据，提交的服务器脚本同样是hello_get.py文件，hello_get.html 代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>菜鸟教程(runoob.com)</title>\n</head>\n<body>\n<form action=\"/cgi-bin/hello_get.py\" method=\"get\">\n站点名称: <input type=\"text\" name=\"name\">  <br />\n\n站点 URL: <input type=\"text\" name=\"url\" />\n<input type=\"submit\" value=\"提交\" />\n</form>\n</body>\n</html>"
+    },
+    {
+      "type": "text",
+      "content": "默认情况下 cgi-bin 目录只能存放脚本文件，我们将 hello_get.html 存储在 test 目录下，修改文件权限为 755："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "chmod 755 hello_get.html"
+    },
+    {
+      "type": "text",
+      "content": "Gif 演示如下所示：\n使用POST方法传递数据\n使用POST方法向服务器传递数据是更安全可靠的，像一些敏感信息如用户密码等需要使用POST传输数据。\n以下同样是hello_get.py ，它也可以处理浏览器提交的POST表单数据:"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n\n# CGI处理模块\nimport cgi, cgitb \n\n# 创建 FieldStorage 的实例化\nform = cgi.FieldStorage() \n\n# 获取数据\nsite_name = form.getvalue('name')\nsite_url  = form.getvalue('url')\n\nprint \"Content-type:text/html\"\nprint\nprint \"<html>\"\nprint \"<head>\"\nprint \"<meta charset=\\\"utf-8\\\">\"\nprint \"<title>菜鸟教程 CGI 测试实例</title>\"\nprint \"</head>\"\nprint \"<body>\"\nprint \"<h2>%s官网：%s</h2>\" % (site_name, site_url)\nprint \"</body>\"\nprint \"</html>\""
+    },
+    {
+      "type": "text",
+      "content": "以下为表单通过POST方法（method=\"post\"）向服务器脚本 hello_get.py 提交数据:"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>菜鸟教程(runoob.com)</title>\n</head>\n<body>\n<form action=\"/cgi-bin/hello_get.py\" method=\"post\">\n站点名称: <input type=\"text\" name=\"name\">  <br />\n\n站点 URL: <input type=\"text\" name=\"url\" />\n<input type=\"submit\" value=\"提交\" />\n</form>\n</body>\n</html>"
+    },
+    {
+      "type": "text",
+      "content": "Gif 演示如下所示：\n通过CGI程序传递checkbox数据\ncheckbox用于提交一个或者多个选项数据，HTML代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>菜鸟教程(runoob.com)</title>\n</head>\n<body>\n<form action=\"/cgi-bin/checkbox.py\" method=\"POST\" target=\"_blank\">\n<input type=\"checkbox\" name=\"runoob\" value=\"on\" /> 菜鸟教程\n<input type=\"checkbox\" name=\"google\" value=\"on\" /> Google\n<input type=\"submit\" value=\"选择站点\" />\n</form>\n</body>\n</html>"
+    },
+    {
+      "type": "text",
+      "content": "以下为 checkbox.py 文件的代码："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n\n# 引入 CGI 处理模块 \nimport cgi, cgitb \n\n# 创建 FieldStorage的实例 \nform = cgi.FieldStorage() \n\n# 接收字段数据\nif form.getvalue('google'):\n   google_flag = \"是\"\nelse:\n   google_flag = \"否\"\n\nif form.getvalue('runoob'):\n   runoob_flag = \"是\"\nelse:\n   runoob_flag = \"否\"\n\nprint \"Content-type:text/html\"\nprint\nprint \"<html>\"\nprint \"<head>\"\nprint \"<meta charset=\\\"utf-8\\\">\"\nprint \"<title>菜鸟教程 CGI 测试实例</title>\"\nprint \"</head>\"\nprint \"<body>\"\nprint \"<h2> 菜鸟教程是否选择了 : %s</h2>\" % runoob_flag\nprint \"<h2> Google 是否选择了 : %s</h2>\" % google_flag\nprint \"</body>\"\nprint \"</html>\""
+    },
+    {
+      "type": "text",
+      "content": "修改 checkbox.py 权限："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "chmod 755 checkbox.py"
+    },
+    {
+      "type": "text",
+      "content": "浏览器访问 Gif 演示图：\n通过CGI程序传递Radio数据\nRadio 只向服务器传递一个数据，HTML代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>菜鸟教程(runoob.com)</title>\n</head>\n<body>\n<form action=\"/cgi-bin/radiobutton.py\" method=\"post\" target=\"_blank\">\n<input type=\"radio\" name=\"site\" value=\"runoob\" /> 菜鸟教程\n<input type=\"radio\" name=\"site\" value=\"google\" /> Google\n<input type=\"submit\" value=\"提交\" />\n</form>\n</body>\n</html>"
+    },
+    {
+      "type": "text",
+      "content": "radiobutton.py 脚本代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n\n# 引入 CGI 处理模块 \nimport cgi, cgitb \n\n# 创建 FieldStorage的实例 \nform = cgi.FieldStorage() \n\n# 接收字段数据\nif form.getvalue('site'):\n   site = form.getvalue('site')\nelse:\n   site = \"提交数据为空\"\n\nprint \"Content-type:text/html\"\nprint\nprint \"<html>\"\nprint \"<head>\"\nprint \"<meta charset=\\\"utf-8\\\">\"\nprint \"<title>菜鸟教程 CGI 测试实例</title>\"\nprint \"</head>\"\nprint \"<body>\"\nprint \"<h2> 选中的网站是 %s</h2>\" % site\nprint \"</body>\"\nprint \"</html>\""
+    },
+    {
+      "type": "text",
+      "content": "修改 radiobutton.py 权限："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "chmod 755 radiobutton.py"
+    },
+    {
+      "type": "text",
+      "content": "浏览器访问 Gif 演示图：\n通过CGI程序传递 Textarea 数据\nTextarea 向服务器传递多行数据，HTML代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>菜鸟教程(runoob.com)</title>\n</head>\n<body>\n<form action=\"/cgi-bin/textarea.py\" method=\"post\" target=\"_blank\">\n<textarea name=\"textcontent\" cols=\"40\" rows=\"4\">\n在这里输入内容...\n</textarea>\n<input type=\"submit\" value=\"提交\" />\n</form>\n</body>\n</html>"
+    },
+    {
+      "type": "text",
+      "content": "textarea.py 脚本代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n\n# 引入 CGI 处理模块 \nimport cgi, cgitb \n\n# 创建 FieldStorage的实例 \nform = cgi.FieldStorage() \n\n# 接收字段数据\nif form.getvalue('textcontent'):\n   text_content = form.getvalue('textcontent')\nelse:\n   text_content = \"没有内容\"\n\nprint \"Content-type:text/html\"\nprint\nprint \"<html>\"\nprint \"<head>\";\nprint \"<meta charset=\\\"utf-8\\\">\"\nprint \"<title>菜鸟教程 CGI 测试实例</title>\"\nprint \"</head>\"\nprint \"<body>\"\nprint \"<h2> 输入的内容是：%s</h2>\" % text_content\nprint \"</body>\"\nprint \"</html>\""
+    },
+    {
+      "type": "text",
+      "content": "修改 textarea.py 权限："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "chmod 755 textarea.py"
+    },
+    {
+      "type": "text",
+      "content": "浏览器访问 Gif 演示图：\n通过CGI程序传递下拉数据。\nHTML 下拉框代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>菜鸟教程(runoob.com)</title>\n</head>\n<body>\n<form action=\"/cgi-bin/dropdown.py\" method=\"post\" target=\"_blank\">\n<select name=\"dropdown\">\n<option value=\"runoob\" selected>菜鸟教程</option>\n<option value=\"google\">Google</option>\n</select>\n<input type=\"submit\" value=\"提交\"/>\n</form>\n</body>\n</html>"
+    },
+    {
+      "type": "text",
+      "content": "dropdown.py 脚本代码如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n\n# 引入 CGI 处理模块 \nimport cgi, cgitb \n\n# 创建 FieldStorage的实例 \nform = cgi.FieldStorage() \n\n# 接收字段数据\nif form.getvalue('dropdown'):\n   dropdown_value = form.getvalue('dropdown')\nelse:\n   dropdown_value = \"没有内容\"\n\nprint \"Content-type:text/html\"\nprint\nprint \"<html>\"\nprint \"<head>\"\nprint \"<meta charset=\\\"utf-8\\\">\"\nprint \"<title>菜鸟教程 CGI 测试实例</title>\"\nprint \"</head>\"\nprint \"<body>\"\nprint \"<h2> 选中的选项是：%s</h2>\" % dropdown_value\nprint \"</body>\"\nprint \"</html>\""
+    },
+    {
+      "type": "text",
+      "content": "修改 dropdown.py 权限："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "chmod 755 dropdown.py"
+    },
+    {
+      "type": "text",
+      "content": "浏览器访问 Gif 演示图：\nCGI中使用Cookie\n在 http 协议一个很大的缺点就是不对用户身份的进行判断，这样给编程人员带来很大的不便，\n而 cookie 功能的出现弥补了这个不足。\ncookie 就是在客户访问脚本的同时，通过客户的浏览器，在客户硬盘上写入纪录数据\n，当下次客户访问脚本时取回数据信息，从而达到身份判别的功能，cookie 常用在身份校验中。\ncookie的语法\nhttp cookie的发送是通过http头部来实现的，他早于文件的传递，头部set-cookie的语法如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "Set-cookie:name=name;expires=date;path=path;domain=domain;secure"
+    },
+    {
+      "type": "text",
+      "content": "name=name: 需要设置cookie的值(name不能使用\";\"和\",\"号),有多个name值时用 \";\" 分隔，例如：name1=name1;name2=name2;name3=name3。\nexpires=date: cookie的有效期限,格式： expires=\"Wdy,DD-Mon-YYYY HH:MM:SS\"\n path=path: 设置cookie支持的路径,如果path是一个路径，则cookie对这个目录下的所有文件及子目录生效，例如： path=\"/cgi-bin/\"，如果path是一个文件，则cookie指对这个文件生效，例如：path=\"/cgi-bin/cookie.cgi\"。\n domain=domain: 对cookie生效的域名，例如：domain=\"www.runoob.com\"\n secure: 如果给出此标志，表示cookie只能通过SSL协议的https服务器来传递。\n cookie的接收是通过设置环境变量HTTP_COOKIE来实现的，CGI程序可以通过检索该变量获取cookie信息。\nCookie设置\nCookie的设置非常简单，cookie会在http头部单独发送。以下实例在cookie中设置了name 和 expires："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n# \nprint 'Content-Type: text/html'\nprint 'Set-Cookie: name=\"菜鸟教程\";expires=Wed, 28 Aug 2016 18:30:00 GMT'\nprint\nprint \"\"\"\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n        <title>菜鸟教程(runoob.com)</title>\n    </head>\n    <body>\n        <h1>Cookie set OK!</h1>\n    </body>\n</html>\n\"\"\""
+    },
+    {
+      "type": "text",
+      "content": "将以上代码保存到 cookie_set.py，并修改 cookie_set.py 权限："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "chmod 755 cookie_set.py"
+    },
+    {
+      "type": "text",
+      "content": "以上实例使用了 Set-Cookie 头信息来设置Cookie信息，可选项中设置了Cookie的其他属性，如过期时间Expires，域名Domain，路径Path。这些信息设置在 \"Content-type:text/html\"之前。\n检索Cookie信息\nCookie信息检索页非常简单，Cookie信息存储在CGI的环境变量HTTP_COOKIE中，存储格式如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "key1=value1;key2=value2;key3=value3...."
+    },
+    {
+      "type": "text",
+      "content": "以下是一个简单的CGI检索cookie信息的程序："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n\n# 导入模块\nimport os\nimport Cookie\n\nprint \"Content-type: text/html\"\nprint\n\nprint \"\"\"\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>菜鸟教程(runoob.com)</title>\n</head>\n<body>\n<h1>读取cookie信息</h1>\n\"\"\"\n\nif 'HTTP_COOKIE' in os.environ:\n    cookie_string=os.environ.get('HTTP_COOKIE')\n    c=Cookie.SimpleCookie()\n    c.load(cookie_string)\n\n    try:\n        data=c['name'].value\n        print \"cookie data: \"+data+\"<br>\"\n    except KeyError:\n        print \"cookie 没有设置或者已过期<br>\"\nprint \"\"\"\n</body>\n</html>\n\n\"\"\""
+    },
+    {
+      "type": "text",
+      "content": "将以上代码保存到 cookie_get.py，并修改 cookie_get.py 权限："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "chmod 755 cookie_get.py"
+    },
+    {
+      "type": "text",
+      "content": "以上 cookie 设置颜色 Gif 如下所示：\n文件上传实例\nHTML设置上传文件的表单需要设置 enctype 属性为 multipart/form-data，代码如下所示："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>菜鸟教程(runoob.com)</title>\n</head>\n<body>\n <form enctype=\"multipart/form-data\" \n                     action=\"/cgi-bin/save_file.py\" method=\"post\">\n   <p>选中文件: <input type=\"file\" name=\"filename\" /></p>\n   <p><input type=\"submit\" value=\"上传\" /></p>\n   </form>\n</body>\n</html>"
+    },
+    {
+      "type": "text",
+      "content": "save_file.py脚本文件代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n\nimport cgi, os\nimport cgitb; cgitb.enable()\n\nform = cgi.FieldStorage()\n\n# 获取文件名\nfileitem = form['filename']\n\n# 检测文件是否上传\nif fileitem.filename:\n   # 设置文件路径 \n   fn = os.path.basename(fileitem.filename)\n   open('/tmp/' + fn, 'wb').write(fileitem.file.read())\n\n   message = '文件 \"' + fn + '\" 上传成功'\n   \nelse:\n   message = '文件没有上传'\n   \nprint \"\"\"\\\nContent-Type: text/html\\n\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>菜鸟教程(runoob.com)</title>\n</head>\n<body>\n   <p>%s</p>\n</body>\n</html>\n\"\"\" % (message,)"
+    },
+    {
+      "type": "text",
+      "content": "将以上代码保存到 save_file.py，并修改 save_file.py 权限："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "chmod 755 save_file.py"
+    },
+    {
+      "type": "text",
+      "content": "以上 cookie 设置颜色 Gif 如下所示：\n如果你使用的系统是Unix/Linux，你必须替换文件分隔符，在window下只需要使用open()语句即可："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "fn = os.path.basename(fileitem.filename.replace(\"\\\\\", \"/\" ))"
+    },
+    {
+      "type": "text",
+      "content": "文件下载对话框\n我们先在当前目录下创建 foo.txt 文件，用于程序的下载。\n文件下载通过设置HTTP头信息来实现，功能代码如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n\n# HTTP 头部\nprint \"Content-Disposition: attachment; filename=\\\"foo.txt\\\"\";\nprint\n# 打开文件\nfo = open(\"foo.txt\", \"rb\")\n\nstr = fo.read();\nprint str\n\n# 关闭文件\nfo.close()"
+    }
+  ]
+}

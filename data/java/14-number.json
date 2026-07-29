@@ -1,0 +1,71 @@
+{
+  "id": "14-number",
+  "title": "Java Number & Math 类",
+  "order": 14,
+  "source_url": "https://www.runoob.com/java/java-number.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Java Number\n一般地，当需要使用数字的时候，我们通常使用内置数据类型，如：byte、int、long、double 等。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// 实例\nint a = 5000;\nfloat b = 13.65f;\nbyte c = 0x4a;"
+    },
+    {
+      "type": "text",
+      "content": "然而，在实际开发过程中，我们经常会遇到需要使用对象，而不是内置数据类型的情形。为了解决这个问题，Java 语言为每一个内置数据类型提供了对应的包装类。\n所有的包装类（Integer、Long、Byte、Double、Float、Short）都是抽象类 Number 的子类。\n类名对应基本类型描述Bytebyte字节型包装类Shortshort短整型包装类Integerint整型包装类Longlong长整型包装类Floatfloat单精度浮点型包装类Doubledouble双精度浮点型包装类BigInteger-不可变任意精度整数BigDecimal-不可变任意精度有符号十进制数\n这种由编译器特别支持的包装称为装箱，所以当内置数据类型被当作对象使用的时候，编译器会把内置类型装箱为包装类。相似的，编译器也可以把一个对象拆箱为内置类型。\nNumber 类属于 java.lang 包。\nNumber 是一个抽象类，主要作用是为各种数值类型提供统一的转换方法：\n下面是一个使用 Integer 对象的实例："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test{\n \n   public static void main(String[] args){\n      Integer x = 5;\n      x =  x + 10;\n      System.out.println(x); \n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "15"
+    },
+    {
+      "type": "text",
+      "content": "当 x 被赋为整型值时，由于x是一个对象，所以编译器要对x进行装箱。然后，为了使x能进行加运算，所以要对x进行拆箱。\n常用方法示例\n基本类型转换\n数值比较\n特殊数值处理\n处理大数\n数值格式化\n自动装箱与拆箱\nJava 5+ 支持自动转换：\nJava Math 类\nMath 类是 Java 提供的数学工具类，位于 java.lang 包中，包含执行基本数值运算的静态方法。\nJava 的 Math 包含了用于执行基本数学运算的属性和方法，如初等指数、对数、平方根和三角函数。\nMath 的方法都被定义为 static 形式，通过 Math 类可以在主函数中直接调用。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test {  \n    public static void main (String []args)  \n    {  \n        System.out.println(\"90 度的正弦值：\" + Math.sin(Math.PI/2));  \n        System.out.println(\"0度的余弦值：\" + Math.cos(0));  \n        System.out.println(\"60度的正切值：\" + Math.tan(Math.PI/3));  \n        System.out.println(\"1的反正切值： \" + Math.atan(1));  \n        System.out.println(\"π/2的角度值：\" + Math.toDegrees(Math.PI/2));  \n        System.out.println(Math.PI);  \n    }  \n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "90 度的正弦值：1.0\n0度的余弦值：1.0\n60度的正切值：1.7320508075688767\n1的反正切值： 0.7853981633974483\nπ/2的角度值：90.0\n3.141592653589793"
+    },
+    {
+      "type": "text",
+      "content": "高级数学运算\n1. 指数对数运算\n2. 随机数生成\n3. 其他运算\n4. 常量字段\nNumber & Math 类方法\n下面的表中列出的是 Number & Math 类常用的一些方法：\n序号\n\t\t\t\t方法与描述\n\t\t\t\t1\n\t\t\t\txxxValue()\n\t\t\t\t将 Number 对象转换为xxx数据类型的值并返回。\n\t\t\t\t2\n\t\t\t\tcompareTo()\n\t\t\t\t将number对象与参数比较。\n\t\t\t\t3\n\t\t\t\tequals()\n\t\t\t\t判断number对象是否与参数相等。\n\t\t\t\t4\n\t\t\t\tvalueOf()\n\t\t\t\t返回一个 Number 对象指定的内置数据类型\n\t\t\t\t5\n\t\t\t\ttoString()\n\t\t\t\t以字符串形式返回值。\n\t\t\t\t6\n\t\t\t\tparseInt()\n\t\t\t\t将字符串解析为int类型。\n\t\t\t\t7\n\t\t\t\tabs()\n\t\t\t\t返回参数的绝对值。\n\t\t\t\t8\n\t\t\t\tceil()\n\t\t\t\t返回大于等于( >= )给定参数的的最小整数，类型为双精度浮点型。\n\t\t\t\t9\n\t\t\t\tfloor()\n\t\t\t\t返回小于等于（<=）给定参数的最大整数 。\n\t\t\t\t10\n\t\t\t\trint()\n\t\t\t\t返回与参数最接近的整数。返回类型为double。\n\t\t\t\t11\n\t\t\t\tround()\n\t\t\t\t它表示四舍五入，算法为 Math.floor(x+0.5)，即将原来的数字加上 0.5 后再向下取整，所以，Math.round(11.5) 的结果为12，Math.round(-11.5) 的结果为-11。\n\t\t\t\t12\n\t\t\t\tmin()\n\t\t\t\t返回两个参数中的最小值。\n\t\t\t\t13\n\t\t\t\tmax()\n\t\t\t\t返回两个参数中的最大值。\n\t\t\t\t14\n\t\t\t\texp()\n\t\t\t\t返回自然数底数e的参数次方。\n\t\t\t\t15\n\t\t\t\tlog()\n\t\t\t\t返回参数的自然数底数的对数值。\n\t\t\t\t16\n\t\t\t\tpow()\n\t\t\t\t返回第一个参数的第二个参数次方。\n\t\t\t\t17\n\t\t\t\tsqrt()\n\t\t\t\t求参数的算术平方根。\n\t\t\t\t18\n\t\t\t\tsin()\n\t\t\t\t求指定double类型参数的正弦值。\n\t\t\t\t19\n\t\t\t\tcos()\n\t\t\t\t求指定double类型参数的余弦值。\n\t\t\t\t20\n\t\t\t\ttan()\n\t\t\t\t求指定double类型参数的正切值。\n\t\t\t\t21\n\t\t\t\tasin()\n\t\t\t\t求指定double类型参数的反正弦值。\n\t\t\t\t22\n\t\t\t\tacos()\n\t\t\t\t求指定double类型参数的反余弦值。\n\t\t\t\t23\n\t\t\t\tatan()\n\t\t\t\t求指定double类型参数的反正切值。\n\t\t\t\t24\n\t\t\t\tatan2()\n\t\t\t\t将笛卡尔坐标转换为极坐标，并返回极坐标的角度值。\n\t\t\t\t25\n\t\t\t\ttoDegrees()\n\t\t\t\t将参数转化为角度。\n\t\t\t\t26\n\t\t\t\ttoRadians()\n\t\t\t\t将角度转换为弧度。\n\t\t\t\t27\n\t\t\t\trandom()\n\t\t\t\t返回一个随机数。\nMath 的 floor,round 和 ceil 方法实例比较\n参数\nMath.floor\nMath.round\nMath.ceil\n1.4\n1\n1\n2\n1.5\n1\n2\n2\n1.6\n1\n2\n2\n-1.4\n-2\n-1\n-1\n-1.5\n-2\n-1\n-1\n-1.6\n-2\n-2\n-1"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// floor,round 和 ceil 实例：\npublic class Main {   \n  public static void main(String[] args) {   \n    double[] nums = { 1.4, 1.5, 1.6, -1.4, -1.5, -1.6 };   \n    for (double num : nums) {   \n      test(num);   \n    }   \n  }   \n  \n  private static void test(double num) {   \n    System.out.println(\"Math.floor(\" + num + \")=\" + Math.floor(num));   \n    System.out.println(\"Math.round(\" + num + \")=\" + Math.round(num));   \n    System.out.println(\"Math.ceil(\" + num + \")=\" + Math.ceil(num));   \n  }   \n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例执行输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "Math.floor(1.4)=1.0\nMath.round(1.4)=1\nMath.ceil(1.4)=2.0\nMath.floor(1.5)=1.0\nMath.round(1.5)=2\nMath.ceil(1.5)=2.0\nMath.floor(1.6)=1.0\nMath.round(1.6)=2\nMath.ceil(1.6)=2.0\nMath.floor(-1.4)=-2.0\nMath.round(-1.4)=-1\nMath.ceil(-1.4)=-1.0\nMath.floor(-1.5)=-2.0\nMath.round(-1.5)=-1\nMath.ceil(-1.5)=-1.0\nMath.floor(-1.6)=-2.0\nMath.round(-1.6)=-2\nMath.ceil(-1.6)=-1.0"
+    }
+  ]
+}

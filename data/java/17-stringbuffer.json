@@ -1,0 +1,48 @@
+{
+  "id": "17-stringbuffer",
+  "title": "Java StringBuffer 和 StringBuilder 类",
+  "order": 17,
+  "source_url": "https://www.runoob.com/java/java-stringbuffer.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "当对字符串进行修改的时候，需要使用 StringBuffer 和 StringBuilder 类。\n和 String 类不同的是，StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。\n在使用 StringBuffer 类时，每次都会对 StringBuffer 对象本身进行操作，而不是生成新的对象，所以如果需要对字符串进行修改推荐使用 StringBuffer。\nStringBuilder 类在 Java 5 中被提出，它和 StringBuffer 之间的最大不同在于 StringBuilder 的方法不是线程安全的（不能同步访问）。\n由于 StringBuilder 相较于 StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// 实例\npublic class RunoobTest{\n    public static void main(String[] args){\n        StringBuilder sb = new StringBuilder(10);\n        sb.append(\"Runoob..\");\n        System.out.println(sb);  \n        sb.append(\"!\");\n        System.out.println(sb); \n        sb.insert(8, \"Java\");\n        System.out.println(sb); \n        sb.delete(5,8);\n        System.out.println(sb);  \n    }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "Runoob..\nRunoob..!\nRunoob..Java!\nRunooJava!"
+    },
+    {
+      "type": "text",
+      "content": "然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test{\n  public static void main(String[] args){\n    StringBuffer sBuffer = new StringBuffer(\"菜鸟教程官网：\");\n    sBuffer.append(\"www\");\n    sBuffer.append(\".runoob\");\n    sBuffer.append(\".com\");\n    System.out.println(sBuffer);  \n  }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "菜鸟教程官网：www.runoob.com"
+    },
+    {
+      "type": "text",
+      "content": "StringBuffer 方法\n以下是 StringBuffer 类支持的主要方法：\n序号\n\t\t\t\t方法描述\n\t\t\t\t1\n\t\t\t\tpublic StringBuffer append(String s)\n\t\t\t\t将指定的字符串追加到此字符序列。\n\t\t\t\t2\n\t\t\t\tpublic StringBuffer reverse()\n\t\t\t\t 将此字符序列用其反转形式取代。\n\t\t\t\t3\n\t\t\t\tpublic delete(int start, int end)\n\t\t\t\t移除此序列的子字符串中的字符。\n\t\t\t\t4\n\t\t\t\tpublic insert(int offset, int i)\n\t\t\t\t将 int 参数的字符串表示形式插入此序列中。\n\t\t\t\t5\n\t\t\t\t\tinsert(int offset, String str)\n\t\t\t\t将 str 参数的字符串插入此序列中。\n\t\t\t\t6\n\t\t\t\treplace(int start, int end, String str)\n\t\t\t\t使用给定 String 中的字符替换此序列的子字符串中的字符。\n以下列表列出了 StringBuffer 类的其他常用方法：\n序号\n\t\t\t\t方法描述\n\t\t\t\t1\n\t\t\t\tint capacity()\n\t\t\t\t返回当前容量。\n\t\t\t\t2\n\t\t\t\tchar charAt(int index)\n\t\t\t\t返回此序列中指定索引处的 char 值。\n\t\t\t\t3\n\t\t\t\tvoid ensureCapacity(int minimumCapacity)\n\t\t\t\t确保容量至少等于指定的最小值。\n\t\t\t\t4\n\t\t\t\tvoid getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin)\n\t\t\t\t将字符从此序列复制到目标字符数组 dst。\n\t\t\t\t5\n\t\t\t\tint indexOf(String str)\n\t\t\t\t返回第一次出现的指定子字符串在该字符串中的索引。\n\t\t\t\t6\n\t\t\t\tint indexOf(String str, int fromIndex)\n\t\t\t\t从指定的索引处开始，返回第一次出现的指定子字符串在该字符串中的索引。\n\t\t\t\t7\n\t\t\t\tint lastIndexOf(String str)\n\t\t\t\t返回最右边出现的指定子字符串在此字符串中的索引。\n\t\t\t\t8\n\t\t\t\tint lastIndexOf(String str, int fromIndex)\n返回 String 对象中子字符串最后出现的位置。\n\t\t\t\t9\n\t\t\t\tint length()\n\t\t\t\t 返回长度（字符数）。\n\t\t\t\t10\n\t\t\t\tvoid setCharAt(int index, char ch)\n\t\t\t\t将给定索引处的字符设置为 ch。\n\t\t\t\t11\n\t\t\t\tvoid setLength(int newLength)\n\t\t\t\t设置字符序列的长度。\n\t\t\t\t12\n\t\t\t\tCharSequence subSequence(int start, int end)\n\t\t\t\t返回一个新的字符序列，该字符序列是此序列的子序列。\n\t\t\t\t13\n\t\t\t\tString substring(int start)\n\t\t\t\t返回一个新的 String，它包含此字符序列当前所包含的字符子序列。\n\t\t\t\t14\n\t\t\t\tString substring(int start, int end)\n\t\t\t\t返回一个新的 String，它包含此序列当前所包含的字符子序列。\n\t\t\t\t15\n\t\t\t\tString toString()\n\t\t\t\t返回此序列中数据的字符串表示形式。\n更多内容：\nStringBuffer 类：https://www.runoob.com/manual/jdk11api/java.base/java/lang/StringBuffer.html\nStringBuilder 类：https://www.runoob.com/manual/jdk11api/java.base/java/lang/StringBuilder.html"
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "id": "11-loop",
+  "title": "Java 循环结构 - for, while 及 do...while",
+  "order": 11,
+  "source_url": "https://www.runoob.com/java/java-loop.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "顺序结构的程序语句只能被执行一次。\n如果您想要同样的操作执行多次，就需要使用循环结构。\nJava中有三种主要的循环结构：\nwhile 循环\n\t\tdo…while 循环\n\t\tfor 循环\n在 Java5 中引入了一种主要用于数组的增强型 for 循环。\nwhile 循环\nwhile是最基本的循环，它的结构为："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "while( 布尔表达式 ) {\n  //循环内容\n}"
+    },
+    {
+      "type": "text",
+      "content": "只要布尔表达式为 true，循环就会一直执行下去。\n实例"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test {\n   public static void main(String[] args) {\n      int x = 10;\n      while( x < 20 ) {\n         System.out.print(\"value of x : \" + x );\n         x++;\n         System.out.print(\"\\n\");\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "value of x : 10\nvalue of x : 11\nvalue of x : 12\nvalue of x : 13\nvalue of x : 14\nvalue of x : 15\nvalue of x : 16\nvalue of x : 17\nvalue of x : 18\nvalue of x : 19"
+    },
+    {
+      "type": "text",
+      "content": "do…while 循环\n对于 while 语句而言，如果不满足条件，则不能进入循环。但有时候我们需要即使不满足条件，也至少执行一次。\ndo…while 循环和 while 循环相似，不同的是，do…while 循环至少会执行一次。"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "do {\n       //代码语句\n}while(布尔表达式);"
+    },
+    {
+      "type": "text",
+      "content": "注意：布尔表达式在循环体的后面，所以语句块在检测布尔表达式之前已经执行了。\n如果布尔表达式的值为 true，则语句块一直执行，直到布尔表达式的值为 false。\n实例"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test {\n   public static void main(String[] args){\n      int x = 10;\n \n      do{\n         System.out.print(\"value of x : \" + x );\n         x++;\n         System.out.print(\"\\n\");\n      }while( x < 20 );\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "value of x : 10\nvalue of x : 11\nvalue of x : 12\nvalue of x : 13\nvalue of x : 14\nvalue of x : 15\nvalue of x : 16\nvalue of x : 17\nvalue of x : 18\nvalue of x : 19"
+    },
+    {
+      "type": "text",
+      "content": "for循环\n虽然所有循环结构都可以用 while 或者 do...while表示，但 Java 提供了另一种语句 —— for 循环，使一些循环结构变得更加简单。\nfor循环执行的次数是在执行前就确定的。语法格式如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "for(初始化; 布尔表达式; 更新) {\n    //代码语句\n}"
+    },
+    {
+      "type": "text",
+      "content": "关于 for 循环有以下几点说明：\n最先执行初始化步骤。可以声明一种类型，但可初始化一个或多个循环控制变量，也可以是空语句。\n\t\t然后，检测布尔表达式的值。如果为 true，循环体被执行。如果为false，循环终止，开始执行循环体后面的语句。\n\t\t执行一次循环后，更新循环控制变量。\n\t\t再次检测布尔表达式。循环执行上面的过程。\n实例"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test {\n   public static void main(String[] args) {\n \n      for(int x = 10; x < 20; x = x+1) {\n         System.out.print(\"value of x : \" + x );\n         System.out.print(\"\\n\");\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "value of x : 10\nvalue of x : 11\nvalue of x : 12\nvalue of x : 13\nvalue of x : 14\nvalue of x : 15\nvalue of x : 16\nvalue of x : 17\nvalue of x : 18\nvalue of x : 19"
+    },
+    {
+      "type": "text",
+      "content": "Java 增强 for 循环\nJava5 引入了一种主要用于数组的增强型 for 循环。\nJava 增强 for 循环语法格式如下:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "for(声明语句 : 表达式)\n{\n   //代码句子\n}"
+    },
+    {
+      "type": "text",
+      "content": "声明语句：声明新的局部变量，该变量的类型必须和数组元素的类型匹配。其作用域限定在循环语句块，其值与此时数组元素的值相等。\n表达式：表达式是要访问的数组名，或者是返回值为数组的方法。\n实例"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test {\n   public static void main(String[] args){\n      int [] numbers = {10, 20, 30, 40, 50};\n \n      for(int x : numbers ){\n         System.out.print( x );\n         System.out.print(\",\");\n      }\n      System.out.print(\"\\n\");\n      String [] names ={\"James\", \"Larry\", \"Tom\", \"Lacy\"};\n      for( String name : names ) {\n         System.out.print( name );\n         System.out.print(\",\");\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "10,20,30,40,50,\nJames,Larry,Tom,Lacy,"
+    },
+    {
+      "type": "text",
+      "content": "break 关键字\nbreak 主要用在循环语句或者 switch 语句中，用来跳出整个语句块。\nbreak 跳出最里层的循环，并且继续执行该循环下面的语句。\n语法\nbreak 的用法很简单，就是循环结构中的一条语句："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "break;"
+    },
+    {
+      "type": "text",
+      "content": "实例"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test {\n   public static void main(String[] args) {\n      int [] numbers = {10, 20, 30, 40, 50};\n \n      for(int x : numbers ) {\n         // x 等于 30 时跳出循环\n         if( x == 30 ) {\n            break;\n         }\n         System.out.print( x );\n         System.out.print(\"\\n\");\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "10\n20"
+    },
+    {
+      "type": "text",
+      "content": "continue 关键字\ncontinue 适用于任何循环控制结构中。作用是让程序立刻跳转到下一次循环的迭代。\n在 for 循环中，continue 语句使程序立即跳转到更新语句。\n在 while 或者 do…while 循环中，程序立即跳转到布尔表达式的判断语句。\n语法\ncontinue 就是循环体中一条简单的语句："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "continue;"
+    },
+    {
+      "type": "text",
+      "content": "实例"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "// Test.java 文件代码：\npublic class Test {\n   public static void main(String[] args) {\n      int [] numbers = {10, 20, 30, 40, 50};\n \n      for(int x : numbers ) {\n         if( x == 30 ) {\n        continue;\n         }\n         System.out.print( x );\n         System.out.print(\"\\n\");\n      }\n   }\n}"
+    },
+    {
+      "type": "text",
+      "content": "以上实例编译运行结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "10\n20\n40\n50"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "08-if-statement",
+  "title": "Python 条件语句",
+  "order": 8,
+  "source_url": "https://www.runoob.com/python/python-if-statement.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Python条件语句是通过一条或多条语句的执行结果（True或者False）来决定执行的代码块。\n可以通过下图来简单了解条件语句的执行过程:\nPython程序语言指定任何非0和非空（null）值为true，0 或者 null为false。\nPython 编程中 if 语句用于控制程序的执行，基本形式为："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "if 判断条件：\n    执行语句……\nelse：\n    执行语句……"
+    },
+    {
+      "type": "text",
+      "content": "其中\"判断条件\"成立时（非零），则执行后面的语句，而执行内容可以多行，以缩进来区分表示同一范围。\nelse 为可选语句，当需要在条件不成立时执行内容则可以执行相关语句。\nGif 演示：\n具体例子如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \n# 例1：if 基本用法\n \nflag = False\nname = 'luren'\nif name == 'python':         # 判断变量是否为 python \n    flag = True              # 条件成立时设置标志为真\n    print 'welcome boss'     # 并输出欢迎信息\nelse:\n    print name               # 条件不成立时输出变量名称"
+    },
+    {
+      "type": "text",
+      "content": "输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "luren            # 输出结果"
+    },
+    {
+      "type": "text",
+      "content": "if 语句的判断条件可以用>（大于）、<(小于)、==（等于）、>=（大于等于）、<=（小于等于）来表示其关系。\n当判断条件为多个值时，可以使用以下形式："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "if 判断条件1:\n    执行语句1……\nelif 判断条件2:\n    执行语句2……\nelif 判断条件3:\n    执行语句3……\nelse:\n    执行语句4……"
+    },
+    {
+      "type": "text",
+      "content": "实例如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n# 例2：elif用法\n \nnum = 5     \nif num == 3:            # 判断num的值\n    print 'boss'        \nelif num == 2:\n    print 'user'\nelif num == 1:\n    print 'worker'\nelif num < 0:           # 值小于零时输出\n    print 'error'\nelse:\n    print 'roadman'     # 条件均不成立时输出"
+    },
+    {
+      "type": "text",
+      "content": "输出结果为："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "roadman        # 输出结果"
+    },
+    {
+      "type": "text",
+      "content": "由于 python 并不支持 switch 语句，所以多个条件判断，只能用 elif 来实现，如果判断需要多个条件需同时判断时，可以使用 or （或），表示两个条件有一个成立时判断条件成功；使用 and （与）时，表示只有两个条件同时成立的情况下，判断条件才成功。"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python\n# -*- coding: UTF-8 -*-\n \n# 例3：if语句多个条件\n \nnum = 9\nif num >= 0 and num <= 10:    # 判断值是否在0~10之间\n    print 'hello'\n# 输出结果: hello\n \nnum = 10\nif num < 0 or num > 10:    # 判断值是否在小于0或大于10\n    print 'hello'\nelse:\n    print 'undefine'\n# 输出结果: undefine\n \nnum = 8\n# 判断值是否在0~5或者10~15之间\nif (num >= 0 and num <= 5) or (num >= 10 and num <= 15):    \n    print 'hello'\nelse:\n    print 'undefine'\n# 输出结果: undefine"
+    },
+    {
+      "type": "text",
+      "content": "当if有多个条件时可使用括号来区分判断的先后顺序，括号中的判断优先执行，此外 and 和 or 的优先级低于>（大于）、<（小于）等判断符号，即大于和小于在没有括号的情况下会比与或要优先判断。\n简单的语句组\n你也可以在同一行的位置上使用if条件判断语句，如下实例："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "# 实例\n#!/usr/bin/python \n# -*- coding: UTF-8 -*-\n \nvar = 100 \n \nif ( var  == 100 ) : print \"变量 var 的值为100\" \n \nprint \"Good bye!\""
+    },
+    {
+      "type": "text",
+      "content": "以上代码执行输出结果如下："
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "content": "变量 var 的值为100\nGood bye!"
+    }
+  ]
+}

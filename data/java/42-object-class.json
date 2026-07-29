@@ -1,0 +1,30 @@
+{
+  "id": "42-object-class",
+  "title": "Java Object 类",
+  "order": 42,
+  "source_url": "https://www.runoob.com/java/java-object-class.html",
+  "sections": [
+    {
+      "type": "text",
+      "content": "Java Object 类是所有类的父类，也就是说 Java 的所有类都继承了 Object，子类可以使用 Object 的所有方法。\nObject 类位于 java.lang 包中，编译时会自动导入，我们创建一个类时，如果没有明确继承一个父类，那么它就会自动继承 Object，成为 Object 的子类。\nObject 类可以显式继承，也可以隐式继承，以下两种方式是一样的：\n显式继承:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "public class Runoob extends Object{\n\n}"
+    },
+    {
+      "type": "text",
+      "content": "隐式继承:"
+    },
+    {
+      "type": "code",
+      "lang": "java",
+      "content": "public class Runoob {\n\n}"
+    },
+    {
+      "type": "text",
+      "content": "类的构造函数\n序号\n构造方法 & 描述\n1\nObject()\n构造一个新对象。\n类的方法\n序号\n方法 & 描述\n1\nprotected Object clone()\n创建并返回一个对象的拷贝\n2\nboolean equals(Object obj)\n比较两个对象是否相等\n3\nprotected void finalize()\n当 GC (垃圾回收器)确定不存在对该对象的有更多引用时，由对象的垃圾回收器调用此方法。\n4\nClass<?> getClass()\n获取对象的运行时对象的类\n5\nint hashCode()\n获取对象的 hash 值\n6\nvoid notify()\n唤醒在该对象上等待的某个线程\n7\nvoid notifyAll()\n唤醒在该对象上等待的所有线程\n8\nString toString()\n返回对象的字符串表示形式\n9\nvoid wait()\n让当前线程进入等待状态。直到其他线程调用此对象的 notify() 方法或 notifyAll() 方法。\n10\nvoid wait(long timeout)\n让当前线程处于等待(阻塞)状态，直到其他线程调用此对象的 notify() 方法或 notifyAll() 方法，或者超过参数设置的timeout超时时间。\n11\nvoid wait(long timeout, int nanos)\n与 wait(long timeout) 方法类似，多了一个 nanos 参数，这个参数表示额外时间（以纳秒为单位，范围是 0-999999）。 所以超时的时间还需要加上 nanos 纳秒。。"
+    }
+  ]
+}
