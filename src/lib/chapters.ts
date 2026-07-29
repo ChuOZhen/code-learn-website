@@ -16,7 +16,7 @@ export interface ChapterWithId extends ChapterIndex {
 }
 
 export const LANGUAGES: { key: Language; label: string; icon: string }[] = [
-  { key: 'cpp', label: 'C++', icon: '</>' },
+  { key: 'cpp', label: 'C++', icon: 'C' },
   { key: 'python', label: 'Python', icon: '🐍' },
   { key: 'java', label: 'Java', icon: '☕' },
 ];
