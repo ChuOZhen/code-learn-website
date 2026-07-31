@@ -46,13 +46,14 @@
 ## ️ 项目结构
 
 ```
-cpp-learn/
+code-learn/
 ├── .github/workflows/     # GitHub Actions 工作流
 ├── data/                  # 教程数据（C++ / Python / Java）
-│   ├── chapters/          # C++ 教程 JSON
+│   ├── cpp/               # C++ 教程 JSON
 │   ├── java/              # Java 教程 JSON
 │   └── python/            # Python 教程 JSON
 ├── public/                # 静态资源
+├── scripts/               # 抓取脚本（Python / Java）
 ├── src/
 │   ├── app/               # Next.js App Router
 │   │   ├── chapters/[language]/[slug]/  # 章节详情页
