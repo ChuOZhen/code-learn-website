@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
-import { useAuth } from './AuthProvider';
-import { getChapterIndex, urlToChapterId, LANGUAGES, isLanguage, type Language } from '@/lib/chapters';
+import { useAuth, progressKey } from './AuthProvider';
+import { getAllChapters, LANGUAGES, isLanguage, type Language } from '@/lib/chapters';
 
 
 export default function Sidebar() {
@@ -25,13 +25,22 @@ export default function Sidebar() {
     return lang?.key || 'cpp';
   }, [pathname]);
 
-  const chapters = useMemo(() => getChapterIndex(currentLang), [currentLang]);
+  const chapters = useMemo(() => getAllChapters(currentLang), [currentLang]);
+
+  // 当前章节 order（用于语言切换时保留位置）
+  const currentOrder = useMemo(() => {
+    const parts = pathname.split('/');
+    const slug = parts[3];
+    return chapters.find(ch => ch.id === slug)?.order || 1;
+  }, [pathname, chapters]);
 
   useEffect(() => {
     setIsOpen(false);
     }, [pathname]);
 
-  const completedCount = Object.values(progress).filter(s => s === 'completed').length;
+  const completedCount = Object.entries(progress).filter(
+    ([k, v]) => k.startsWith(`${currentLang}:`) && v === 'completed'
+  ).length;
   const currentLangInfo = LANGUAGES.find(l => l.key === currentLang);
 
   return (
@@ -94,23 +103,26 @@ export default function Sidebar() {
 
             {/* Language switcher */}
             <div className="mt-3 flex gap-1.5">
-              {LANGUAGES.map(lang => (
-                <Link
-                  key={lang.key}
-                  href={`/chapters/${lang.key}/${urlToChapterId(
-                    getChapterIndex(lang.key)[0]?.url || '',
-                    lang.key
-                  )}`}
-                  onClick={() => setIsOpen(false)}
-                  className={`text-xs px-2.5 py-1 rounded-md transition-all duration-200 ${
-                    currentLang === lang.key
-                      ? 'bg-primary text-white font-medium'
-                      : 'bg-background text-foreground-muted hover:text-foreground hover:bg-background-elevated'
-                  }`}
-                >
-                  {lang.icon} {lang.label}
-                </Link>
-              ))}
+              {LANGUAGES.map(lang => {
+                const targetChapters = getAllChapters(lang.key);
+                const target =
+                  targetChapters.find(ch => ch.order === currentOrder) ||
+                  targetChapters[0];
+                return (
+                  <Link
+                    key={lang.key}
+                    href={`/chapters/${lang.key}/${target?.id || '01-intro'}`}
+                    onClick={() => setIsOpen(false)}
+                    className={`text-xs px-2.5 py-1 rounded-md transition-all duration-200 ${
+                      currentLang === lang.key
+                        ? 'bg-primary text-white font-medium'
+                        : 'bg-background text-foreground-muted hover:text-foreground hover:bg-background-elevated'
+                    }`}
+                  >
+                    {lang.icon} {lang.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -153,9 +165,8 @@ export default function Sidebar() {
         {/* Chapter list */}
         <nav className={`flex-1 overflow-y-auto py-2 ${isCollapsed ? 'hidden md:hidden' : 'block'}`}>
           {chapters.map(chapter => {
-            const id = urlToChapterId(chapter.url, currentLang);
-            // slug kept for potential future use; id is the canonical route segment
-            const status = progress[id] || 'not_started';
+            const id = chapter.id;
+            const status = progress[progressKey(currentLang, id)] || 'not_started';
             const isActive = pathname === `/chapters/${currentLang}/${id}`;
 
             return (

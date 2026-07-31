@@ -1,7 +1,7 @@
-import chapterIndexCpp from '../../data/chapters/00-index.json';
+import chapterIndexCpp from '../../data/cpp/00-index.json';
 import chapterIndexPython from '../../data/python/00-index.json';
 import chapterIndexJava from '../../data/java/00-index.json';
-import { getIdFromUrl, SLUG_TO_ID_MAP } from './slugs';
+import { getIdFromUrl } from './slugs';
 
 export type Language = 'cpp' | 'python' | 'java';
 
@@ -38,12 +38,6 @@ export function getAllChapters(language: Language = 'cpp'): ChapterWithId[] {
     ...ch,
     id: getIdFromUrl(ch.url, language),
   }));
-}
-
-export function urlToChapterId(url: string, language: Language = 'cpp'): string {
-  const slug = url.split('/').pop()?.replace('.html', '') || '';
-  const map = SLUG_TO_ID_MAP[language];
-  return map?.[slug] || slug;
 }
 
 /** Validate that a language string is one we support */

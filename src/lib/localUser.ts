@@ -41,10 +41,10 @@ function arrayBufferToBase64(buffer: ArrayBuffer): string {
 
 function base64ToArrayBuffer(base64: string): ArrayBuffer {
   const binary = atob(base64);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-    return bytes.buffer;
-  }
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes.buffer;
+}
 
 function stringToArrayBuffer(str: string): ArrayBuffer {
   return new TextEncoder().encode(str).buffer;
@@ -54,7 +54,7 @@ function arrayBufferToString(buffer: ArrayBuffer): string {
   return new TextDecoder().decode(buffer);
 }
 
-async function getCryptoKey(password: string, salt: ArrayBuffer, usage: KeyUsage[]): Promise<CryptoKey> {
+async function getCryptoKey(password: string, salt: ArrayBuffer, usage: KeyUsage[], extractable: boolean = false): Promise<CryptoKey> {
   const enc = new TextEncoder();
   const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits', 'deriveKey']);
   return crypto.subtle.deriveKey(
@@ -66,7 +66,7 @@ async function getCryptoKey(password: string, salt: ArrayBuffer, usage: KeyUsage
     },
     keyMaterial,
     { name: 'AES-GCM', length: 256 },
-    false,
+    extractable,
     usage
   );
 }
@@ -289,19 +289,85 @@ export async function saveUserData(username: string, password: string, data: Use
   return { success: true };
 }
 
-// ─── Export / Import ────────────────────────────────────────────
+// ─── Session key (keeps password out of storage) ────────────────
+// 密码只用于派生 AES 密钥；sessionStorage 只存派生密钥本身，
+// 攻击者即使读到密钥也拿不到密码（无法反推 PBKDF2 输入）。
 
-export async function exportUserData(username: string): Promise<{ success: boolean; data?: UserRecord; error?: string }> {
+export async function deriveSessionKey(
+  username: string,
+  password: string
+): Promise<{ token: string } | { error: string }> {
+  const db = await getDB();
+  const record = (await db.get(STORE_USERS, username)) as UserRecord | undefined;
+  if (!record) return { error: '用户不存在' };
+
+  const salt = base64ToArrayBuffer(record.salt);
+  try {
+    // extractable=true 以便 exportKey 导出会话密钥（base64）存入 sessionStorage
+    const key = await getCryptoKey(password, salt, ['encrypt', 'decrypt'], true);
+    // 用解密验证密码正确性
+    const progressPayload = JSON.parse(record.encryptedProgress);
+    await decryptData(progressPayload.ciphertext, progressPayload.iv, key);
+    const raw = await crypto.subtle.exportKey('raw', key);
+    return { token: arrayBufferToBase64(raw) };
+  } catch {
+    return { error: '密码错误' };
+  }
+}
+
+export async function importSessionKey(token: string): Promise<CryptoKey> {
+  const raw = base64ToArrayBuffer(token);
+  return crypto.subtle.importKey(
+    'raw',
+    raw,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt']
+  );
+}
+
+export async function loadUserDataWithKey(
+  username: string,
+  key: CryptoKey
+): Promise<{ data: UserData; error?: string }> {
+  const db = await getDB();
+  const record = (await db.get(STORE_USERS, username)) as UserRecord | undefined;
+  if (!record) return { data: { progress: {}, apiKey: '' }, error: '用户不存在' };
+
+  try {
+    const progressPayload = JSON.parse(record.encryptedProgress);
+    const progressStr = await decryptData(progressPayload.ciphertext, progressPayload.iv, key);
+    const apiKeyPayload = JSON.parse(record.encryptedApiKey);
+    const apiKey = await decryptData(apiKeyPayload.ciphertext, apiKeyPayload.iv, key);
+
+    return {
+      data: {
+        progress: JSON.parse(progressStr) as UserProgress,
+        apiKey,
+      },
+    };
+  } catch {
+    return { data: { progress: {}, apiKey: '' }, error: '解密失败，会话已失效，请重新登录' };
+  }
+}
+
+export async function saveUserDataWithKey(
+  username: string,
+  key: CryptoKey,
+  data: UserData
+): Promise<{ success: boolean; error?: string }> {
   const db = await getDB();
   const record = (await db.get(STORE_USERS, username)) as UserRecord | undefined;
   if (!record) return { success: false, error: '用户不存在' };
-  return { success: true, data: record };
-}
 
-export async function importUserData(record: UserRecord): Promise<{ success: boolean; error?: string }> {
-  const db = await getDB();
-  const existing = await db.get(STORE_USERS, record.username);
-  if (existing) return { success: false, error: '用户名已存在，请先删除原账号' };
-  await db.put(STORE_USERS, record);
+  const encryptedProgress = await encryptData(JSON.stringify(data.progress), key);
+  const encryptedApiKey = await encryptData(data.apiKey, key);
+
+  await db.put(STORE_USERS, {
+    ...record,
+    encryptedProgress: JSON.stringify(encryptedProgress),
+    encryptedApiKey: JSON.stringify(encryptedApiKey),
+  });
+
   return { success: true };
 }

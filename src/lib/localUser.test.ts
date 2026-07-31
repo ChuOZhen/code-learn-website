@@ -23,10 +23,14 @@ import {
   clearCurrentUser,
   createUser,
   deleteUser,
+  deriveSessionKey,
   getCurrentUser,
+  importSessionKey,
   listUsers,
   loadUserData,
+  loadUserDataWithKey,
   saveUserData,
+  saveUserDataWithKey,
   setCurrentUser,
   verifyUser,
 } from './localUser';
@@ -144,6 +148,72 @@ describe('localUser', () => {
 
       const data = await loadUserData(username, 'password123');
       expect(data.data.apiKey).toBe(apiKey);
+    });
+  });
+
+  describe('会话密钥（密码不落盘）', () => {
+    it('正确密码应派生会话密钥，并能用它读写数据', async () => {
+      const username = unique('alice');
+      await createUser(username, 'password123');
+
+      const res = await deriveSessionKey(username, 'password123');
+      expect('token' in res).toBe(true);
+      if (!('token' in res)) return;
+
+      const key = await importSessionKey(res.token);
+      const { data, error } = await loadUserDataWithKey(username, key);
+      expect(error).toBeUndefined();
+      expect(data.progress).toEqual({});
+
+      const saveRes = await saveUserDataWithKey(username, key, {
+        progress: { 'cpp:01-intro': 'completed' },
+        apiKey: 'sk-session-test',
+      });
+      expect(saveRes.success).toBe(true);
+
+      const reloaded = await loadUserDataWithKey(username, key);
+      expect(reloaded.data.progress).toEqual({ 'cpp:01-intro': 'completed' });
+      expect(reloaded.data.apiKey).toBe('sk-session-test');
+    });
+
+    it('错误密码不应派生会话密钥', async () => {
+      const username = unique('alice');
+      await createUser(username, 'password123');
+      const res = await deriveSessionKey(username, 'wrongpassword');
+      expect('error' in res).toBe(true);
+    });
+
+    it('篡改的会话密钥不应能解密数据', async () => {
+      const username = unique('alice');
+      await createUser(username, 'password123');
+      const res = await deriveSessionKey(username, 'password123');
+      expect('token' in res).toBe(true);
+      if (!('token' in res)) return;
+      // 篡改的 base64 要么 import 直接抛错，要么能 import 但解密失败
+      let error: string | undefined;
+      try {
+        const key = await importSessionKey(res.token + 'AA');
+        const result = await loadUserDataWithKey(username, key);
+        error = result.error;
+      } catch {
+        error = 'invalid token';
+      }
+      expect(error).toBeDefined();
+    });
+  });
+
+  describe('进度按语言隔离', () => {
+    it('同 chapterId 不同语言互不覆盖', async () => {
+      const username = unique('alice');
+      await createUser(username, 'password123');
+      await saveUserData(username, 'password123', {
+        progress: { 'cpp:01-intro': 'completed', 'python:01-intro': 'in_progress' },
+        apiKey: '',
+      });
+
+      const data = await loadUserData(username, 'password123');
+      expect(data.data.progress['cpp:01-intro']).toBe('completed');
+      expect(data.data.progress['python:01-intro']).toBe('in_progress');
     });
   });
 

@@ -8,19 +8,21 @@ export default function SettingsModal({ onClose }: { onClose: () => void }) {
   const [apiKey, setApiKey] = useState(storedApiKey);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState('');
 
 
   const handleSave = async () => {
     if (!apiKey.trim()) return;
     setSaving(true);
+    setSaveError('');
     try {
       await updateApiKey(apiKey.trim());
       setSaved(true);
       setTimeout(() => {
         onClose();
       }, 1000);
-    } catch {
-      // Silently fail
+    } catch (err) {
+      setSaveError(err instanceof Error ? err.message : '保存失败，请重试');
     } finally {
       setSaving(false);
     }
@@ -35,7 +37,8 @@ export default function SettingsModal({ onClose }: { onClose: () => void }) {
       <div className="relative bg-background-soft border border-border rounded-2xl shadow-2xl p-6 w-full max-w-md mx-4">
         <h2 className="text-xl font-bold text-foreground mb-1">DeepSeek 设置</h2>
         <p className="text-sm text-foreground-muted mb-5">
-          输入你的 DeepSeek API Key，仅存储在本地当前账号下，不会上传到任何第三方服务器。
+          你的 API Key 加密后仅存储在本机浏览器。调用 AI 功能时会直接发送给
+          DeepSeek 官方 API（api.deepseek.com）用于生成内容，不会上传到其他任何服务器。
         </p>
 
         <label className="block text-sm font-medium text-foreground mb-2">
@@ -54,6 +57,11 @@ export default function SettingsModal({ onClose }: { onClose: () => void }) {
         </p>
 
         <div className="flex flex-col gap-3 mt-6">
+          {saveError && (
+            <p className="text-sm text-danger bg-danger-soft border border-danger/20 rounded-lg px-3 py-2">
+              {saveError}
+            </p>
+          )}
           <div className="flex gap-3">
             <button
               onClick={onClose}

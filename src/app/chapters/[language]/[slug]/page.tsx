@@ -1,12 +1,15 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { getChapter, getChapterIndex } from '@/lib/db';
-import { isLanguage, type Language } from '@/lib/chapters';
-import { getIdFromUrl as getSlugIdFromUrl } from '@/lib/slugs';
+import { getChapter } from '@/lib/db';
+import { getAllChapters, isLanguage, LANGUAGES, type Language } from '@/lib/chapters';
 import ChapterViewer from '@/components/ChapterViewer';
 import ExercisePanel from '@/components/ExercisePanel';
 import ChapterActions from './ChapterActions';
+
+function langLabelOf(language: Language): string {
+  return LANGUAGES.find(l => l.key === language)?.label || 'C++';
+}
 
 export async function generateMetadata({
   params,
@@ -18,11 +21,9 @@ export async function generateMetadata({
   const language = langParam as Language;
   const chapter = getChapter(slug, language);
   if (!chapter) {
-    const langLabel = language === 'cpp' ? 'C++' : language === 'python' ? 'Python' : 'Java';
-    return { title: `${langLabel} 自学平台` };
+    return { title: `${langLabelOf(language)} 自学平台` };
   }
-  const langLabel = language === 'cpp' ? 'C++' : language === 'python' ? 'Python' : 'Java';
-  const title = chapter ? `${chapter.title} - ${langLabel} 教程` : `${langLabel} 自学平台`;
+  const title = `${chapter.title} - ${langLabelOf(language)} 教程`;
   return { title };
 }
 
@@ -31,10 +32,9 @@ export async function generateStaticParams() {
   const params: { language: string; slug: string }[] = [];
 
   for (const lang of languages) {
-    const chapters = getChapterIndex(lang);
+    const chapters = getAllChapters(lang);
     for (const ch of chapters) {
-      const slug = urlToChapterId(ch.url, lang);
-      params.push({ language: lang, slug });
+      params.push({ language: lang, slug: ch.id });
     }
   }
   return params;
@@ -57,7 +57,7 @@ export default async function ChapterPage({
     notFound();
   }
 
-  const index = getChapterIndex(language);
+  const index = getAllChapters(language);
   const currentOrder = chapter.order;
   const prevChapter = index.find(ch => ch.order === currentOrder - 1);
   const nextChapter = index.find(ch => ch.order === currentOrder + 1);
@@ -88,7 +88,7 @@ export default async function ChapterPage({
   }
   const chapterSummary = summaryParts.join('\n');
 
-  const langLabel = language === 'cpp' ? 'C++' : language === 'python' ? 'Python' : 'Java';
+  const langLabel = langLabelOf(language);
 
   return (
     <div className="max-w-4xl mx-auto px-8 py-8">
@@ -98,7 +98,7 @@ export default async function ChapterPage({
           首页
         </Link>
         <span>/</span>
-        <Link href={`/chapters/${language}/${getSlugIdFromUrl(index[0]?.url || '', language)}`} className="hover:text-foreground transition-colors">
+        <Link href={`/chapters/${language}/${index[0]?.id || slug}`} className="hover:text-foreground transition-colors">
           {langLabel}
         </Link>
         <span>/</span>
@@ -134,6 +134,7 @@ export default async function ChapterPage({
 
       {/* Exercise Panel */}
       <ExercisePanel
+        language={language}
         chapterId={chapter.id}
         chapterTitle={chapter.title}
         chapterSummary={chapterSummary}
@@ -143,7 +144,7 @@ export default async function ChapterPage({
       <div className="flex justify-between items-center mt-8 pt-6 border-t border-border">
         {prevChapter ? (
           <Link
-            href={`/chapters/${language}/${getSlugIdFromUrl(prevChapter.url, language)}`}
+            href={`/chapters/${language}/${prevChapter.id}`}
             className="text-sm text-foreground-muted hover:text-primary transition-colors"
           >
             &larr; {prevChapter.title}
@@ -153,7 +154,7 @@ export default async function ChapterPage({
         )}
         {nextChapter ? (
           <Link
-            href={`/chapters/${language}/${getSlugIdFromUrl(nextChapter.url, language)}`}
+            href={`/chapters/${language}/${nextChapter.id}`}
             className="text-sm text-foreground-muted hover:text-primary transition-colors"
           >
             {nextChapter.title} &rarr;
@@ -164,10 +165,4 @@ export default async function ChapterPage({
       </div>
     </div>
   );
-}
-
-// ─── Helpers ────────────────────────────────────────────────
-
-function urlToChapterId(url: string, language: Language): string {
-  return getSlugIdFromUrl(url, language);
 }

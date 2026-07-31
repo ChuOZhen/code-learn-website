@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useAuth } from '@/components/AuthProvider';
+import { useAuth, progressKey } from '@/components/AuthProvider';
 import type { Language } from '@/lib/chapters';
 
 const AITutorChat = dynamic(() => import('@/components/AITutorChat'), { ssr: false });
@@ -20,7 +20,7 @@ export default function ChapterActions({
   language?: Language;
 }) {
   const { progress, updateProgress } = useAuth();
-  const status = progress[chapterId] || 'not_started';
+  const status = progress[progressKey(language, chapterId)] || 'not_started';
   const [loading, setLoading] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -28,15 +28,15 @@ export default function ChapterActions({
   // Mark as in_progress when first visiting
   useEffect(() => {
     if (status === 'not_started') {
-      updateProgress(chapterId, 'in_progress').catch(() => {});
+      updateProgress(language, chapterId, 'in_progress').catch(() => {});
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chapterId, status]);
+  }, [language, chapterId, status]);
 
   const markComplete = async () => {
     setLoading(true);
     try {
-      await updateProgress(chapterId, 'completed');
+      await updateProgress(language, chapterId, 'completed');
     } finally {
       setLoading(false);
     }
@@ -45,7 +45,7 @@ export default function ChapterActions({
   const markIncomplete = async () => {
     setLoading(true);
     try {
-      await updateProgress(chapterId, 'in_progress');
+      await updateProgress(language, chapterId, 'in_progress');
     } finally {
       setLoading(false);
     }

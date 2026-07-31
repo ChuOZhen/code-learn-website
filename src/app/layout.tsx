@@ -44,6 +44,14 @@ export default function RootLayout({
           src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"
           strategy="afterInteractive"
         />
+        <Script
+          src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

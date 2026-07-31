@@ -114,7 +114,7 @@ ${chapterContext}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && (
           <div className="text-center text-foreground-muted text-sm py-10">
-            <p className="mb-2">👋 你好！我是你的 C++ 助教。</p>
+            <p className="mb-2">👋 你好！我是你的 {languageName} 助教。</p>
             <p>关于「{chapterTitle}」有什么不懂的，尽管问我！</p>
             <p className="mt-2 text-xs text-foreground-subtle">我会尽量引导你自己思考，而不是直接给答案哦。</p>
           </div>

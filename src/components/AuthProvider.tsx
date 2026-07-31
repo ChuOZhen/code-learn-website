@@ -5,14 +5,19 @@ import {
   clearCurrentUser,
   createUser,
   deleteUser,
+  deriveSessionKey,
   getCurrentUser,
+  importSessionKey,
   listUsers,
-  loadUserData,
-  saveUserData,
+  loadUserDataWithKey,
+  saveUserDataWithKey,
   setCurrentUser,
   type PublicUser,
   type UserProgress,
 } from '@/lib/localUser';
+import type { Language } from '@/lib/chapters';
+
+const SESSION_KEY_STORAGE = 'cpp_learn_session_key';
 
 interface AuthContextType {
   currentUser: string | null;
@@ -25,9 +30,8 @@ interface AuthContextType {
   logout: () => void;
   refreshUsers: () => void;
   removeUser: (username: string, password: string) => Promise<{ success: boolean; error?: string }>;
-  updateProgress: (chapterId: string, status: UserProgress[string]) => Promise<void>;
+  updateProgress: (language: Language, chapterId: string, status: UserProgress[string]) => Promise<void>;
   updateApiKey: (apiKey: string) => Promise<void>;
-  getCurrentPassword: () => string | null;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -38,9 +42,19 @@ export function useAuth() {
   return ctx;
 }
 
+/**
+ * 进度 key 约定：`${language}:${chapterId}`，防止 C++/Python/Java
+ * 相同章节 ID 互相串号。
+ */
+export function progressKey(language: Language, chapterId: string): string {
+  return `${language}:${chapterId}`;
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [currentUser, setCurrentUserState] = useState<string | null>(null);
-  const [password, setPassword] = useState<string>('');
+  // 密码从不持久化；sessionStorage 只存派生 AES 密钥（base64），
+  // 攻击者无法从密钥反推密码。
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [users, setUsers] = useState<PublicUser[]>([]);
   const [progress, setProgress] = useState<UserProgress>({});
   const [apiKey, setApiKey] = useState<string>('');
@@ -51,16 +65,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUsers(u);
   };
 
-  // On init: restore both session (IndexedDB) and password (sessionStorage)
+  // On init: restore session (IndexedDB) + derived key (sessionStorage)
   useEffect(() => {
     const init = async () => {
       const session = await getCurrentUser();
       if (session) {
         setCurrentUserState(session.username);
-        // Restore password from sessionStorage so we can decrypt data on reload
-        const savedPwd = sessionStorage.getItem('cpp_learn_pwd');
-        if (savedPwd) {
-          setPassword(savedPwd);
+        const savedToken = sessionStorage.getItem(SESSION_KEY_STORAGE);
+        if (savedToken) {
+          try {
+            const key = await importSessionKey(savedToken);
+            const { data, error } = await loadUserDataWithKey(session.username, key);
+            if (!error) {
+              setSessionToken(savedToken);
+              setProgress(data.progress);
+              setApiKey(data.apiKey);
+            } else {
+              // 会话密钥失效，清理存储，需要重新登录
+              sessionStorage.removeItem(SESSION_KEY_STORAGE);
+              await clearCurrentUser();
+              setCurrentUserState(null);
+            }
+          } catch {
+            sessionStorage.removeItem(SESSION_KEY_STORAGE);
+            await clearCurrentUser();
+            setCurrentUserState(null);
+          }
         }
       }
       await refreshUsers();
@@ -69,38 +99,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     init();
   }, []);
 
-  // Load user data when currentUser or password changes
-  useEffect(() => {
-    const load = async () => {
-      if (!currentUser || !password) {
-        setProgress({});
-        setApiKey('');
-        return;
-      }
-      const { data, error } = await loadUserData(currentUser, password);
-      if (error) {
-        setProgress({});
-        setApiKey('');
-        return;
-      }
-      setProgress(data.progress);
-      setApiKey(data.apiKey);
-    };
-    load();
-  }, [currentUser, password]);
-
   const persistData = async (newProgress: UserProgress, newApiKey: string) => {
-    if (!currentUser || !password) return;
-    await saveUserData(currentUser, password, { progress: newProgress, apiKey: newApiKey });
+    if (!currentUser || !sessionToken) return;
+    try {
+      const key = await importSessionKey(sessionToken);
+      await saveUserDataWithKey(currentUser, key, { progress: newProgress, apiKey: newApiKey });
+    } catch {
+      // 保存失败（如密钥失效）静默处理，内存状态保留
+    }
   };
 
   const login = async (username: string, pwd: string) => {
-    const { data, error } = await loadUserData(username, pwd);
-    if (error) return { success: false, error };
+    const res = await deriveSessionKey(username, pwd);
+    if ('error' in res) return { success: false, error: res.error };
     await setCurrentUser(username);
     setCurrentUserState(username);
-    setPassword(pwd);
-    sessionStorage.setItem('cpp_learn_pwd', pwd);
+    setSessionToken(res.token);
+    sessionStorage.setItem(SESSION_KEY_STORAGE, res.token);
+    const key = await importSessionKey(res.token);
+    const { data } = await loadUserDataWithKey(username, key);
     setProgress(data.progress);
     setApiKey(data.apiKey);
     return { success: true };
@@ -109,10 +126,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const register = async (username: string, pwd: string) => {
     const res = await createUser(username, pwd);
     if (!res.success) return res;
+    const keyRes = await deriveSessionKey(username, pwd);
+    if ('error' in keyRes) return { success: false, error: keyRes.error };
     await setCurrentUser(username);
     setCurrentUserState(username);
-    setPassword(pwd);
-    sessionStorage.setItem('cpp_learn_pwd', pwd);
+    setSessionToken(keyRes.token);
+    sessionStorage.setItem(SESSION_KEY_STORAGE, keyRes.token);
     setProgress({});
     setApiKey('');
     await refreshUsers();
@@ -121,20 +140,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = async () => {
     await clearCurrentUser();
-    sessionStorage.removeItem('cpp_learn_pwd');
+    sessionStorage.removeItem(SESSION_KEY_STORAGE);
     setCurrentUserState(null);
-    setPassword('');
+    setSessionToken(null);
     setProgress({});
     setApiKey('');
   };
 
   const removeUser = async (username: string, pwd: string) => {
-    const { error } = await loadUserData(username, pwd);
-    if (error) return { success: false, error };
+    const res = await deriveSessionKey(username, pwd);
+    if ('error' in res) return { success: false, error: res.error };
     await deleteUser(username);
     if (currentUser === username) {
+      sessionStorage.removeItem(SESSION_KEY_STORAGE);
       setCurrentUserState(null);
-      setPassword('');
+      setSessionToken(null);
       setProgress({});
       setApiKey('');
     }
@@ -142,8 +162,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { success: true };
   };
 
-  const updateProgress = async (chapterId: string, status: UserProgress[string]) => {
-    const next = { ...progress, [chapterId]: status };
+  const updateProgress = async (language: Language, chapterId: string, status: UserProgress[string]) => {
+    const key = progressKey(language, chapterId);
+    const next = { ...progress, [key]: status };
     setProgress(next);
     await persistData(next, apiKey);
   };
@@ -152,8 +173,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setApiKey(newApiKey);
     await persistData(progress, newApiKey);
   };
-
-  const getCurrentPassword = () => password;
 
   return (
     <AuthContext.Provider
@@ -170,7 +189,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         removeUser,
         updateProgress,
         updateApiKey,
-        getCurrentPassword,
       }}
     >
       {children}

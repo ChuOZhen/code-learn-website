@@ -4,6 +4,7 @@ import { useState } from 'react';
 import CodeBlock from './CodeBlock';
 import { useAuth } from './AuthProvider';
 import { generateExercises, checkAnswer } from '@/lib/deepseek-client';
+import type { Language } from '@/lib/chapters';
 
 interface Exercise {
   question: string;
@@ -17,10 +18,12 @@ interface CheckResult {
 }
 
 export default function ExercisePanel({
+  language,
   chapterId,
   chapterTitle,
   chapterSummary,
 }: {
+  language: Language;
   chapterId: string;
   chapterTitle: string;
   chapterSummary: string;
@@ -52,7 +55,7 @@ export default function ExercisePanel({
         setError('请先在设置中配置 DeepSeek API Key');
         return;
       }
-      const data = await generateExercises(apiKey, chapterTitle, chapterSummary, difficulty, count);
+      const data = await generateExercises(apiKey, language, chapterTitle, chapterSummary, difficulty, count);
       setExercises(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : '网络错误，请重试');
@@ -94,7 +97,7 @@ export default function ExercisePanel({
         setCheckResults(prev => ({ ...prev, [index]: { feedback: '请先在设置中配置 DeepSeek API Key' } }));
         return;
       }
-      const feedback = await checkAnswer(apiKey, exercise.question, userAnswer, exercise.answer);
+      const feedback = await checkAnswer(apiKey, language, exercise.question, userAnswer, exercise.answer);
       setCheckResults(prev => ({ ...prev, [index]: { feedback } }));
     } catch (err) {
       setCheckResults(prev => ({ ...prev, [index]: { feedback: err instanceof Error ? err.message : '检查失败，请重试' } }));
@@ -104,7 +107,7 @@ export default function ExercisePanel({
   };
 
   // Split question into description and code blocks.
-  // Supports both fenced markdown code blocks (``` ... ```) and inline C++-like code lines.
+  // 优先识别 ``` 围栏代码块；否则按语言启发式分行。
   const parseQuestion = (question: string): { description: string; code: string } => {
     // 1. Try to extract fenced code blocks first.
     const fencedCode: string[] = [];
@@ -125,7 +128,7 @@ export default function ExercisePanel({
       };
     }
 
-    // 2. Fallback: classify lines as code or description heuristically.
+    // 2. Fallback: classify lines as code or description heuristically (language-aware).
     const lines = question.split('\n');
     const codeLines: string[] = [];
     const descLines: string[] = [];
@@ -134,6 +137,37 @@ export default function ExercisePanel({
     const isCodeLine = (line: string): boolean => {
       const trimmed = line.trim();
       if (!trimmed) return false;
+
+      if (language === 'python') {
+        if (trimmed.startsWith('def ') || trimmed.startsWith('class ')) return true;
+        if (trimmed.startsWith('import ') || trimmed.startsWith('from ')) return true;
+        if (trimmed.startsWith('print(') || trimmed.startsWith('return ')) return true;
+        if (trimmed.startsWith('if ') || trimmed.startsWith('elif ') || trimmed.startsWith('else:')) return true;
+        if (trimmed.startsWith('for ') || trimmed.startsWith('while ')) return true;
+        if (trimmed.startsWith('#')) return true; // Python comment
+        if (/^\s*[a-z_]\w*\s*=/.test(trimmed)) return true;
+        if (/^\s*\w+\s*\(/.test(trimmed) && /[:=]/.test(trimmed)) return true;
+        if (trimmed.includes('____')) return true;
+        if (trimmed.includes('{' ) && trimmed.includes('}')) return true;
+        return false;
+      }
+
+      if (language === 'java') {
+        if (trimmed.startsWith('public class') || trimmed.startsWith('class ')) return true;
+        if (trimmed.startsWith('public static void main')) return true;
+        if (trimmed.startsWith('import ')) return true;
+        if (trimmed.startsWith('System.out.println')) return true;
+        if (trimmed.startsWith('//')) return true; // Java comment
+        if (/^\s*(public|private|protected|static|final|void|int|double|float|long|char|boolean|String)\s+\w+/.test(trimmed)) return true;
+        if (/^\s*(if|for|while|switch)\s*\(/.test(trimmed)) return true;
+        if (/^\s*(return|new)\b/.test(trimmed)) return true;
+        if (/^\s*[{}]\s*$/.test(trimmed)) return true;
+        if (/^\s*\w+\s*[+\-*/]?=\s*.+;?/.test(trimmed)) return true;
+        if (trimmed.includes('____')) return true;
+        return false;
+      }
+
+      // C++ (default)
       if (trimmed.startsWith('#include')) return true;
       if (trimmed.startsWith('using namespace')) return true;
       if (trimmed.startsWith('#define')) return true;
@@ -183,7 +217,14 @@ export default function ExercisePanel({
     };
   };
 
-  const isIntroOrSetup = chapterId === '01-intro' || chapterId === '02-setup';
+  // 导论/安装章节按语言跳过（各语言第 1-2 章）
+  const skipOrders: Record<Language, number[]> = {
+    cpp: [1, 2],
+    python: [1, 2],
+    java: [1, 2],
+  };
+  const chapterOrder = Number.parseInt(chapterId.split('-')[0], 10);
+  const isIntroOrSetup = skipOrders[language]?.includes(chapterOrder) ?? false;
 
   return (
     <div className="mt-10 border-t border-border pt-8">
@@ -263,7 +304,7 @@ export default function ExercisePanel({
                     <p className="text-foreground leading-relaxed whitespace-pre-wrap mb-3">
                       {description}
                     </p>
-                    {code && <CodeBlock code={code} language="cpp" />}
+                    {code && <CodeBlock code={code} language={language} />}
                   </div>
                 </div>
 
@@ -326,7 +367,7 @@ export default function ExercisePanel({
                   </button>
                   {revealedAnswers.has(i) && (
                     <div className="space-y-3">
-                      <CodeBlock code={ex.answer} language="cpp" />
+                      <CodeBlock code={ex.answer} language={language} />
                       <p className="text-sm text-foreground-muted bg-background rounded-lg px-3 py-2 border border-border">
                         <span className="font-medium text-foreground">思路解析：</span>
                         {ex.explanation}
